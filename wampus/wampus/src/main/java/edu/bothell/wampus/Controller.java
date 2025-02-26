@@ -34,6 +34,7 @@ public class Controller {
 
     public void start() {
         this.activeTeammate = this.activeTeammates.getFirst();
+        this.locationManager.setNewPlayers(this.activeTeammates);
         while (!gameOver()) {
 
             this.ui.showPersonTurn((this.activeTeammate));

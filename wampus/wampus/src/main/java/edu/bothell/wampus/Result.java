@@ -13,7 +13,7 @@ public class Result {
     public Result(String action, Person player) {
         this.action = action;
         this.player = player;
-        this.message = "Preformed " + action;
+        this.message = action;
     }
 
     // Methods
@@ -27,7 +27,7 @@ public class Result {
     public void playerMove(GameLocation oldLocation, GameLocation newLocation) {
 
         if(this.message.equals("Move")){
-            this.message = " moved from " + oldLocation.getLocationId() + " to " + newLocation.getLocationId();
+            this.message = " Moved from " + oldLocation.getLocationId() + " to " + newLocation.getLocationId();
         }
     }
 

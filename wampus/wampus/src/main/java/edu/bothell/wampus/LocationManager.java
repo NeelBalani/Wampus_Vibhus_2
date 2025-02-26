@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LocationManager {
     // Properties
-    private HashMap<Person, GameLocation> playerLocations;
+    private HashMap<Person, GameLocation> playerLocations = new HashMap<Person, GameLocation>();
     private Cave cave;
 
     // Constructors
@@ -22,7 +22,7 @@ public class LocationManager {
 
     public void setNewPlayers (List<Person> players){
         for(Person p: players){
-            playerLocations.put(p, this.cave.spawnPoint());
+            this.playerLocations.put(p, this.cave.spawnPoint());
         }
     }
 
