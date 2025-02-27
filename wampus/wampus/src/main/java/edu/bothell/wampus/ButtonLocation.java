@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class ButtonLocation implements Locatable, ActionListener{
+public class ButtonLocation extends JButton implements Locatable, ActionListener{
 
     private int x;
     private int y;
