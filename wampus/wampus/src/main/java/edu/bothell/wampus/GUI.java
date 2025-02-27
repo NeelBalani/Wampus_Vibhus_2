@@ -2,12 +2,14 @@ package edu.bothell.wampus;
 
 
 import java.awt.Button;
-
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-
-
-public class GUI implements CaveView{
+import javax.swing.JOptionPane;
 
     private JButton[][] button = new JButton[6][5];
 
