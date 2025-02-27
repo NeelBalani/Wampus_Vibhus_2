@@ -18,11 +18,15 @@ public class ButtonLocation extends JButton implements Locatable, ActionListener
     private GameLocation location;
     private Controller c;
 
-    public ButtonLocation(int x, int y, GameLocation location, Controller c){
+    public ButtonLocation(GUI frame, int x, int y, GameLocation location, Controller c){
+        super();
         this.x = x;
         this.y = y;
         this.location = location;
         this.c = c;
+
+        frame.add(this);
+        super.setSize(200,200);
     }
 
     @Override

@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class GUI implements CaveView{
+public class GUI extends JFrame implements CaveView{
 
     private JButton[][] button = new JButton[6][5];
 
@@ -21,7 +21,7 @@ public class GUI implements CaveView{
 
         for(int i = 0; i < button.length ;i++){
             for(int o = 0; o < button[i].length; o++)
-            this.button[i/6][o%5] = new ButtonLocation(i/3, o%3, new GameLocation(i/3, o%3));
+            this.button[i/6][o%5] = new ButtonLocation(this ,i/3, o%3, new GameLocation(i/3, o%3), new Controller());
         }
 
 
