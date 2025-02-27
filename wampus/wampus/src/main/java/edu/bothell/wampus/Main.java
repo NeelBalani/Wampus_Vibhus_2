@@ -2,7 +2,7 @@ package edu.bothell.wampus;
 
 public class Main {
     public static void main(String[] args) {
-        new GUI();
+        new GUI(new Controller(), new Cave());
         /*Controller controller = new Controller();
         UI ui = new ConsoleUI(controller);
 

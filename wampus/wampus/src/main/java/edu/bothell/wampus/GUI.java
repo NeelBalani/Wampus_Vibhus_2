@@ -26,7 +26,7 @@ public class GUI extends JFrame implements CaveView{
 
         for(int i = 0; i < button.length ;i++){
             for(int o = 0; o < button[i].length; o++)
-            this.button[i/6][o%5] = new ButtonLocation(i/6, o%5, this.cave.getLocationBasedOnCoords(i, o), this.c);
+            this.button[i][o] = new ButtonLocation(this,i, o, this.cave.getLocationBasedOnCoords(i, o), this.c);
         }
 
 
