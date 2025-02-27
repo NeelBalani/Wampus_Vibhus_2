@@ -19,9 +19,9 @@ public class Cave {
     }
 
     public int getLocationId(int i, int j){
-        i *= 6;
-        i += j + 1;
-        return i;
+        j *= 6;
+        j += i + 1;
+        return j;
     }
 
     public GameLocation getLocationBasedOnCoords(int x, int y){
