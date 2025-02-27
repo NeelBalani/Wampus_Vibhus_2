@@ -2,6 +2,7 @@ package edu.bothell.wampus;
 
 import java.awt.Button;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -15,15 +16,18 @@ public class ButtonLocation extends JButton implements Locatable, ActionListener
     private int x;
     private int y;
     private GameLocation location;
+    private Controller c;
 
-    public ButtonLocation(int x, int y, GameLocation location){
+    public ButtonLocation(int x, int y, GameLocation location, Controller c){
         this.x = x;
         this.y = y;
         this.location = location;
+        this.c = c;
     }
 
     @Override
     public void actionPerformed(ActionEvent e){
+        c.findWhatIsInLocation(this.location);
     }
 
     @Override
@@ -43,7 +47,7 @@ public class ButtonLocation extends JButton implements Locatable, ActionListener
     }
 
     @Override
-    public GameLocation getLocation(){
+    public GameLocation getButtonLocation(){
         return location;
     }
     

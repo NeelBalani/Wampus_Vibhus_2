@@ -24,6 +24,10 @@ public class Cave {
         return j;
     }
 
+    public int[] getSize(){
+        return new int[] {this.cave.length, this.cave[0].length};
+    }
+
     public GameLocation getLocationBasedOnCoords(int x, int y){
         return this.cave[x][y];
     }

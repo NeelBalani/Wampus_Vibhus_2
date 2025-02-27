@@ -5,5 +5,5 @@ public interface Locatable {
     int getX();  // Return the X-coordinate
     int getY();  // Return the Y-coordinate
     int[] getPos();  // Return both coordinates as an array
-    GameLocation getLocation();  // Return the associated Location object
+    GameLocation getButtonLocation();  // Return the associated Location object
 }
