@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+public class GUI implements CaveView{
+
     private JButton[][] button = new JButton[6][5];
 
     public GUI(){
