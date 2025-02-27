@@ -20,6 +20,7 @@ public class GameLocation {
         this.x = x;
         this.y = y;
     }
+    
 
 
     //Method
