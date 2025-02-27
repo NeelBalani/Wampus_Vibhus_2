@@ -2,6 +2,7 @@ package edu.bothell.wampus;
 
 
 import java.awt.Button;
+import java.awt.FlowLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ public class GUI implements CaveView{
 
     public GUI(){
 
+
         for(int i = 0; i < button.length ;i++){
             for(int o = 0; o < button[i].length; o++)
             this.button[i/6][o%5] = new ButtonLocation(i/3, o%3, new GameLocation(i/3, o%3));
@@ -25,6 +27,8 @@ public class GUI implements CaveView{
 
         JFrame frame = new JFrame();
         frame.setVisible(true);
+        frame.setSize(400,400);
+        frame.setLayout(new FlowLayout());
     }
 
     @Override
