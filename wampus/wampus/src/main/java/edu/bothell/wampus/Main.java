@@ -7,6 +7,6 @@ public class Main {
 
         controller.addPerson(new Pranav("Pranav"));
 
-        controller.start();
+        //controller.start();
     }
 }

@@ -62,6 +62,11 @@ public class Controller {
         this.ui.displaySummary();
     }
 
+    public List<Person> findWhatIsInLocation(GameLocation location){
+        return this.locationManager.getPersonsInLocation(location);
+
+    }
+
     public void addResult(Result result){
         this.summary.add(result);
     }

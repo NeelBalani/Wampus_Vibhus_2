@@ -1,7 +1,9 @@
 package edu.bothell.wampus;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LocationManager {
     // Properties
@@ -28,6 +30,15 @@ public class LocationManager {
 
     public GameLocation getGameLocationOfPerson(Person p){
         return this.playerLocations.get(p);
+    }
+
+    public List<Person> getPersonsInLocation(GameLocation l){
+        List<Person> p = new ArrayList<Person>();
+        for(Map.Entry<Person, GameLocation> set : this.playerLocations.entrySet()){
+            if(set.getValue().equals(l)){
+                p.add(set.getKey());
+            }
+        } return p;
     }
 
     public GameLocation getGameLocationInThisDirection(GameLocation initialLocation, Directions direction){
