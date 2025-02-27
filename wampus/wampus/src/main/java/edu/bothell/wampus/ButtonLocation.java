@@ -16,13 +16,14 @@ public class ButtonLocation implements Locatable, ActionListener{
     private int y;
     private GameLocation location;
 
-    public ButtonLocation(){
-        
+    public ButtonLocation(int x, int y, GameLocation location){
+        this.x = x;
+        this.y = y;
+        this.location = location;
     }
 
     @Override
     public void actionPerformed(ActionEvent e){
-        
     }
 
     @Override
