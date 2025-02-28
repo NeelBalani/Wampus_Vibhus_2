@@ -2,12 +2,12 @@ package edu.bothell.wampus;
 
 public class Main {
     public static void main(String[] args) {
-        new GUI(new Controller(), new Cave());
-        /*Controller controller = new Controller();
+
+        Controller controller = new Controller();
         UI ui = new ConsoleUI(controller);
 
         controller.addPerson(new Pranav("Pranav"));
-
+        new GUI(controller, controller.getCave());
         //controller.start();*/
     }
 }

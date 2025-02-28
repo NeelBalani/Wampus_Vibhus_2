@@ -63,7 +63,9 @@ public class Controller {
     }
 
     public List<Object> findWhatIsInLocation(GameLocation location){
-        return this.locationManager.getPersonsInLocation(location);
+        List<Object> o = this.locationManager.getPersonsInLocation(location);
+        System.out.println(o);
+        return o;
 
     }
 
@@ -90,5 +92,9 @@ public class Controller {
     
     public List<Result> getSummary(){
         return this.summary;
+    }
+
+    public Cave getCave(){
+        return this.cave;
     }
 }

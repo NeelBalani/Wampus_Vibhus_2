@@ -9,9 +9,9 @@ public class Cave {
         for(int i = 0; i < cave.length; i++){
             for(int j = 0; j < cave[i].length; j++){
                 cave[i][j] = new GameLocation(i,j,getLocationId(i, j));
-                System.out.print(getLocationId(i,j));
-            }
-        }System.out.println();
+                System.out.print(getLocationId(i,j) + " ");
+            }System.out.println();
+        }
     }
 
     public GameLocation spawnPoint(){
@@ -19,9 +19,8 @@ public class Cave {
     }
 
     public int getLocationId(int i, int j){
-        j *= 6;
-        j += i + 1;
-        return j;
+        return i * 6 + j + 1;
+
     }
 
     public int[] getSize(){

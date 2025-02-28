@@ -28,7 +28,7 @@ public class LocationManager {
     public void setGameLocations(){
         int[] size = this.cave.getSize();
         for(int x = 0; x < size[0]; x++){
-            for(int y = 0; y < size[1]; x++){
+            for(int y = 0; y < size[1]; y++){
                 this.locationItems.put(this.cave.getLocationBasedOnCoords(x, y), null);
             }
         }
