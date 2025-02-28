@@ -17,7 +17,7 @@ public class Controller {
         this.activeTeammates = new ArrayList<>();
         this.allTeammates = this.activeTeammates;
         this.cave = new Cave();
-        this.locationManager = new LocationManager(this.cave);
+        this.locationManager = new LocationManager(this.allTeammates, this.cave);
     }
 
     public void addPlayersToLocationManager(){

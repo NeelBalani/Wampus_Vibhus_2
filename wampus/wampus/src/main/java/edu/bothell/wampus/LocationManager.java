@@ -29,8 +29,9 @@ public class LocationManager {
         int[] size = this.cave.getSize();
         for(int x = 0; x < size[0]; x++){
             for(int y = 0; y < size[1]; y++){
-                this.locationItems.put(this.cave.getLocationBasedOnCoords(x, y), null);
-            }
+                this.locationItems.put(this.cave.getLocationBasedOnCoords(x, y), new ArrayList<Object>());
+                System.out.print(this.cave.getLocationBasedOnCoords(x, y).getLocationId() + " ");
+            } System.out.println();
         }
     }
 
@@ -38,9 +39,12 @@ public class LocationManager {
         for(Person p: players){
             this.playerLocations.put(p, this.cave.spawnPoint());
             List<Object> o = this.locationItems.get(this.cave.spawnPoint());
+            o.add(p);
             this.locationItems.replace(this.cave.spawnPoint(), o);
         }
     }
+
+
 
     public GameLocation getGameLocationOfPerson(Person p){
         return this.playerLocations.get(p);
