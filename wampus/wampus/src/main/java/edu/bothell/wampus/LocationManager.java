@@ -8,7 +8,6 @@ import java.util.Map;
 public class LocationManager {
     // Properties
     private HashMap<Person, GameLocation> playerLocations = new HashMap<Person, GameLocation>();
-    private HashMap<GameLocation, List<Object>> locationItems = new HashMap<GameLocation, List<Object>>();
     private Cave cave;
 
     // Constructors
@@ -29,7 +28,6 @@ public class LocationManager {
         int[] size = this.cave.getSize();
         for(int x = 0; x < size[0]; x++){
             for(int y = 0; y < size[1]; y++){
-                this.locationItems.put(this.cave.getLocationBasedOnCoords(x, y), new ArrayList<Object>());
                 System.out.print(this.cave.getLocationBasedOnCoords(x, y).getLocationId() + " ");
             } System.out.println();
         }
@@ -38,12 +36,9 @@ public class LocationManager {
     public void setNewPlayers (List<Person> players){
         for(Person p: players){
             this.playerLocations.put(p, this.cave.spawnPoint());
-            List<Object> o = this.locationItems.get(this.cave.spawnPoint());
-            o.add(p);
-            this.locationItems.replace(this.cave.spawnPoint(), o);
+            this.cave.spawnPoint().addItemToLocation(p);
         }
     }
-
 
 
     public GameLocation getGameLocationOfPerson(Person p){
@@ -51,7 +46,7 @@ public class LocationManager {
     }
 
     public List<Object> getPersonsInLocation(GameLocation l){
-        return this.locationItems.get(l);
+        return l.getItems();
     }
 
     public GameLocation getGameLocationInThisDirection(GameLocation initialLocation, Directions direction){

@@ -64,7 +64,7 @@ public class Controller {
 
     public List<Object> findWhatIsInLocation(GameLocation location){
         List<Object> o = this.locationManager.getPersonsInLocation(location);
-        System.out.println(o);
+        System.out.println(o + " " + location.getLocationId());
         return o;
 
     }
