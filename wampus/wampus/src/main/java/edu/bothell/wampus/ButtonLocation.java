@@ -13,21 +13,19 @@ public class ButtonLocation extends JButton implements Locatable, ActionListener
 
     private int x;
     private int y;
-    private GameLocation location;
     private GUI frame;
 
     public ButtonLocation(GUI frame, int x, int y, GameLocation location){
         super();
         this.x = x;
         this.y = y;
-        this.location = location;
         this.frame = frame;
 
         this.addActionListener(this);
         this.setPreferredSize(new Dimension(100, 100));
         this.setMargin(new Insets(25, 25, 25, 25));
         this.setFont(new Font("Arial", Font.PLAIN, 20));
-        this.setText(this.location.getLocationId()+"");
+        this.setText(getButtonLocation().getLocationId()+"");
         this.setVisible(true);
     }
 
@@ -54,7 +52,7 @@ public class ButtonLocation extends JButton implements Locatable, ActionListener
 
     @Override
     public GameLocation getButtonLocation(){
-        return location;
+        return this.frame.getLocation(this.x, this.y);
     }
     
 }

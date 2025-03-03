@@ -62,6 +62,10 @@ public class GUI extends JFrame implements CaveView{
         this.c.findWhatIsInLocation(this.cave.getLocationBasedOnCoords(row, col));
     }
 
+    public GameLocation getLocation(int row, int col){
+        return this.cave.getLocationBasedOnCoords(row, col);
+    }
+
     
        
 }
