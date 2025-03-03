@@ -7,6 +7,7 @@ public class Main {
         UI ui = new ConsoleUI(controller);
 
         controller.addPerson(new Pranav("Pranav"));
+        controller.addPlayersToLocationManager();
         new GUI(controller, controller.getCave());
         //controller.start();*/
     }
