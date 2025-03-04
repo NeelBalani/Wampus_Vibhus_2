@@ -1,4 +1,5 @@
 package edu.bothell.wampus;
+import java.util.Random;
 
 public class TriviaQuestion {
     // Properties
@@ -6,9 +7,8 @@ public class TriviaQuestion {
     private String question;
 
     // Constructors
-    public TriviaQuestion(String question, String answer){
-        this.answer = answer;
-        this.question = question;
+    public TriviaQuestion(){
+        Random r =  new Random();
     }
 
     // Methods
@@ -23,5 +23,9 @@ public class TriviaQuestion {
 
     public String getQuestion() {
         return this.question;
+    }
+
+    public void getQuestionFromTM(int rand){
+        
     }
 }
