@@ -11,11 +11,8 @@ public class TriviaManager {
         "Science: What is the lightest element on the periodic table?"
     };
 
-    private String[] possibleAnswerArray = new String[]{
-
-    };
-
     private String[] correctAnswerArray = new String[]{
+        "Green Bay Packers",
         "Avatar",
         "Chile",
         "Franklin Delano Roosevelt",
@@ -23,17 +20,19 @@ public class TriviaManager {
         "Hydrogen"
     };
 
-    public TriviaManager(){
+    public TriviaManager() {
 
     }
 
-    public String getQuestion(int num){
+    public String getQuestion(int num) {
         return questionArray[num];
     }
 
-    public String getCorrectAnswer(int num){
+    public String getCorrectAnswer(int num) {
         return correctAnswerArray[num];
     }
 
-    
+    public int getTotalQuestions() {
+        return questionArray.length;
+    }
 }
