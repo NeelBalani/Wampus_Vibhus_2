@@ -6,6 +6,7 @@ public class QuestionBank {
     // Properties
     private List<TriviaQuestion> questions;
 
+
     // Method
     public TriviaQuestion getRandomQuestion(){
         return null;
