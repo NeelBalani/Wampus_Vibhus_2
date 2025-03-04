@@ -7,15 +7,15 @@ public class TriviaQuestion {
     private String question;
     private TriviaManager tmanager;
 
-    // Constructors
-    public TriviaQuestion(TriviaManager tmanager){
-        Random r =  new Random();
-        getQuestionFromTM(r.nextInt(50));
+    // Constructor
+    public TriviaQuestion(TriviaManager tmanager) {
+        this.tmanager = tmanager; 
+        Random r = new Random();
+        getQuestionFromTM(r.nextInt(tmanager.getTotalQuestions()));
     }
 
     // Methods
-
-    public boolean checkAnswer(String response){
+    public boolean checkAnswer(String response) {
         return response.equalsIgnoreCase(this.answer);
     }
 
@@ -27,8 +27,8 @@ public class TriviaQuestion {
         return this.question;
     }
 
-    public void getQuestionFromTM(int rand){
+    public void getQuestionFromTM(int rand) {
         question = tmanager.getQuestion(rand);
-        answer = tmanager.getAnswer(rand);
+        answer = tmanager.getCorrectAnswer(rand);
     }
 }
