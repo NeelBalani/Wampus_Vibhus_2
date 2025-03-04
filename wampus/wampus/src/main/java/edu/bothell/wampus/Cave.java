@@ -31,5 +31,9 @@ public class Cave {
         return this.cave[x][y];
     }
 
+    public GameLocation[][] getCave(){
+        return this.cave;
+    }
+
 
 }

@@ -1,4 +1,7 @@
 package edu.bothell.wampus;
 
-public class Obstacle {
+public interface Obstacle {
+
+    void obstacleTriggered();
+    GameLocation getLocation();
 }

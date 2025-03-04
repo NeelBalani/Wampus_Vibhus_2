@@ -11,6 +11,7 @@ public class GameLocation {
     private int locationId;
     private List<Directions> whereWalls;
     private ArrayList<Object> items = new ArrayList<>();
+    private Obstacle obstacle;
     private boolean hasObstacle;
 
     // Constructor
@@ -59,5 +60,15 @@ public class GameLocation {
 
     public boolean hasObstacle(){
         return this.hasObstacle;
+    }
+
+    public void addObstacle(Obstacle obstacle){
+        this.hasObstacle = true;
+        this.obstacle = obstacle;
+        this.items.add(obstacle);
+    }
+
+    public Obstacle getObstacle(){
+        return this.obstacle;
     }
 }
