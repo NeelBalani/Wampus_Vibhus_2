@@ -5,10 +5,12 @@ public class TriviaQuestion {
     // Properties
     private String answer;
     private String question;
+    private TriviaManager tmanager;
 
     // Constructors
-    public TriviaQuestion(){
+    public TriviaQuestion(TriviaManager tmanager){
         Random r =  new Random();
+        getQuestionFromTM(r.nextInt(50));
     }
 
     // Methods
@@ -26,6 +28,7 @@ public class TriviaQuestion {
     }
 
     public void getQuestionFromTM(int rand){
-        
+        question = tmanager.getQuestion(rand);
+        answer = tmanager.getAnswer(rand);
     }
 }
