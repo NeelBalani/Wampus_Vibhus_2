@@ -29,6 +29,6 @@ public class TriviaQuestion {
 
     public void getQuestionFromTM(int rand){
         question = tmanager.getQuestion(rand);
-        answer = tmanager.getAnswer(rand);
+        answer = tmanager.getCorrectAnswer(rand);
     }
 }

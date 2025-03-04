@@ -3,23 +3,25 @@ package edu.bothell.wampus;
 public class TriviaManager {
 
     private String[] questionArray = new String[]{
-        "Sports:",
-        "Sports:",
-        "Sports:",
-        "Sports:",
-        "Sports:",
-        "Entertainment:",
-        "Entertainment:",
-        "Entertainment:",
-        "Entertainment:",
-        "Entertainment:",
-        "Geography:",
-        "History:",
-        "Arts:",
-        
+        "Sports: Who won the first Superbowl?",
+        "Entertainment: What is the highest grossing movie of all time?",
+        "Geography: What is the closest country to Antarctica?",
+        "History: Who was the US president during WW1?",
+        "Arts: What is the most expensive art piece in the world?",
+        "Science: What is the lightest element on the periodic table?"
     };
 
-    private String[] answerArray = new String[]{};
+    private String[] possibleAnswerArray = new String[]{
+
+    };
+
+    private String[] correctAnswerArray = new String[]{
+        "Avatar",
+        "Chile",
+        "Franklin Delano Roosevelt",
+        "Salvator Mundi",
+        "Hydrogen"
+    };
 
     public TriviaManager(){
 
@@ -29,8 +31,9 @@ public class TriviaManager {
         return questionArray[num];
     }
 
-    public String getAnswer(int num){
-        return answerArray[num];
+    public String getCorrectAnswer(int num){
+        return correctAnswerArray[num];
     }
+
     
 }

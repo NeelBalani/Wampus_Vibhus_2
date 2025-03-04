@@ -4,6 +4,6 @@ public class QuestionInitializer {
     
     // Method
     public QuestionBank fromFile(String filename){
-        return new QuestionBank()
+        return new QuestionBank();
     }
 }
