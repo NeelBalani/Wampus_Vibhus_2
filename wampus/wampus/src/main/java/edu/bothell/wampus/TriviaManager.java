@@ -1,50 +1,53 @@
 package edu.bothell.wampus;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class TriviaManager {
+    private List<String> questionArray = new ArrayList<>();
+    private List<String> correctAnswerArray = new ArrayList<>();
+    private List<String[]> possibleAnswerArray = new ArrayList<>();
 
-    private String[] questionArray = new String[]{
-        "Sports: Who won the first Superbowl?",
-        "Entertainment: What is the highest grossing movie of all time?",
-        "Geography: What is the closest country to Antarctica?",
-        "History: Who was the US president during WW1?",
-        "Arts: What is the most expensive art piece in the world?",
-        "Science: What is the lightest element on the periodic table?"
-    };
+    public TriviaManager(String filename) {
+        loadQuestionsFromFile(filename);
+    }
 
-    private String[] correctAnswerArray = new String[]{
-        "Green Bay Packers",
-        "Avatar",
-        "Chile",
-        "Franklin Delano Roosevelt",
-        "Salvator Mundi",
-        "Hydrogen"
-    };
-
-    private String[][] possibleAnswerArray = new String[][]{
-        {"Green Bay Packers", "Dallas Cowboys", "Miami Dolphins", "New England Patriots"},
-        {"Avatar", "Titanic", "Star Wars: The Force Awakens", "Avengers: Endgame"},
-        {"Chile", "Argentina", "Australia", "New Zealand"},
-        {"Woodrow Wilson", "Franklin Delano Roosevelt", "Herbert Hoover", "Warren G. Harding"},
-        {"Salvator Mundi", "The Card Players", "Nafea Faa Ipoipo", "Interchange"},
-        {"Hydrogen", "Helium", "Lithium", "Beryllium"}
-    };
-
-    public TriviaManager() {
+    private void loadQuestionsFromFile(String filename) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length >= 6) {
+                    questionArray.add(parts[0].replace("\"", ""));
+                    correctAnswerArray.add(parts[1].replace("\"", ""));
+                    String[] possibleAnswers = new String[4];
+                    for (int i = 2; i < 6; i++) {
+                        possibleAnswers[i - 2] = parts[i].replace("\"", "");
+                    }
+                    possibleAnswerArray.add(possibleAnswers);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getQuestion(int num) {
-        return questionArray[num];
+        return questionArray.get(num);
     }
 
     public String getCorrectAnswer(int num) {
-        return correctAnswerArray[num];
+        return correctAnswerArray.get(num);
     }
 
     public String[] getPossibleAnswers(int num) {
-        return possibleAnswerArray[num];
+        return possibleAnswerArray.get(num);
     }
 
     public int getTotalQuestions() {
-        return questionArray.length;
+        return questionArray.size();
     }
 }

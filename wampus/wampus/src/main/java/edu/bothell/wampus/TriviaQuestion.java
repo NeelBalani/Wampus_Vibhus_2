@@ -11,7 +11,7 @@ public class TriviaQuestion {
 
     // Constructor
     public TriviaQuestion(TriviaManager tmanager) {
-        this.tmanager = tmanager; 
+        this.tmanager = tmanager;
         Random r = new Random();
         getQuestionFromTM(r.nextInt(tmanager.getTotalQuestions()));
     }
