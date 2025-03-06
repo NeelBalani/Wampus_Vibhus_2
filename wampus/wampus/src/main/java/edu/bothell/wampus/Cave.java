@@ -12,6 +12,7 @@ public class Cave {
                 System.out.print(getLocationId(i,j) + " ");
             }System.out.println();
         }
+        getLocationBasedOnCoords(3,0).addObstacle(new Pit(getLocationBasedOnCoords(1,0)));
     }
 
     public GameLocation spawnPoint(){
