@@ -1,10 +1,12 @@
 package edu.bothell.wampus;
+
 import java.util.Random;
 
 public class TriviaQuestion {
     // Properties
     private String answer;
     private String question;
+    private String[] possibleAnswers;
     private TriviaManager tmanager;
 
     // Constructor
@@ -27,8 +29,13 @@ public class TriviaQuestion {
         return this.question;
     }
 
+    public String[] getPossibleAnswers() {
+        return this.possibleAnswers;
+    }
+
     public void getQuestionFromTM(int rand) {
         question = tmanager.getQuestion(rand);
         answer = tmanager.getCorrectAnswer(rand);
+        possibleAnswers = tmanager.getPossibleAnswers(rand);
     }
 }
