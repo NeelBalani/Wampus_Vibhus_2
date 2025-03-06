@@ -10,7 +10,7 @@ public class GameLocation {
     private int y;
     private int locationId;
     private List<Directions> whereWalls;
-    private ArrayList<Object> items = new ArrayList<>();
+    private ArrayList<Person> people = new ArrayList<Person>();
     private Obstacle obstacle;
     private boolean hasObstacle;
 
@@ -34,12 +34,20 @@ public class GameLocation {
         return new int[]{this.x, this.y};
     }
 
-    public void addItemToLocation(Object o){
-        this.items.add(o);
+    public boolean doesContainPerson(Person p){
+        if(this.people.contains(p)) return true;
+        return false;
+    }
+
+    public void addPersonToLocation(Person o){
+        this.people.add(o);
     }
 
     public List<Object> getItems(){
-        return this.items;
+        List<Object> os = new ArrayList<>();
+        os.addAll(this.people);
+        if (this.obstacle == null) os.add(this.obstacle);  
+        return os;
     }
 
     public int getLocationId(){
@@ -48,6 +56,10 @@ public class GameLocation {
 
     public void setWalls(List<Directions> walls){
         this.whereWalls = walls;
+    }
+
+    public boolean isThereAPlayer(){
+        return !this.people.isEmpty();
     }
 
     public boolean isThereAWall(Directions direction){
@@ -65,10 +77,18 @@ public class GameLocation {
     public void addObstacle(Obstacle obstacle){
         this.hasObstacle = true;
         this.obstacle = obstacle;
-        this.items.add(obstacle);
     }
 
     public Obstacle getObstacle(){
         return this.obstacle;
+    }
+
+    // Checks if the person and obstacle are in the same location
+    public boolean didPersonTriggerObstacle(){
+        if(!this.hasObstacle) return false;
+        if(isThereAPlayer() && !this.obstacle.hasObstacleBeenTriggered()){
+            this.obstacle.triggerObstacle();
+            return true;
+        } return false;
     }
 }

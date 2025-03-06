@@ -1,17 +1,17 @@
 package edu.bothell.wampus;
 
-public class Bats implements Obstacle {
+public class Pit implements Obstacle {
     // Properties
     private GameLocation location;
     private boolean isTriggered = false;
     private boolean isDestroyed = false;
 
-    // Constructor
-    public Bats(GameLocation location){
-        this.location = location;
+    // Constructors
+    public Pit(GameLocation gl){
+        this.location = gl;
     }
 
-    // Methods
+    // Method
 
     @Override
     public boolean hasObstacleBeenTriggered(){
@@ -37,5 +37,4 @@ public class Bats implements Obstacle {
     public GameLocation getLocation(){
         return this.location;
     }
-
 }
