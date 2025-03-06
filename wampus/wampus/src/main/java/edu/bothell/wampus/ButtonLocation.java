@@ -9,24 +9,18 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class ButtonLocation extends JButton implements Locatable, ActionListener{
+public class ButtonLocation implements ActionListener{
 
     private int x;
     private int y;
     private GUI frame;
+    private GameLocation location;
 
     public ButtonLocation(GUI frame, int x, int y, GameLocation location){
         super();
         this.x = x;
         this.y = y;
         this.frame = frame;
-
-        this.addActionListener(this);
-        this.setPreferredSize(new Dimension(100, 100));
-        this.setMargin(new Insets(25, 25, 25, 25));
-        this.setFont(new Font("Arial", Font.PLAIN, 20));
-        this.setText(getButtonLocation().getLocationId()+"");
-        this.setVisible(true);
     }
 
     @Override
@@ -34,25 +28,19 @@ public class ButtonLocation extends JButton implements Locatable, ActionListener
         this.frame.handleButtonClick(this.x, this.y);
     }
 
-    @Override
     public int getX(){
         return x;
     }
 
-    @Override
+    public static JButton giveJButton(){
+        JButton button = new JButton();
+        //button.setPreferredSize(100,100);
+        return button;
+    }
+
+    
     public int getY(){
         return y;
-    }
-
-    @Override
-    public int[] getPos(){
-        int[] array = new int[] {x,y};
-        return array;
-    }
-
-    @Override
-    public GameLocation getButtonLocation(){
-        return this.frame.getLocation(this.x, this.y);
     }
     
 }
