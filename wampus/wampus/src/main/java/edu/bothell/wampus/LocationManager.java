@@ -36,7 +36,7 @@ public class LocationManager {
     public void setNewPlayers (List<Person> players){
         for(Person p: players){
             this.playerLocations.put(p, this.cave.spawnPoint());
-            this.cave.spawnPoint().addItemToLocation(p);
+            this.cave.spawnPoint().addPersonToLocation(p);
             System.out.println(p.getName());
         }
     }

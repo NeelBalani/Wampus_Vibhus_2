@@ -2,6 +2,11 @@ package edu.bothell.wampus;
 
 public interface Obstacle {
 
-    void obstacleTriggered();
+    // The Controller checks on the obstacles
+    // The Cave contains the obstacles
+    boolean hasObstacleBeenTriggered();
+    void triggerObstacle();
+    void destroyObstacle();
+    boolean isObstacleDestroyed();
     GameLocation getLocation();
 }
