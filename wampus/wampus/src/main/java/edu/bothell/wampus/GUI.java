@@ -24,7 +24,7 @@ public class GUI extends JFrame implements CaveView{
         super.setLayout(new GridLayout(5,6));
         
         for(int i = 0; i < 30 ;i++){
-            this.buttons[i/6][i%5] = ButtonLocation.giveJButton();
+            this.buttons[i/6][i%5] = new ButtonLocation(this, i/6, i%6, c.getCave().getLocationBasedOnCoords(i/6, i%5)).giveJButton();
             this.add(this.buttons[i/6][i%5]);
         }
 

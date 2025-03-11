@@ -15,12 +15,14 @@ public class ButtonLocation implements ActionListener{
     private int y;
     private GUI frame;
     private GameLocation location;
+    private static String num;
 
-    public ButtonLocation(GUI frame, int x, int y, GameLocation location){
+    public ButtonLocation(GUI frame, int x, int y,  GameLocation location){
         super();
         this.x = x;
         this.y = y;
         this.frame = frame;
+        this.num = ((x*6)+y) + 1 + " ";
     }
 
     @Override
@@ -34,6 +36,8 @@ public class ButtonLocation implements ActionListener{
 
     public static JButton giveJButton(){
         JButton button = new JButton();
+        System.out.println(num);
+        button.setText(num);
         //button.setPreferredSize(100,100);
         return button;
     }
