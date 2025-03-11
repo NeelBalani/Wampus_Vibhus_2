@@ -12,7 +12,8 @@ public class Cave {
                 System.out.print(getLocationId(i,j) + " ");
             }System.out.println();
         }
-        getLocationBasedOnCoords(3,0).addObstacle(new Pit(getLocationBasedOnCoords(1,0)));
+        GameLocation testTrap = getLocationBasedOnCoords(1,0);
+        testTrap.addObstacle(new Pit(testTrap));
     }
 
     public GameLocation spawnPoint(){
@@ -21,7 +22,6 @@ public class Cave {
 
     public int getLocationId(int i, int j){
         return i * 6 + j + 1;
-
     }
 
     public int[] getSize(){
