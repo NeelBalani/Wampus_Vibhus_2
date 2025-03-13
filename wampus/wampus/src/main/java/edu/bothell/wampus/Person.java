@@ -40,6 +40,7 @@ public class Person implements Teammate {
         }
         int actionIndex = ui.getActionChoice(directions);
         String stringDirection = directions.get(actionIndex);
+        ui.showMessage(stringDirection);
         return Directions.valueOf(stringDirection);
     }
 }

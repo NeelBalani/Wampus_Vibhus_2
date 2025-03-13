@@ -8,10 +8,12 @@ public class Cave {
     public Cave(){
         for(int i = 0; i < cave.length; i++){
             for(int j = 0; j < cave[i].length; j++){
-                cave[i][j] = new GameLocation(i,j,getLocationId(i, j));
+                cave[i][j] = new GameLocation(j,i,getLocationId(i, j));
                 System.out.print(getLocationId(i,j) + " ");
             }System.out.println();
         }
+        GameLocation testTrap = getLocationBasedOnCoords(1,0);
+        testTrap.addObstacle(new Pit(testTrap));
     }
 
     public GameLocation spawnPoint(){
@@ -19,16 +21,15 @@ public class Cave {
     }
 
     public int getLocationId(int i, int j){
-        return i * 6 + j + 1;
-
+        return i * this.cave[0].length + j + 1;
     }
 
     public int[] getSize(){
         return new int[] {this.cave.length, this.cave[0].length};
     }
 
-    public GameLocation getLocationBasedOnCoords(int x, int y){
-        return this.cave[x][y];
+    public GameLocation getLocationBasedOnCoords(int y, int x){
+        return this.cave[y][x];
     }
 
     public GameLocation[][] getCave(){

@@ -31,6 +31,10 @@ public class Result {
         }
     }
 
+    public void diedToTrap(Obstacle obstacle){
+        this.message += " and died to a " + obstacle.getClass().toString();
+    }
+
     public String getAction() {
         return this.action;
     }

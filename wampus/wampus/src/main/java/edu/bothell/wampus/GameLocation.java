@@ -43,6 +43,10 @@ public class GameLocation {
         this.people.add(o);
     }
 
+    public void removePlayerFromLocation(Person p){
+        this.people.remove(p);
+    }
+
     public List<Object> getItems(){
         List<Object> os = new ArrayList<>();
         os.addAll(this.people);
