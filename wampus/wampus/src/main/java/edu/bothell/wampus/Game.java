@@ -1,0 +1,52 @@
+package edu.bothell.wampus;
+
+import java.util.List;
+
+public class Game {
+    private LocationManager locationManager;
+    private List<Person> players;
+
+    public Game(LocationManager locationManager, List<Person> players) {
+        this.locationManager = locationManager;
+        this.players = players;
+    }
+
+    public boolean canMove(Person p, Directions direction) {
+        GameLocation currentLocation = locationManager.getGameLocationOfPerson(p);
+        GameLocation targetLocation = locationManager.getGameLocationInThisDirection(currentLocation, direction);
+        
+        return targetLocation != null;
+    }
+
+    public void movePlayer(Person p, Directions direction) {
+        if (canMove(p, direction)) {
+            GameLocation currentLocation = locationManager.getGameLocationOfPerson(p);
+            GameLocation newLocation = locationManager.getGameLocationInThisDirection(currentLocation, direction);
+            locationManager.changeGameLocationOfPerson(p, newLocation, currentLocation);
+        } else {
+            throw new IllegalArgumentException("Cannot move to the specified location.");
+        }
+    }
+
+    public String getVisibleInfo(Person p) {
+        GameLocation currentLocation = locationManager.getGameLocationOfPerson(p);
+        List<Object> items = currentLocation.getItems();
+        StringBuilder info = new StringBuilder("You see: ");
+        for (Object item : items) {
+            info.append(item.toString()).append(", ");
+        }
+        return info.toString();
+    }
+
+    public void resolveHazard(Person p) {
+        GameLocation currentLocation = locationManager.getGameLocationOfPerson(p);
+        if (currentLocation.hasObstacle()) {
+            Obstacle obstacle = currentLocation.getObstacle();
+            if (obstacle instanceof Wumpus) {
+                System.out.println("You encountered a Wumpus! Game Over.");
+            } else {
+                System.out.println("You encountered a hazard: " + obstacle);
+            }
+        }
+    }
+}
