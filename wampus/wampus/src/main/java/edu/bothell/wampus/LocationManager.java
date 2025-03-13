@@ -23,8 +23,8 @@ public class LocationManager {
 
     public void setGameLocations(){
         int[] size = this.cave.getSize();
-        for(int x = 0; x < size[1]; x++){
-            for(int y = 0; y < size[0]; y++){
+        for(int y = 0; y < size[0]; y++){
+            for(int x = 0; x < size[1]; x++){
                 System.out.print(this.cave.getLocationBasedOnCoords(y, x).getLocationId() + " ");
             } System.out.println();
         }
@@ -52,13 +52,16 @@ public class LocationManager {
         System.out.println("initial value: " + Arrays.toString(initialLocationValue));
         int[] finalLocationValue = new int[2];
         finalLocationValue[0] = initialLocationValue[0] + direction.dX();
-        System.out.println(finalLocationValue[0]);
+        System.out.println("dx: " + direction.dX());
+        System.out.println("x: " + finalLocationValue[0]);
         finalLocationValue[1] = initialLocationValue[1] + direction.dY();
-        System.out.println(finalLocationValue[1]);
+        System.out.println("dy: " + direction.dY());
+        System.out.println("y: " + finalLocationValue[1]);
 
         GameLocation finalGameLocation;
         try{
             finalGameLocation = this.cave.getLocationBasedOnCoords(finalLocationValue[1], finalLocationValue[0]);
+            System.out.println(Arrays.toString(finalGameLocation.getLocation()));
             return finalGameLocation;
         } catch(IndexOutOfBoundsException e){
             return null;
