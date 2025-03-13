@@ -16,12 +16,8 @@ public class Cave {
         }
         GameLocation testTrap = getLocationBasedOnCoords(1,0);
         testTrap.addObstacle(new Pit(testTrap));
-
-        for(int j = 0; j < cave[1].length; j++){
-            System.out.print(this.cave[0][j].getLocationId());
-            System.out.println(Arrays.toString(this.cave[0][j].getLocation()));
-        }
-        
+        GameLocation wumpusLocation = getLocationBasedOnCoords(2, 3);
+        wumpusLocation.addObstacle(new Wumpus(wumpusLocation));
     }
 
     public GameLocation spawnPoint(){
