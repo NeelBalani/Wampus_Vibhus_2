@@ -1,9 +1,6 @@
 package edu.bothell.wampus;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LocationManager {
     // Properties
@@ -26,9 +23,9 @@ public class LocationManager {
 
     public void setGameLocations(){
         int[] size = this.cave.getSize();
-        for(int x = 0; x < size[0]; x++){
-            for(int y = 0; y < size[1]; y++){
-                System.out.print(this.cave.getLocationBasedOnCoords(x, y).getLocationId() + " ");
+        for(int x = 0; x < size[1]; x++){
+            for(int y = 0; y < size[0]; y++){
+                System.out.print(this.cave.getLocationBasedOnCoords(y, x).getLocationId() + " ");
             } System.out.println();
         }
     }
@@ -52,20 +49,25 @@ public class LocationManager {
 
     public GameLocation getGameLocationInThisDirection(GameLocation initialLocation, Directions direction){
         int[] initialLocationValue = initialLocation.getLocation();
+        System.out.println("initial value: " + Arrays.toString(initialLocationValue));
         int[] finalLocationValue = new int[2];
         finalLocationValue[0] = initialLocationValue[0] + direction.dX();
+        System.out.println(finalLocationValue[0]);
         finalLocationValue[1] = initialLocationValue[1] + direction.dY();
+        System.out.println(finalLocationValue[1]);
 
         GameLocation finalGameLocation;
         try{
-            finalGameLocation = this.cave.getLocationBasedOnCoords(finalLocationValue[0], finalLocationValue[1]);
+            finalGameLocation = this.cave.getLocationBasedOnCoords(finalLocationValue[1], finalLocationValue[0]);
             return finalGameLocation;
         } catch(IndexOutOfBoundsException e){
             return null;
         }
     }
 
-    public void changeGameLocationOfPerson(Person p, GameLocation newGameLocation){
+    public void changeGameLocationOfPerson(Person p, GameLocation newGameLocation, GameLocation oldLocation){
         this.playerLocations.replace(p, newGameLocation);
+        oldLocation.removePlayerFromLocation(p);
+        newGameLocation.addPersonToLocation(p);
     }
 }

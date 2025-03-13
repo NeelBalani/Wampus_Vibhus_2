@@ -42,9 +42,11 @@ public class Controller {
 
         GameLocation oldLocation = this.locationManager.getGameLocationOfPerson(this.activeTeammate);
         GameLocation newLocation = this.locationManager.getGameLocationInThisDirection(oldLocation, direction);
-        this.locationManager.changeGameLocationOfPerson(this.activeTeammate, newLocation);
+        this.locationManager.changeGameLocationOfPerson(this.activeTeammate, newLocation, oldLocation);
+
 
         boolean obstacleTrigger = newLocation.didPersonTriggerObstacle();
+        System.out.println(obstacleTrigger);
         if(obstacleTrigger) obstacleAction(newLocation.getObstacle());
 
         result.playerMove(oldLocation, newLocation);
@@ -72,6 +74,13 @@ public class Controller {
             
             // Check if the player moved
             if(result.getAction().equals("Move")){
+                GameLocation[][] c = this.cave.getCave();
+                for(int i = 0; i < c.length; i++){
+                    for(int j = 0; j < c[i].length; j++){
+                        c[i][j] = new GameLocation(i,j,this.cave.getLocationId(i, j));
+                        System.out.print(this.cave.getLocationId(i,j) + " ");
+                    }System.out.println();
+                }
                 thePlayerTriedToMove(result);
             }
 

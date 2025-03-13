@@ -32,8 +32,9 @@ public enum Directions {
     }
 
     public int dX() {
-        if(name().equals("E") || name().equals("W") || !this.offset) return dx;
-        return this.dx + 1;
+        //if(name().equals("E") || name().equals("W") || !this.offset) return dx;
+        //return this.dx + 1;
+        return this.dx;
     }
 
     public int dY() {
