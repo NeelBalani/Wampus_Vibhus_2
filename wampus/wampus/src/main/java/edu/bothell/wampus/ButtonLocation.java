@@ -27,6 +27,7 @@ public class ButtonLocation implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e){
+        System.out.println("TESTING TESTING");
         this.frame.handleButtonClick(this.x, this.y);
     }
 

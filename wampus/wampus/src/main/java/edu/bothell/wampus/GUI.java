@@ -3,6 +3,7 @@ package edu.bothell.wampus;
 import java.awt.Button;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -47,8 +48,9 @@ public class GUI extends JFrame implements CaveView{
 
     @Override
     public void handleButtonClick(int row, int col) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'handleButtonClick'");
+        GameLocation g = this.c.getCave().getLocationBasedOnCoords(row, col);
+        System.out.println(g);
+        System.out.println(g.getLocationId() + " " + this.c.findWhatIsInLocation(g));
     }
 
 

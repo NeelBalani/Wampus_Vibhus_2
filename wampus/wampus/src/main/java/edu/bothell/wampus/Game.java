@@ -18,11 +18,18 @@ public class Game {
         return targetLocation != null;
     }
 
-    public void movePlayer(Person p, Directions direction) {
+    public void movePlayer(Person p, Directions direction, Result result) {
         if (canMove(p, direction)) {
-            GameLocation currentLocation = locationManager.getGameLocationOfPerson(p);
-            GameLocation newLocation = locationManager.getGameLocationInThisDirection(currentLocation, direction);
-            locationManager.changeGameLocationOfPerson(p, newLocation, currentLocation);
+            GameLocation oldLocation = this.locationManager.getGameLocationOfPerson(p);
+            GameLocation newLocation = this.locationManager.getGameLocationInThisDirection(oldLocation, direction);
+            this.locationManager.changeGameLocationOfPerson(p, newLocation, oldLocation);
+    
+    
+            boolean obstacleTrigger = newLocation.didPersonTriggerObstacle();
+            System.out.println(obstacleTrigger);
+            if(obstacleTrigger) resolveHazard(p);
+    
+            result.playerMove(oldLocation, newLocation);
         } else {
             throw new IllegalArgumentException("Cannot move to the specified location.");
         }

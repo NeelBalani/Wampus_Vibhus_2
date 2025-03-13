@@ -9,6 +9,9 @@ public class Main {
         controller.addPlayersToLocationManager();
         new GUI(controller);
         controller.setNewPlayers();
-        controller.start();
+        System.out.println(
+            "is it testing"
+        );
+        // controller.start();
     }
 }

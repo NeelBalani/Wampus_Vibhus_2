@@ -12,12 +12,14 @@ public class Controller {
     private boolean continueGame;
     private LocationManager locationManager;
     private Cave cave;
+    private Game game;
 
     public Controller() {
         this.activeTeammates = new ArrayList<>();
         this.allTeammates = this.activeTeammates;
         this.cave = new Cave();
         this.locationManager = new LocationManager(this.allTeammates, this.cave);
+        this.game = new Game(this.locationManager, this.activeTeammates);
     }
 
     public void addPlayersToLocationManager(){
@@ -74,7 +76,8 @@ public class Controller {
             
             // Check if the player moved
             if(result.getAction().equals("Move")){
-                thePlayerTriedToMove(result);
+                Directions direction = this.activeTeammate.doMove(ui);
+                this.game.movePlayer(this.activeTeammate, direction, result);
             }
 
             if(result.getAction().equals("Shoot")){
