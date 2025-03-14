@@ -1,5 +1,6 @@
 package edu.bothell.wampus;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Cave {
@@ -38,6 +39,18 @@ public class Cave {
 
     public GameLocation[][] getCave(){
         return this.cave;
+    }
+
+    public ArrayList<GameLocation> getAdjacentLocations(GameLocation target, LocationManager lm){
+        ArrayList<GameLocation> adjacentLocations = new ArrayList<GameLocation>();
+        GameLocation adjecent;
+
+        for(Directions d : Directions.values()){
+            adjecent = lm.getGameLocationInThisDirection(target, d);
+            adjacentLocations.add(adjecent);
+        }
+
+        return adjacentLocations;
     }
 
 
