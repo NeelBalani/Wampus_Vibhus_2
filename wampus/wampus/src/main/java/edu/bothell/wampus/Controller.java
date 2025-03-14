@@ -39,32 +39,6 @@ public class Controller {
         this.locationManager.setNewPlayers(this.activeTeammates);
     }
 
-    public void thePlayerTriedToMove(Result result){
-        Directions direction = this.activeTeammate.doMove(this.ui);
-
-        GameLocation oldLocation = this.locationManager.getGameLocationOfPerson(this.activeTeammate);
-        GameLocation newLocation = this.locationManager.getGameLocationInThisDirection(oldLocation, direction);
-        this.locationManager.changeGameLocationOfPerson(this.activeTeammate, newLocation, oldLocation);
-
-
-        boolean obstacleTrigger = newLocation.didPersonTriggerObstacle();
-        System.out.println(obstacleTrigger);
-        if(obstacleTrigger) obstacleAction(newLocation.getObstacle());
-
-        result.playerMove(oldLocation, newLocation);
-    }
-
-    public void obstacleAction(Obstacle obstacle){
-        /*
-         * Check what obstacle it is
-         * Do an action based on what the obstacle is
-         */
-        // if(obstacle is pit) say player is dead and remove from active players
-        Pit pit = new Pit(new GameLocation(0, 0));
-        if(obstacle.getClass() == pit.getClass()){
-            System.out.println("THE OBSTACLE IS A PIT");
-        };
-    }
 
     public void start() {
         
@@ -77,10 +51,10 @@ public class Controller {
             // Check if the player moved
             if(result.getAction().equals("Move")){
                 Directions direction = this.activeTeammate.doMove(ui);
-                this.game.movePlayer(this.activeTeammate, direction, result);
+                result = this.game.movePlayer(this.activeTeammate, direction, result);
             }
 
-            if(result.getAction().equals("Shoot")){
+            else if(result.getAction().equals("Shoot")){
                 // Todo: Action for shooting
             }
 
