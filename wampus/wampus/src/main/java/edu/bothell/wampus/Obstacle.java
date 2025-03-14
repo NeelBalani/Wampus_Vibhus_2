@@ -9,4 +9,5 @@ public interface Obstacle {
     void destroyObstacle();
     boolean isObstacleDestroyed();
     GameLocation getLocation();
+    String toString();
 }

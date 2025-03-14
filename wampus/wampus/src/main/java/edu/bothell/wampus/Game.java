@@ -45,8 +45,7 @@ public class Game {
         return info.toString();
     }
 
-    public void resolveHazard(Person p) {
-        GameLocation currentLocation = locationManager.getGameLocationOfPerson(p);
+    public void resolveHazard(GameLocation currentLocation) {
         if (currentLocation.hasObstacle()) {
             Obstacle obstacle = currentLocation.getObstacle();
             if (obstacle instanceof Wumpus) {

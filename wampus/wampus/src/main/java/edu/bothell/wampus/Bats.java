@@ -38,4 +38,6 @@ public class Bats implements Obstacle {
         return this.location;
     }
 
+    @Override
+    public String toString() { return "Bats"; }
 }

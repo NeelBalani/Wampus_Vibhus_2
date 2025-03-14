@@ -50,7 +50,7 @@ public class GameLocation {
     public List<Object> getItems(){
         List<Object> os = new ArrayList<>();
         os.addAll(this.people);
-        if (this.obstacle == null) os.add(this.obstacle);  
+        if (this.obstacle != null) os.add(this.obstacle);
         return os;
     }
 

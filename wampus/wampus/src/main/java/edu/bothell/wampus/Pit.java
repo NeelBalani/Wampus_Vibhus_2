@@ -37,4 +37,7 @@ public class Pit implements Obstacle {
     public GameLocation getLocation(){
         return this.location;
     }
+
+    @Override
+    public String toString() { return "Pit"; }
 }

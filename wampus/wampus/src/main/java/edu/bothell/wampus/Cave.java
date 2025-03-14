@@ -8,10 +8,10 @@ public class Cave {
 
 
     public Cave(){
-        for(int i = 0; i < cave.length; i++){
-            for(int j = 0; j < cave[i].length; j++){
-                cave[i][j] = new GameLocation(i,j,generateLocationId(i, j));
-                System.out.print(generateLocationId(i,j) + " " + Arrays.toString(cave[i][j].getLocation()));
+        for(int y = 0; y < cave.length; y++){
+            for(int x = 0; x < cave[y].length; x++){
+                cave[y][x] = new GameLocation(x,y,generateLocationId(y, x));
+                System.out.print(generateLocationId(y,x) + " " + Arrays.toString(cave[y][x].getLocation()));
             }System.out.println();
         }
         GameLocation testTrap = getLocationBasedOnCoords(1,0);

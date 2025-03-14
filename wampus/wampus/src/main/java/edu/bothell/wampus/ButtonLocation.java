@@ -14,33 +14,35 @@ public class ButtonLocation implements ActionListener{
     private int x;
     private int y;
     private GUI frame;
-    private GameLocation location;
     private static String num;
+    private JButton button;
 
-    public ButtonLocation(GUI frame, int x, int y,  GameLocation location){
+    public ButtonLocation(GUI frame, int x, int y){
         super();
         this.x = x;
         this.y = y;
         this.frame = frame;
-        this.num = ((x*6)+y) + 1 + " ";
+        this.num = String.valueOf(frame.getLocationID(this.y, this.x));
     }
 
     @Override
     public void actionPerformed(ActionEvent e){
-        System.out.println("TESTING TESTING");
-        this.frame.handleButtonClick(this.x, this.y);
+        if(e.getSource() == this.button){
+            this.frame.handleButtonClick(this.y, this.x);
+        }
     }
 
     public int getX(){
         return x;
     }
 
-    public static JButton giveJButton(){
-        JButton button = new JButton();
+    public JButton giveJButton(){
+        this.button = new JButton();
         System.out.println(num);
-        button.setText(num);
+        this.button.setText(num);
         //button.setPreferredSize(100,100);
-        return button;
+        this.button.addActionListener(this);
+        return this.button;
     }
 
     
