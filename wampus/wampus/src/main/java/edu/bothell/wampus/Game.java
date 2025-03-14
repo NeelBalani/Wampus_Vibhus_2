@@ -27,7 +27,7 @@ public class Game {
     
             boolean obstacleTrigger = newLocation.didPersonTriggerObstacle();
             System.out.println(obstacleTrigger);
-            if(obstacleTrigger) resolveHazard(p);
+            if(obstacleTrigger) resolveHazard(newLocation);
     
             result.playerMove(oldLocation, newLocation);
         } else {
