@@ -42,6 +42,17 @@ public class GUI extends JFrame implements CaveView{
         }
         this.add(pane);
         pane.setVisible(true);
+
+        JPanel movePane = new JPanel();
+        movePane.setLayout(new FlowLayout());
+        movePane.add(new DpadButtons(this, "Up").giveJButton());
+        movePane.add(new DpadButtons(this, "Right").giveJButton());
+        movePane.add(new DpadButtons(this, "Down").giveJButton());
+        movePane.add(new DpadButtons(this, "Left").giveJButton());
+
+        this.add(movePane);
+        movePane.setVisible(true);
+
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         super.setLocationRelativeTo(null);
         super.setVisible(true);

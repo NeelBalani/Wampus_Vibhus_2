@@ -8,7 +8,7 @@ public class Main {
         UI ui = new ConsoleUI(controller);
         controller.addPerson(new Pranav("Pranav"));
         controller.addPlayersToLocationManager();
-        //new GUI(controller);
+        new GUI(controller);
         controller.setNewPlayers();
         System.out.println("Current working directory: " + System.getProperty("user.dir"));
 
