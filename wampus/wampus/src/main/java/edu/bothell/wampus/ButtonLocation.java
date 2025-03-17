@@ -40,7 +40,6 @@ public class ButtonLocation implements ActionListener{
         this.button = new JButton();
         System.out.println(num);
         this.button.setText(num);
-        //button.setPreferredSize(100,100);
         this.button.addActionListener(this);
         return this.button;
     }
