@@ -5,10 +5,18 @@ import java.util.Arrays;
 
 public class Cave {
 
-    private GameLocation[][] cave = new GameLocation[2][3];
+    // Properties
+    private GameLocation[][] cave;
 
+    // Constructors
+    
+    public Cave(GameLocation[][] c){
+        this.cave = c;
+    }
 
     public Cave(){
+        this.cave = new GameLocation[2][3];
+
         for(int y = 0; y < cave.length; y++){
             for(int x = 0; x < cave[y].length; x++){
                 cave[y][x] = new GameLocation(x,y,generateLocationId(y, x));
