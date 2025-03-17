@@ -23,14 +23,19 @@ public class GUI extends JFrame implements CaveView{
 
     public GUI(Controller c){
         super();
+
         this.c = c;
+        int[] size = this.c.getCave().getSize();
+        
         super.setTitle("My first Jframe");
-        super.setSize(400,400);
+        super.setSize(size[0]*100,size[1]*100);
         super.setLayout(new FlowLayout());
         this.buttons = new JButton[this.c.getCave().getSize()[0]][this.c.getCave().getSize()[1]];
-        JPanel pane = new JPanel();
-        pane.setLayout(new GridLayout(5,6));
-        pane.setSize(400,400);
+        
+        JPanel pane = new JPanel();        
+        pane.setLayout(new GridLayout(size[0],size[1]));
+        
+        pane.setSize(size[0]*100, size[1]*100);
         
         for(int y = 0; y < this.buttons.length; y++){
             for(int x = 0; x < this.buttons[y].length; x++){
