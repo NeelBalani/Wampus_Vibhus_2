@@ -14,7 +14,7 @@ public class Main {
 
         
         QuestionInitializer questionInitializer = new QuestionInitializer();
-        TriviaManager triviaManager = questionInitializer.fromFile("trivia.csv");
+        TriviaManager triviaManager = questionInitializer.fromFile("Trivia.csv");
         
         for (int i = 0; i < triviaManager.getTotalQuestions(); i++) {
             System.out.println("Question " + (i + 1) + ": " + triviaManager.getQuestion(i));
