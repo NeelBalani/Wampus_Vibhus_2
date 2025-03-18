@@ -10,20 +10,23 @@ public class DpadButtons implements ActionListener {
 
     private JButton button;
     private GUI frame;
-    
-    public DpadButtons(GUI frame){
-        frame = this.frame;
+    private String direc;
+
+        public DpadButtons(GUI frame, String dir){
+            frame = this.frame;
+            direc = dir;
+        System.out.println(direc);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        System.out.println(direc);
     }
     
-    public JButton giveJButton(int n){
+    public JButton giveJButton(){
         this.button = new JButton();
-        this.button.setText(n + " ");
+        System.out.println(direc);
+        this.button.setText(direc);
         this.button.addActionListener(this);
         return this.button;
     }

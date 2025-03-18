@@ -8,14 +8,15 @@ public class Main {
         UI ui = new ConsoleUI(controller);
         controller.addPerson(new Pranav("Pranav"));
         controller.addPlayersToLocationManager();
-        //new GUI(controller);
+        new GUI(controller);
         controller.setNewPlayers();
         System.out.println("Current working directory: " + System.getProperty("user.dir"));
 
         
-        QuestionInitializer questionInitializer = new QuestionInitializer();
-        TriviaManager triviaManager = questionInitializer.fromFile("Trivia.csv");
+        //QuestionInitializer questionInitializer = new QuestionInitializer();
+        //TriviaManager triviaManager = questionInitializer.fromFile("trivia.csv");
         
+        /*
         for (int i = 0; i < triviaManager.getTotalQuestions(); i++) {
             System.out.println("Question " + (i + 1) + ": " + triviaManager.getQuestion(i));
             System.out.println("Correct Answer: " + triviaManager.getCorrectAnswer(i));
@@ -25,9 +26,10 @@ public class Main {
             }
             System.out.println("\n");
         }
-
+        */
         
         System.out.println("is it testing");
-        // controller.start();
+        controller.start();
+        // I made a mistake of commiting to the main file instead of the branch mb
     }
 }

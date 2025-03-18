@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class Cave {
 
-    private GameLocation[][] cave = new GameLocation[5][6];
+    private GameLocation[][] cave = new GameLocation[2][3];
 
 
     public Cave(){
