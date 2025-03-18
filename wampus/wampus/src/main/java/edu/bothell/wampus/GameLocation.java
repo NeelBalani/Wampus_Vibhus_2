@@ -70,8 +70,12 @@ public class GameLocation {
         return this.whereWalls.contains(direction);
     }
 
-    public List<Directions> getWalls(){
-        return this.whereWalls;
+    public Directions[] getWalls(){
+        Directions[] directions = new Directions[4];
+        for(int d = 0; d < this.whereWalls.size(); d++){
+            directions[d] = this.whereWalls.get(d);
+        }
+        return directions;
     }
 
     public boolean hasObstacle(){

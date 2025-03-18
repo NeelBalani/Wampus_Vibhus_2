@@ -23,7 +23,9 @@ public class CaveInitializer {
         this.caveBuilder = new GameLocation[caveSize[0]][caveSize[1]];
 
         // Fills up the caveBuilder with the map created from the file
+        // Skips description
         scanner.nextLine();
+        
         int rowNumber = 0;
         while(scanner.hasNextLine()){
             // Builds each row
