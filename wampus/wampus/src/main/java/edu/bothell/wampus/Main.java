@@ -1,11 +1,9 @@
 package edu.bothell.wampus;
 
-import java.io.FileNotFoundException;
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
-        /*
+    public static void main(String[] args) {
         Controller controller = new Controller();
         UI ui = new ConsoleUI(controller);
         controller.addPerson(new Pranav("Pranav"));
@@ -13,7 +11,7 @@ public class Main {
         new GUI(controller);
         controller.setNewPlayers();
         System.out.println("Current working directory: " + System.getProperty("user.dir"));
-    */
+
         
         //QuestionInitializer questionInitializer = new QuestionInitializer();
         //TriviaManager triviaManager = questionInitializer.fromFile("trivia.csv");
@@ -31,9 +29,6 @@ public class Main {
         */
         
         System.out.println("is it testing");
-
-        new CaveInitializer("C:/Users/vibhu/IdeaProjects/Wampus_Vibhus_2/wampus/wampus/src/main/java/edu/bothell/wampus/maps/EasyCaveMap.csv");
-
-        //controller.start();
+        controller.start();
     }
 }
