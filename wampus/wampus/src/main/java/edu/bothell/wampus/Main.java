@@ -1,9 +1,10 @@
 package edu.bothell.wampus;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Controller controller = new Controller();
         UI ui = new ConsoleUI(controller);
         controller.addPerson(new Pranav("Pranav"));
