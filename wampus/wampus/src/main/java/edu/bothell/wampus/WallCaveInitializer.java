@@ -8,14 +8,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class CaveInitializer {
+public class WallCaveInitializer {
     // Properties
     private GameLocation[][] caveBuilder;
     private int roomIdCounter = 1;
     private Cave cave;
 
     // Constructors
-    public CaveInitializer(String filePath) throws FileNotFoundException {
+    public WallCaveInitializer(String filePath) throws FileNotFoundException {
         // Gets the file and initializes the caveBuilder ready for filling up
         File file = new File(filePath);
         Scanner scanner = new Scanner(file);

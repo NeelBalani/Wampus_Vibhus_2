@@ -32,7 +32,7 @@ public class Main {
         
         System.out.println("is it testing");
 
-        new CaveInitializer("wampus/wampus/src/main/java/edu/bothell/wampus/maps/EasyCaveMap.csv");
+        new WallCaveInitializer("wampus/wampus/src/main/java/edu/bothell/wampus/maps/EasyCaveMap.csv");
 
         //controller.start();
     }
