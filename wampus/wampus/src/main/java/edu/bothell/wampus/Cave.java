@@ -7,6 +7,18 @@ public class Cave {
 
     private GameLocation[][] cave = new GameLocation[2][3];
 
+    
+    public Cave(GameLocation[][] c){
+        this.cave = c;
+        for(int y = 0; y < cave.length; y++){
+
+            for(int x = 0; x < cave[y].length; x++){
+                System.out.print("[" + this.cave[y][x] + " " + Arrays.toString(this.cave[y][x].getLocation()) + "]");
+                System.out.print(Arrays.deepToString(this.cave[y][x].getWalls()));
+            }
+            System.out.println();
+        }
+    }
 
     public Cave(){
         for(int y = 0; y < cave.length; y++){

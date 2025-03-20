@@ -29,7 +29,9 @@ public class Main {
         */
         
         System.out.println("is it testing");
-        controller.start();
-        // I made a mistake of commiting to the main file instead of the branch mb
+
+        new WallCaveInitializer("wampus/wampus/src/main/java/edu/bothell/wampus/maps/EasyCaveMap.csv");
+
+        //controller.start();
     }
 }
