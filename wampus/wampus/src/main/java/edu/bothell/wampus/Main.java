@@ -6,11 +6,19 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         Controller controller = new Controller();
+        controller.setCaveAs("wampus/wampus/src/main/java/edu/bothell/wampus/maps/EasyCaveMap.csv");
+        controller.setNewLocationManager();
+
         UI ui = new ConsoleUI(controller);
         controller.addPerson(new Pranav("Pranav"));
         controller.addPlayersToLocationManager();
+        controller.passPlayersToLocationManager();
+
+        
         new GUI(controller);
-        controller.setNewPlayers();
+
+        
+
         System.out.println("Current working directory: " + System.getProperty("user.dir"));
 
         
@@ -31,7 +39,6 @@ public class Main {
         
         System.out.println("is it testing");
 
-        new WallCaveInitializer("wampus/wampus/src/main/java/edu/bothell/wampus/maps/EasyCaveMap.csv");
 
         //controller.start();
     }

@@ -7,16 +7,16 @@ import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import org.apache.naming.java.javaURLContextFactory;
-import org.thymeleaf.standard.expression.Fragment;
-
-public class GUI extends JFrame implements CaveView{
+// Let GUI implement UI and replace the previous UI
+// Removes the middleman UI that implements GUI methods
+// Makes much more sense for the Controller to just talk to the GUI
+public class GUI extends JFrame implements CaveView, UI{
 
     private JButton[][] buttons;
     private Controller c;
@@ -86,7 +86,34 @@ public class GUI extends JFrame implements CaveView{
         return this.c.getCave().getLocationBasedOnCoords(row, col).getLocationId();
     }
 
+    @Override
+    public void showMessage(String message) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'showMessage'");
+    }
 
-    
+    @Override
+    public void showPersonTurn(Person person) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'showPersonTurn'");
+    }
+
+    @Override
+    public int getActionChoice(List<String> actions) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getActionChoice'");
+    }
+
+    @Override
+    public boolean askToContinue(String name) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'askToContinue'");
+    }
+
+    @Override
+    public void displaySummary() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'displaySummary'");
+    }
        
 }

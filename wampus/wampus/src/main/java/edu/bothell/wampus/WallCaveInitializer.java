@@ -36,6 +36,10 @@ public class WallCaveInitializer {
         this.cave = new Cave(this.caveBuilder);
     }
 
+    public Cave getBuiltCave(){
+        return this.cave;
+    }
+
     private void printCave(){
         for(int y = 0; y < caveBuilder.length; y++){
 
