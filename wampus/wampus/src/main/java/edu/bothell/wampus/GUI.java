@@ -82,13 +82,8 @@ public class GUI extends JFrame implements CaveView, UI{
         System.out.println(this.c.findWhatIsInLocation(g));
     }
 
-    public void handleMoveInDirection(String dir){
-        Directions direction = Directions.N;
-        if(dir.equals("Left")) direction = Directions.W;
-        if(dir.equals("Right")) direction = Directions.E;
-        if(dir.equals("Up")) direction = Directions.N;
-        if(dir.equals("Down")) direction = Directions.S;
-        this.c.movePlayerUsingDirections(direction);
+    public void handleMoveInDirection(Directions dir){
+        this.c.movePlayerUsingDirections(dir);
     }
 
     public int getLocationID(int row, int col){

@@ -10,13 +10,15 @@ public class DpadButtons implements ActionListener {
 
     private JButton button;
     private GUI frame;
-    private String direc;
+    private Directions direc;
+    private String direcString;
 
         public DpadButtons(GUI f, String dir){
             this.frame = f;
-            direc = dir;
+            direcString = dir;
         System.out.println(direc);
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -25,8 +27,8 @@ public class DpadButtons implements ActionListener {
     
     public JButton giveJButton(){
         this.button = new JButton();
-        System.out.println(direc);
-        this.button.setText(direc);
+        System.out.println(direcString);
+        this.button.setText(direcString);
         this.button.addActionListener(this);
         return this.button;
     }
