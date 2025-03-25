@@ -13,12 +13,13 @@ public class DpadButtons implements ActionListener {
     private Directions direc;
     private String direcString;
 
-        public DpadButtons(GUI f, String dir){
-            this.frame = f;
-            direcString = dir;
+    public DpadButtons(GUI f, String dir){
+        this.frame = f;
+        this.direcString = dir;
+        this.direc = Directions.getDirectionFromString(dir);
+
         System.out.println(direc);
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {

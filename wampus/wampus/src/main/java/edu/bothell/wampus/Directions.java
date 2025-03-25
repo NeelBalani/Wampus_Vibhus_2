@@ -26,7 +26,7 @@ public enum Directions {
         return this;
     }
 
-    public Directions getDirectionFromString(String directionStr){
+    public static Directions getDirectionFromString(String directionStr){
         if(directionStr.equals("Up")) return N;
         if(directionStr.equals("Down")) return S;
         if(directionStr.equals("Right")) return E;
