@@ -11,23 +11,20 @@ public class Controller {
     private Person activeTeammate;
     private List<Result> summary = new ArrayList<>();
     private boolean continueGame;
-    private LocationManager locationManager;
     private Cave cave;
     private Game game;
 
     public Controller(String caveFilePath) throws FileNotFoundException{
-        this.activeTeammates = new ArrayList<>();
-        this.allTeammates = this.activeTeammates;
-        
+
+        initializePlayerLists();
         setCaveAs(caveFilePath);
-        setNewLocationManager();
-        
-        this.game = new Game(this.locationManager, this.activeTeammates);
+        setNewGame();
+
     }
 
-    public Controller() {
-        this.activeTeammates = new ArrayList<>();
-        this.allTeammates = this.activeTeammates;
+    private void initializePlayerLists() {
+        this.allTeammates = new ArrayList<Person>();
+        this.activeTeammates = this.allTeammates;
     }
 
     public void setCaveAs(String filePath) throws FileNotFoundException{
@@ -36,15 +33,14 @@ public class Controller {
     }
 
     public void setNewGame(){
-        this.game = new Game(this.locationManager, this.activeTeammates);
+        this.game = new Game(new LocationManager(this.allTeammates, this.cave), this.activeTeammates);
     }
 
-    public void setNewLocationManager(){
-        this.locationManager = new LocationManager(this.allTeammates, this.cave);
-    }
-
-    public void addPlayersToLocationManager(){
-        this.locationManager.setNewPlayers(this.activeTeammates);
+    public void setPlayers(List<Person> players){
+        this.allTeammates = players;
+        this.activeTeammates = this.allTeammates;
+        this.game.syncPlayers(players);
+        this.activeTeammate = this.activeTeammates.getFirst();
     }
 
     public void setUI(UI ui){
@@ -52,13 +48,8 @@ public class Controller {
     }
 
     public void addPerson(Person teammate) {
-        activeTeammates.add(teammate);
-    }
-
-    public void passPlayersToLocationManager() {
-        this.activeTeammate = this.activeTeammates.getFirst();
-        this.locationManager.setNewPlayers(this.activeTeammates);
-        
+        this.allTeammates.add(teammate);
+        setPlayers(this.allTeammates);
     }
 
 
@@ -97,7 +88,7 @@ public class Controller {
     }
 
     public List<Object> findWhatIsInLocation(GameLocation location){
-        List<Object> o = this.locationManager.getPersonsInLocation(location);
+        List<Object> o = this.game.findObjectsInLocation(location);
         System.out.println(o + " " + location.getLocationId());
         return o;
 

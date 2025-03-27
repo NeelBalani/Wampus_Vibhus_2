@@ -5,15 +5,13 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        Controller controller = new Controller();
-        controller.setCaveAs("wampus/wampus/src/main/java/edu/bothell/wampus/maps/EasyCaveMap.csv");
-        controller.setNewLocationManager();
-        controller.setNewGame();
+
+        // Initialize controller
+        Controller controller = new Controller("wampus/wampus/src/main/java/edu/bothell/wampus/maps/EasyCaveMap.csv");
+        controller.addPerson(new Pranav("Pranav"));
 
         UI ui = new ConsoleUI(controller);
-        controller.addPerson(new Pranav("Pranav"));
-        controller.addPlayersToLocationManager();
-        controller.passPlayersToLocationManager();
+
 
         
         new GUI(controller);

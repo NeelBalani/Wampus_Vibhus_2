@@ -18,6 +18,15 @@ public class Game {
         return targetLocation != null;
     }
 
+    public void syncPlayers(List<Person> people) {
+        this.locationManager.setNewPlayers(people);
+        this.players = people;
+    }
+
+    public void removePlayer(Person removedPerson) {
+        this.players.remove(removedPerson);
+    }
+
     public Result movePlayer(Person p, Directions direction, Result result) {
         if (canMove(p, direction)) {
             GameLocation oldLocation = this.locationManager.getGameLocationOfPerson(p);
@@ -65,5 +74,9 @@ public class Game {
                 System.out.println("You encountered a hazard: " + obstacle);
             }
         }
+    }
+
+    public List<Object> findObjectsInLocation(GameLocation location) {
+        return this.locationManager.getPersonsInLocation(location);
     }
 }
