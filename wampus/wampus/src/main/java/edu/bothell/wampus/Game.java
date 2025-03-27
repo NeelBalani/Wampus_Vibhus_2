@@ -14,8 +14,10 @@ public class Game {
     public boolean canMove(Person p, Directions direction) {
         GameLocation currentLocation = locationManager.getGameLocationOfPerson(p);
         GameLocation targetLocation = locationManager.getGameLocationInThisDirection(currentLocation, direction);
+
+        System.out.println(currentLocation.isThereAWall(direction));
         
-        return targetLocation != null;
+        return targetLocation != null && !currentLocation.isThereAWall(direction);
     }
 
     public void syncPlayers(List<Person> people) {
@@ -53,16 +55,6 @@ public class Game {
             info.append(item.toString()).append(", ");
         }
         return info.toString();
-    }
-
-    public Result movePlayerUsingDirections(Directions direction, Person activeTeammate) {
-        GameLocation oldLocation = this.locationManager.getGameLocationOfPerson(activeTeammate);
-        GameLocation targetLocation = this.locationManager.getGameLocationInThisDirection(oldLocation, direction);
-        this.locationManager.changeGameLocationOfPerson(activeTeammate, targetLocation, oldLocation);
-
-        Result result = new Result("Move", activeTeammate);
-        result.playerMove(oldLocation, targetLocation);
-        return result;
     }
 
     public void resolveHazard(GameLocation currentLocation) {

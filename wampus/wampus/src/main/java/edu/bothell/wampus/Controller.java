@@ -124,7 +124,7 @@ public class Controller {
     }
 
     public void movePlayerUsingDirections(Directions direction) {
-        Result result = this.game.movePlayerUsingDirections(direction, this.activeTeammate);
+        Result result = this.game.movePlayer(this.activeTeammate, direction, new Result("Move", this.activeTeammate));
         addResult(result);
         this.ui.showMessage(result.getMessage());
     }
