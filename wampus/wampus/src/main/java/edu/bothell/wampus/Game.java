@@ -46,6 +46,16 @@ public class Game {
         return info.toString();
     }
 
+    public Result movePlayerUsingDirections(Directions direction, Person activeTeammate) {
+        GameLocation oldLocation = this.locationManager.getGameLocationOfPerson(activeTeammate);
+        GameLocation targetLocation = this.locationManager.getGameLocationInThisDirection(oldLocation, direction);
+        this.locationManager.changeGameLocationOfPerson(activeTeammate, targetLocation, oldLocation);
+
+        Result result = new Result("Move", activeTeammate);
+        result.playerMove(oldLocation, targetLocation);
+        return result;
+    }
+
     public void resolveHazard(GameLocation currentLocation) {
         if (currentLocation.hasObstacle()) {
             Obstacle obstacle = currentLocation.getObstacle();

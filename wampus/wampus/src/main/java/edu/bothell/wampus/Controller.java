@@ -133,12 +133,7 @@ public class Controller {
     }
 
     public void movePlayerUsingDirections(Directions direction) {
-        GameLocation oldLocation = this.locationManager.getGameLocationOfPerson(activeTeammate);
-        GameLocation targetLocation = this.locationManager.getGameLocationInThisDirection(oldLocation, direction);
-        this.locationManager.changeGameLocationOfPerson(activeTeammate, targetLocation, oldLocation);
-        
-        Result result = new Result("Move", activeTeammate);
-        result.playerMove(oldLocation, targetLocation);
+        Result result = this.game.movePlayerUsingDirections(direction, this.activeTeammate);
         addResult(result);
         this.ui.showMessage(result.getMessage());
     }

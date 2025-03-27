@@ -8,6 +8,7 @@ public class Main {
         Controller controller = new Controller();
         controller.setCaveAs("wampus/wampus/src/main/java/edu/bothell/wampus/maps/EasyCaveMap.csv");
         controller.setNewLocationManager();
+        controller.setNewGame();
 
         UI ui = new ConsoleUI(controller);
         controller.addPerson(new Pranav("Pranav"));
