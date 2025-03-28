@@ -26,7 +26,6 @@ public class WampusController{
 
     @GetMapping("/location/{i}")
     public String getCurrentRoom(@PathVariable("i") String i) {
-        GameLocation gl = (new GameLocation(0,1,5));
         return " " + i;
     }    
     
