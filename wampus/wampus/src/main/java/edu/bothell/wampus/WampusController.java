@@ -26,7 +26,7 @@ public class WampusController{
 
     @GetMapping("/hello")
     public String hello() {
-        return "sigma sigma boy sigma boy sigma boy";
+        return "location";
     }
 
     @GetMapping("/location/{i}")
