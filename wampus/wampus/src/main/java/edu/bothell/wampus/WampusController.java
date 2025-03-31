@@ -18,6 +18,11 @@ public class WampusController{
     private List<Person> players = new ArrayList<Person>();
     private Game game = new Game(new LocationManager(this.cave), null);
 
+    @GetMapping("/index")
+    public String homePage() {
+        return "index.html";
+    }
+    
 
     @GetMapping("/hello")
     public String hello() {
