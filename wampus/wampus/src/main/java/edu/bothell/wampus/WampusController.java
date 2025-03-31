@@ -20,7 +20,7 @@ public class WampusController{
 
     @GetMapping("/index")
     public String homePage() {
-        return "index.html";
+        return "index";
     }
     
 
