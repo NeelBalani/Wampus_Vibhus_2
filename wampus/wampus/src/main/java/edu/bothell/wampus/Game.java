@@ -20,6 +20,10 @@ public class Game {
         return targetLocation != null && !currentLocation.isThereAWall(direction);
     }
 
+    public LocationManager getLocationManager(){
+        return this.locationManager;
+    }
+
     public void syncPlayers(List<Person> people) {
         this.locationManager.setNewPlayers(people);
         this.players = people;

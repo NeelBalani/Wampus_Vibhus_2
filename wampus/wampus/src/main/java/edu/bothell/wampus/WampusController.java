@@ -3,15 +3,13 @@ package edu.bothell.wampus;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Controller;
 
 
-@RestController
-@RequestMapping("/api")
+@Controller
 public class WampusController{
 
     private Cave cave = new Cave();
@@ -26,13 +24,9 @@ public class WampusController{
 
     @GetMapping("/hello")
     public String hello() {
-        return "location";
+        return "hello";
     }
 
-    @GetMapping("/location/{i}")
-    public String getCurrentRoom(@PathVariable("i") String i) {
-        return " " + i;
-    }    
     
 }
 

@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        I NEED HELP
+        
     </head>
     <body>
-        LOCATION LOCATION LOCATION
+        <h1>??????</h1>
+        <p>LOCATION LOCATION LOCATION</p>
+
+        <ul>
+            <li th:each="neighbor : ${neighbors}">
+              <a th:href="@{'/location/' + ${neighbor.id}}" th:text="${neighbor.name}"></a>
+            </li>
+          </ul>
+          
     </body>
 </html>
