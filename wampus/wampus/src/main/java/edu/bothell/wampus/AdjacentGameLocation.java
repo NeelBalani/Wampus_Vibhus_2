@@ -6,31 +6,30 @@ import java.util.List;
 public class AdjacentGameLocation {
     // Properties
     private int[] adjacentLocationsId = new int[6]; 
-    private int x;
-    private int y;
     private int locationId;
     private ArrayList<Person> people = new ArrayList<Person>();
+    private ArrayList<AdjacentGameLocation> adjacentLocations = new ArrayList<AdjacentGameLocation>();
     private Obstacle obstacle;
     private boolean hasObstacle;
 
     // Constructor
-    public AdjacentGameLocation(int x, int y, int locationId){
-        this.x = x;
-        this.y = y;
+    public AdjacentGameLocation(int locationId){
         this.locationId = locationId;
-        
     }
-    public AdjacentGameLocation(int x, int y){
-        this.x = x;
-        this.y = y;
-    }
-    
 
+    public AdjacentGameLocation(int locationId, ArrayList<AdjacentGameLocation>adjacentLocations){
+        this.locationId = locationId;
+        setAdjLocations(adjacentLocations);
+    }
 
     //Method
 
-    public int[] getLocation(){
-        return new int[]{this.x, this.y};
+    public ArrayList<AdjacentGameLocation> getAdjGameLocations(){
+        return this.adjacentLocations;
+    }
+
+    public void setAdjLocations(ArrayList<AdjacentGameLocation> adjLocs){
+        this.adjacentLocations = adjLocs;
     }
 
     public boolean doesContainPerson(Person p){

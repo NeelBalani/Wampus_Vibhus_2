@@ -1,10 +1,8 @@
-package edu.bothell.wampus;
-
 import java.io.File;
 
 public class AdjacentCaveInitializer {
     // Properties
-    private GameLocation[] oneDimensionCave;
+    private AdjacentGameLocation[] oneDimensionCave;
 
     // Constructors
     public AdjacentCaveInitializer(String filepath){
