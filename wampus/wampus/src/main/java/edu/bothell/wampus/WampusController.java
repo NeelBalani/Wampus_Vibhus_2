@@ -12,9 +12,8 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class WampusController{
 
-    private Cave cave = new Cave();
-    private List<Person> players = new ArrayList<Person>();
-    private Game game = new Game(new LocationManager(this.cave), null);
+    private AdjacentCaveInitializer caveInitializer = new AdjacentCaveInitializer("wampus/wampus/src/main/java/edu/bothell/wampus/maps/MapGraph.csv");
+    private AdjacentCave adjacentcave = new AdjacentCave();
 
     @GetMapping("/index")
     public String homePage() {
@@ -25,6 +24,16 @@ public class WampusController{
     @GetMapping("/hello")
     public String hello() {
         return "hello";
+    }
+
+    @GetMapping("/location/{id}")
+    public String getLocation(@PathVariable int id, Model model){
+        AdjacentGameLocation adjLocation = this.adjacentcave.getLocationBasedOnId(id);
+
+        ArrayList<AdjacentGameLocation> listOfAdjacentGameLocations = adjLocation.getAdjGameLocations();
+        model.addAttribute("adjacentRooms", listOfAdjacentGameLocations);
+        
+        return "location";
     }
 
     
