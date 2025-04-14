@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class WampusController{
 
-    private AdjacentCaveInitializer caveInitializer = new AdjacentCaveInitializer("wampus/wampus/src/main/java/edu/bothell/wampus/maps/MapGraph.csv");
+    //private AdjacentCaveInitializer caveInitializer = new AdjacentCaveInitializer("wampus/wampus/src/main/java/edu/bothell/wampus/maps/MapGraph.csv");
     private AdjacentCave adjacentcave = new AdjacentCave();
 
     @GetMapping("/index")

@@ -8,9 +8,10 @@ public class AdjacentCaveInitializer {
     // Properties
     private AdjacentGameLocation[] oneDimensionCave;
     private AdjacentGameLocation[] caveBuilder;
+    private AdjacentCave cave;
 
     // Constructors
-    public AdjacentCaveInitializer(String filepath){
+    public AdjacentCaveInitializer(String filepath) throws FileNotFoundException{
                 // Gets the file and initializes the caveBuilder ready for filling up
         File file = new File(filepath);
         Scanner scanner = new Scanner(file);
@@ -28,7 +29,7 @@ public class AdjacentCaveInitializer {
             rowNumber++;
         }
 
-        this.cave = new Cave(this.caveBuilder);        
+        this.cave = new AdjacentCave(this.caveBuilder);        
 
     }
 
@@ -42,6 +43,10 @@ public class AdjacentCaveInitializer {
         }
 
         return caveSizeCounter;
+
+    }
+
+    public void buildGameLocationRow(String row, int rowNumber){
 
     }
 }
