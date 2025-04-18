@@ -40,8 +40,16 @@ public class AdjacentCave {
         return this.cave;
     }
 
-    public ArrayList<AdjacentGameLocation> getAdjacentLocations(AdjacentGameLocation target, AdjacentLocationManager lm){
-        return target.getAdjGameLocations();
+    public ArrayList<AdjacentGameLocation> getAdjacentLocations(AdjacentGameLocation target){
+        ArrayList<Integer> adjacentGameLocationIds = target.getAdjGameLocationId();
+        ArrayList<AdjacentGameLocation> adjacentGameLocations = new ArrayList<AdjacentGameLocation>();
+
+        while(adjacentGameLocations.size() != adjacentGameLocationIds.size()){
+            for(AdjacentGameLocation adjGameLoc : this.cave){
+                if(adjacentGameLocationIds.contains(adjGameLoc.getLocationId())) adjacentGameLocations.add(adjGameLoc);
+            }
+        }
+        return adjacentGameLocations;
     }
 
 

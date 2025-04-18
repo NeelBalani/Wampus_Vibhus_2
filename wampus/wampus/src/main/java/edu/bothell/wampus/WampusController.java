@@ -29,13 +29,10 @@ public class WampusController{
     @GetMapping("/location/{id}")
     public String getLocation(@PathVariable int id, Model model){
         AdjacentGameLocation adjLocation = this.adjacentcave.getLocationBasedOnId(id);
-
-        ArrayList<AdjacentGameLocation> listOfAdjacentGameLocations = adjLocation.getAdjGameLocations();
-        model.addAttribute("adjacentRooms", listOfAdjacentGameLocations);
         
         return "location";
     }
 
-    
+
 }
 

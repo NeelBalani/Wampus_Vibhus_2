@@ -5,10 +5,9 @@ import java.util.List;
 
 public class AdjacentGameLocation {
     // Properties
-    private int[] adjacentLocationsId = new int[6]; 
     private int locationId;
     private ArrayList<Person> people = new ArrayList<Person>();
-    private ArrayList<AdjacentGameLocation> adjacentLocations = new ArrayList<AdjacentGameLocation>();
+    private ArrayList<Integer> adjacentLocationsId = new ArrayList<Integer>();
     private Obstacle obstacle;
     private boolean hasObstacle;
 
@@ -17,24 +16,23 @@ public class AdjacentGameLocation {
         this.locationId = locationId;
     }
 
-    public AdjacentGameLocation(int locationId, ArrayList<AdjacentGameLocation>adjacentLocations){
+    public AdjacentGameLocation(int locationId, ArrayList<Integer>adjacentLocationsId){
         this.locationId = locationId;
-        setAdjLocations(adjacentLocations);
+        setAdjLocations(adjacentLocationsId);
     }
 
     //Method
 
-    public ArrayList<AdjacentGameLocation> getAdjGameLocations(){
-        return this.adjacentLocations;
+    public ArrayList<Integer> getAdjGameLocationId(){
+        return this.adjacentLocationsId;
     }
 
-    public void setAdjLocations(ArrayList<AdjacentGameLocation> adjLocs){
-        this.adjacentLocations = adjLocs;
+    public void setAdjLocations(ArrayList<Integer> adjLocs){
+        this.adjacentLocationsId = adjLocs;
     }
 
     public boolean doesContainPerson(Person p){
-        if(this.people.contains(p)) return true;
-        return false;
+        return this.people.contains(p);
     }
 
     public void addPersonToLocation(Person o){
