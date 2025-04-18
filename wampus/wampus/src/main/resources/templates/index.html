@@ -2,15 +2,21 @@
 <html>
     <head>
         <title>
-            THALAPATHY
+            TAPUSH
         </title>
     </head>
 
     <body>
+        
+        
         <p>
-            I am creating an html page for an endpoint "/"
+            This is the starting page for the Wampus game made by the Vibhu's. Click the button to go to the game.
         </p>
 
-        <button id = "button" > YAZAD IS GAY </button>
+        <button id = "Start" > CLICKe HERE </button>
+
+        <script> document.getElementById("Start").addEventListener("click", function(){
+            window.location.href = 'localhost:8080/hello';
+        });</script>
     </body>
 </html>
