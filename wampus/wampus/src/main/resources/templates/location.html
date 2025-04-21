@@ -8,7 +8,7 @@
         <p>LOCATION LOCATION LOCATION</p>
 
         <ul>
-            <li th:each="neighbor : ${neighbors}">
+            <li th:each="neighbor : ${adjacentRooms}">
               <a th:href="@{'/location/' + ${neighbor.id}}" th:text="${neighbor.name}"></a>
             </li>
           </ul>
