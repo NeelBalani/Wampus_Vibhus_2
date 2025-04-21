@@ -25,17 +25,17 @@ public class GUI extends JFrame implements CaveView, UI{
         super();
 
         this.c = c;
-        int[] size = this.c.getCave().getSize();
+        int size = this.c.getCave().getSize();
         
         super.setTitle("My first Jframe");
-        super.setSize(size[0]*100,size[1]*100);
+        super.setSize(size*100,size*100);
         super.setLayout(new FlowLayout());
-        this.buttons = new JButton[this.c.getCave().getSize()[0]][this.c.getCave().getSize()[1]];
+        this.buttons = new JButton[this.c.getCave().getSize()][this.c.getCave().getSize()];
         
         JPanel pane = new JPanel();        
-        pane.setLayout(new GridLayout(size[0],size[1]));
+        pane.setLayout(new GridLayout(size,size));
         
-        pane.setSize(size[0]*100, size[1]*100);
+        pane.setSize(size*100, size*100);
         
         for(int y = 0; y < this.buttons.length; y++){
             for(int x = 0; x < this.buttons[y].length; x++){
@@ -76,8 +76,8 @@ public class GUI extends JFrame implements CaveView, UI{
     }
 
     @Override
-    public void handleButtonClick(int row, int col) {
-        GameLocation g = this.c.getCave().getLocationBasedOnCoords(row, col);
+    public void handleButtonClick(int id) {
+        AdjacentGameLocation g = this.c.getCave().getLocation(row, col);
         System.out.println(g.getLocationId());
         System.out.println(this.c.findWhatIsInLocation(g));
     }

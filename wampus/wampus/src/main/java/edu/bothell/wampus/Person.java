@@ -33,14 +33,16 @@ public class Person implements Teammate {
         return new Result(action, this);
     }
 
-    public Directions doMove(UI ui) {
-        List<String> directions = new ArrayList<>();
-        for(Directions d: Directions.values()){
-            directions.add(d.name());
+    public int doMove(UI ui, ArrayList<Integer> adjacentIntegers) {
+        List<String> idChoices = new ArrayList<String>();
+
+        for(int adjacentIds : adjacentIntegers){
+            idChoices.add(""+adjacentIds);
         }
-        int actionIndex = ui.getActionChoice(directions);
-        String stringDirection = directions.get(actionIndex);
-        ui.showMessage(stringDirection);
-        return Directions.valueOf(stringDirection);
+
+        int actionIndex = ui.getActionChoice(idChoices);
+        int chosenRoom = adjacentIntegers.get(actionIndex);
+        ui.showMessage(""+chosenRoom);
+        return chosenRoom;
     }
 }

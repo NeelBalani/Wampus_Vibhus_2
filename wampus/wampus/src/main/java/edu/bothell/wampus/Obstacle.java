@@ -8,6 +8,6 @@ public interface Obstacle {
     void triggerObstacle();
     void destroyObstacle();
     boolean isObstacleDestroyed();
-    GameLocation getLocation();
+    AdjacentGameLocation getLocation();
     String toString();
 }

@@ -2,12 +2,12 @@ package edu.bothell.wampus;
 
 public class Bats implements Obstacle {
     // Properties
-    private GameLocation location;
+    private AdjacentGameLocation location;
     private boolean isTriggered = false;
     private boolean isDestroyed = false;
 
     // Constructor
-    public Bats(GameLocation location){
+    public Bats(AdjacentGameLocation location){
         this.location = location;
     }
 
@@ -34,7 +34,7 @@ public class Bats implements Obstacle {
     }
 
     @Override
-    public GameLocation getLocation(){
+    public AdjacentGameLocation getLocation(){
         return this.location;
     }
 

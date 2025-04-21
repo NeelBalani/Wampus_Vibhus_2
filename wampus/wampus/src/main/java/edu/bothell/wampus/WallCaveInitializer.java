@@ -1,4 +1,4 @@
-package edu.bothell.wampus;
+/*package edu.bothell.wampus;
 
 import javax.naming.directory.DirContext;
 import java.io.File;
@@ -95,3 +95,4 @@ public class WallCaveInitializer {
     }
 
 }
+*/

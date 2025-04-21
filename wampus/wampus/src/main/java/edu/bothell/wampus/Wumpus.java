@@ -2,9 +2,9 @@ package edu.bothell.wampus;
 
 public class Wumpus implements Obstacle {
     private boolean triggered;
-    private GameLocation location;
+    private AdjacentGameLocation location;
 
-    public Wumpus(GameLocation location) {
+    public Wumpus(AdjacentGameLocation location) {
         this.location = location;
         this.triggered = false;
     }
@@ -33,7 +33,7 @@ public class Wumpus implements Obstacle {
     }
 
     @Override
-    public GameLocation getLocation() {
+    public AdjacentGameLocation getLocation() {
         return location;
     }
 

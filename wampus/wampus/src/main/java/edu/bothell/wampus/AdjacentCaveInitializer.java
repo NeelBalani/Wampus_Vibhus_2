@@ -33,6 +33,11 @@ public class AdjacentCaveInitializer {
     }
 
     // Methods
+
+    public AdjacentCave getBuiltCave(){
+        return this.cave;
+    }
+
     public int getCaveSize(File file) throws FileNotFoundException{
         int caveSizeCounter = 0;
         Scanner rowScanner = new Scanner(file);
