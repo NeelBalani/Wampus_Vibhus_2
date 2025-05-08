@@ -14,6 +14,7 @@ const D = {
     ]
 };
 
+
 const getData = function(d){
     const tmp = document.querySelector("#templates > .question");
 
