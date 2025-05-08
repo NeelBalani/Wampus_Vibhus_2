@@ -13,6 +13,7 @@ public class AdjacentCaveInitializer {
 
     // Constructors
     public AdjacentCaveInitializer(String filepath) throws FileNotFoundException{
+        System.out.println("cave start");
         // Gets the file and initializes the caveBuilder ready for filling up
         File file = new File(filepath);
         Scanner scanner = new Scanner(file);
@@ -21,7 +22,7 @@ public class AdjacentCaveInitializer {
 
         // Fills up the caveBuilder with the map created from the file
         // Skips description
-        scanner.nextLine();
+        System.out.println(scanner.nextLine());
         
         while(scanner.hasNextLine()){
             // Builds each row
@@ -44,6 +45,7 @@ public class AdjacentCaveInitializer {
 
         while(rowScanner.hasNextLine()){
             caveSizeCounter++;
+            rowScanner.nextLine();
         }
 
         return caveSizeCounter;

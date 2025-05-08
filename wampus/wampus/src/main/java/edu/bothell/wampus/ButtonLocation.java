@@ -11,29 +11,27 @@ import javax.swing.JOptionPane;
 
 public class ButtonLocation implements ActionListener{
 
-    private int x;
-    private int y;
+    private int id;
     private GUI frame;
     private static String num;
     private JButton button;
 
-    public ButtonLocation(GUI frame, int x, int y){
+    public ButtonLocation(GUI frame, int id){
         super();
-        this.x = x;
-        this.y = y;
+        this.id = id;
         this.frame = frame;
-        this.num = String.valueOf(frame.getLocationID(this.y, this.x));
+        this.num = "" + id;
     }
 
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == this.button){
-            this.frame.handleButtonClick(this.y, this.x);
+            this.frame.handleButtonClick(this.id);
         }
     }
 
-    public int getX(){
-        return x;
+    public int getId(){
+        return this.id;
     }
 
     public JButton giveJButton(){
@@ -42,11 +40,6 @@ public class ButtonLocation implements ActionListener{
         this.button.setText(num);
         this.button.addActionListener(this);
         return this.button;
-    }
-
-    
-    public int getY(){
-        return y;
     }
     
 }
