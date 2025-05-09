@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -31,6 +33,12 @@ public class WampusController{
     public String getLocation(@PathVariable int id, Model model){        
         return "location";
     }
+
+    @GetMapping("/html")
+    public String getMethodName() {
+        return "html";
+    }
+    
 
 
 }

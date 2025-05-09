@@ -71,6 +71,10 @@ public class GameController {
                 // Todo: Action for shooting
             }
 
+            else if(result.getAction().equals("Heal")){
+                
+            }
+
             addResult(result);
             this.ui.showMessage(result.getMessage());
 
