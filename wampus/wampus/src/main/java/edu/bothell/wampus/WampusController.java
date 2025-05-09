@@ -1,5 +1,6 @@
 package edu.bothell.wampus;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,11 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class WampusController{
 
-    @GetMapping("/index")
-    public String homePage() {
+    GameController controller;
+
+    @GetMapping("")
+    public String homePage() throws FileNotFoundException {
+       this.controller = new GameController("Wampus_Vibhus_2/wampus/wampus/src/main/java/edu/bothell/wampus/maps/MapGraph.csv");
         return "index";
     }
     

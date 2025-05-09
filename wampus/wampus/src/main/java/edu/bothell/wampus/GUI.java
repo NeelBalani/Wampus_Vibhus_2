@@ -19,9 +19,9 @@ import javax.swing.JPanel;
 public class GUI extends JFrame implements CaveView, UI{
 
     private JButton[][] buttons;
-    private Controller c;
+    private GameController c;
 
-    public GUI(Controller c){
+    public GUI(GameController c){
         super();
 
         this.c = c;

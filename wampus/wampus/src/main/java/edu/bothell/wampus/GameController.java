@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Controller {
+public class GameController {
     private UI ui;
     private List<Person> activeTeammates = new ArrayList<>();
     private List<Person> allTeammates = new ArrayList<>();
@@ -14,7 +14,7 @@ public class Controller {
     private AdjacentCave cave;
     private Game game;
 
-    public Controller(String caveFilePath) throws FileNotFoundException{
+    public GameController(String caveFilePath) throws FileNotFoundException{
 
         initializePlayerLists();
         setCaveAs(caveFilePath);
