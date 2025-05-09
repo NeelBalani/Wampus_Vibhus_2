@@ -6,7 +6,7 @@ public class Result {
     // Properties
     private String message;
     private String action;
-    private GameLocation location;
+    private AdjacentGameLocation location;
     private Person player;
 
     // Constructor
@@ -24,7 +24,7 @@ public class Result {
         }
     }
 
-    public void playerMove(GameLocation oldLocation, GameLocation newLocation) {
+    public void playerMove(AdjacentGameLocation oldLocation, AdjacentGameLocation newLocation) {
 
         if(this.message.equals("Move")){
             this.message = " Moved from " + oldLocation.getLocationId() + " to " + newLocation.getLocationId();

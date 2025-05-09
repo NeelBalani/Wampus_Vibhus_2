@@ -4,31 +4,19 @@ import java.util.*;
 
 public class LocationManager {
     // Properties
-    private HashMap<Person, GameLocation> playerLocations = new HashMap<Person, GameLocation>();
-    private Cave cave;
+    private HashMap<Person, AdjacentGameLocation> playerLocations = new HashMap<Person, AdjacentGameLocation>();
+    private AdjacentCave cave;
 
     // Constructors
-    public LocationManager(List<Person> players, Cave cave){
+    public LocationManager(List<Person> players, AdjacentCave cave){
         this.cave = cave;
-
-        setGameLocations();
         setNewPlayers(players);
     }
-    public LocationManager(Cave cave){
+    public LocationManager(AdjacentCave cave){
         this.cave = cave;
-        setGameLocations();
     }
 
     // Methods
-
-    public void setGameLocations(){
-        int[] size = this.cave.getSize();
-        for(int y = 0; y < size[0]; y++){
-            for(int x = 0; x < size[1]; x++){
-                System.out.print(this.cave.getLocationBasedOnCoords(y, x).getLocationId() + " ");
-            } System.out.println();
-        }
-    }
 
     public void setNewPlayers (List<Person> players){
         for(Person p: players){
@@ -39,32 +27,28 @@ public class LocationManager {
     }
 
 
-    public GameLocation getGameLocationOfPerson(Person p){
+    public AdjacentGameLocation getGameLocationOfPerson(Person p){
         return this.playerLocations.get(p);
     }
 
-    public List<Object> getPersonsInLocation(GameLocation l){
+    public List<Object> getPersonsInLocation(AdjacentGameLocation l){
         return l.getItems();
     }
 
-    public GameLocation getGameLocationInThisDirection(GameLocation initialLocation, Directions direction){
-        int[] initialLocationValue = initialLocation.getLocation();
-        int[] finalLocationValue = new int[2];
-        finalLocationValue[0] = initialLocationValue[0] + direction.dX();
-
-        finalLocationValue[1] = initialLocationValue[1] + direction.dY();
-
-
-        GameLocation finalGameLocation;
+    public boolean doesGameLocationIdExist(int questionableId){
         try{
-            finalGameLocation = this.cave.getLocationBasedOnCoords(finalLocationValue[1], finalLocationValue[0]);
-            return finalGameLocation;
-        } catch(IndexOutOfBoundsException e){
-            return null;
+            this.cave.getLocationBasedOnId(questionableId);
+            return true;
+        } catch(Exception e){
+            return false;
         }
     }
 
-    public void changeGameLocationOfPerson(Person p, GameLocation newGameLocation, GameLocation oldLocation){
+    public AdjacentGameLocation getGameLocationBasedOnId(int gameLocationId){
+        return this.cave.getLocationBasedOnId(gameLocationId);
+    }
+
+    public void changeGameLocationOfPerson(Person p, AdjacentGameLocation newGameLocation, AdjacentGameLocation oldLocation){
         this.playerLocations.replace(p, newGameLocation);
         oldLocation.removePlayerFromLocation(p);
         newGameLocation.addPersonToLocation(p);

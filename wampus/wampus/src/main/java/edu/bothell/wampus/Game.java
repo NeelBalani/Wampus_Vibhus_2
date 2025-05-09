@@ -11,13 +11,12 @@ public class Game {
         this.players = players;
     }
 
-    public boolean canMove(Person p, Directions direction) {
-        GameLocation currentLocation = locationManager.getGameLocationOfPerson(p);
-        GameLocation targetLocation = locationManager.getGameLocationInThisDirection(currentLocation, direction);
-
-        System.out.println(currentLocation.isThereAWall(direction));
+    public boolean canMove(Person p, int newGameLocationId) {
+        AdjacentGameLocation currentLocation = locationManager.getGameLocationOfPerson(p);
         
-        return targetLocation != null && !currentLocation.isThereAWall(direction);
+        System.out.println(newGameLocationId);
+
+        return this.locationManager.doesGameLocationIdExist(newGameLocationId);
     }
 
     public LocationManager getLocationManager(){
@@ -33,10 +32,11 @@ public class Game {
         this.players.remove(removedPerson);
     }
 
-    public Result movePlayer(Person p, Directions direction, Result result) {
-        if (canMove(p, direction)) {
-            GameLocation oldLocation = this.locationManager.getGameLocationOfPerson(p);
-            GameLocation newLocation = this.locationManager.getGameLocationInThisDirection(oldLocation, direction);
+    public Result movePlayer(Person p, int newGameLocationId, Result result) {
+        if (canMove(p, newGameLocationId)) {
+            AdjacentGameLocation oldLocation = this.locationManager.getGameLocationOfPerson(p);
+            AdjacentGameLocation newLocation = this.locationManager.getGameLocationBasedOnId(newGameLocationId);
+
             this.locationManager.changeGameLocationOfPerson(p, newLocation, oldLocation);
     
     
@@ -52,7 +52,7 @@ public class Game {
     }
 
     public String getVisibleInfo(Person p) {
-        GameLocation currentLocation = locationManager.getGameLocationOfPerson(p);
+        AdjacentGameLocation currentLocation = locationManager.getGameLocationOfPerson(p);
         List<Object> items = currentLocation.getItems();
         StringBuilder info = new StringBuilder("You see: ");
         for (Object item : items) {
@@ -61,7 +61,7 @@ public class Game {
         return info.toString();
     }
 
-    public void resolveHazard(GameLocation currentLocation) {
+    public void resolveHazard(AdjacentGameLocation currentLocation) {
         if (currentLocation.hasObstacle()) {
             Obstacle obstacle = currentLocation.getObstacle();
             if (obstacle instanceof Wumpus) {
@@ -72,7 +72,7 @@ public class Game {
         }
     }
 
-    public List<Object> findObjectsInLocation(GameLocation location) {
+    public List<Object> findObjectsInLocation(AdjacentGameLocation location) {
         return this.locationManager.getPersonsInLocation(location);
     }
 }
