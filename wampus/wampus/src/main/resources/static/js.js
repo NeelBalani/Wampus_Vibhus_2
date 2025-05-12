@@ -1,51 +1,76 @@
 const D = {
-    questions:[
+    questions: [
         {
-            question:"whats my name?",
-            answers:["Bingus", "Pranav"],
-            correctAnswer:"Pranav"
+            question: "What's my name?",
+            answers: ["Bingus", "Pranav"],
+            correctAnswer: "Pranav"
         },
         {
-            question:"what?",
-            answers:["Huh", "Yes"],
-            correctAnswer:"Yes"
+            question: "What?",
+            answers: ["Huh", "Yes"],
+            correctAnswer: "Yes"
         },
         {
-            question: "which is bad?",
-            answers:["unicorns", "disgusting lunch slop"],
+            question: "Which is bad?",
+            answers: ["unicorns", "disgusting lunch slop"],
             correctAnswer: "disgusting lunch slop"
-
         }
-        
     ]
 };
 
+const quizContainer = document.getElementById('quiz-container');
+const templates = document.getElementById('templates');
 
-const getData = function(d){
-    const tmp = document.querySelector("#templates > .question");
+const getData = function(d) {
+    for (let i = 0; i < d.questions.length; i++) {
+        const questionData = d.questions[i];
+        const questionElement = templates.querySelector('.question-container').cloneNode(true);
+        const questionTextElement = questionElement.querySelector('.question-text');
+        const answersListElement = questionElement.querySelector('.answers-list');
 
-    for(var i = 0; i < d.questions.length; i++){
-       
-        let dom = tmp.cloneNode(true)
+        questionTextElement.textContent = questionData.question;
+        answersListElement.innerHTML = ''; // Clear existing answers
 
-        console.log(d[i])
-        let q = d.questions[i];
-        dom.querySelector(".question").innerHTML = q.question;
-        dom.querySelector(".answers").innerHTML = "";
-        for(var j = 0; j < q.answers.length; j++){
-            let answer = document.createElement("li");
-            answer.innerHTML = q.answers[j];
-            dom.querySelector(".answers").append("");
-            
-        }
+        questionData.answers.forEach(answerText => {
+            const answerItem = document.createElement('li');
+            answerItem.classList.add('answer-item');
+            answerItem.textContent = answerText;
+            answerItem.dataset.answer = answerText; // Store the answer text
+            answerItem.addEventListener('click', (event) => {
+                doSomething(event, questionData);
+            });
+            answersListElement.appendChild(answerItem);
+        });
 
-        document.body.append(dom);
+        quizContainer.appendChild(questionElement);
+    }
+};
+
+const doSomething = function(event, q) {
+    const selectedAnswer = event.target.dataset.answer;
+    const isCorrect = selectedAnswer === q.correctAnswer;
+
+    if (isCorrect) {
+        alert("You got it!");
+    } else {
+        alert("Nope!");
     }
 
 
-    alert("data time");
-}
+    fetch('/api/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ question: q.question, userAnswer: selectedAnswer, correctAnswer: q.correctAnswer, correct: isCorrect })
+    })
+    .then(res => res.json())
+    .then(serverResponse => {
+        console.log("Server says:", serverResponse);
+    })
+    .catch(error => {
+        console.error("Error submitting answer:", error);
+    });
+};
 
 getData(D);
-
-alert("??");

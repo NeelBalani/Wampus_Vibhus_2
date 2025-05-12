@@ -10,4 +10,4 @@ public class WampusApplication {
 		SpringApplication.run(WampusApplication.class, args);
 	}
 
-}
+}	
