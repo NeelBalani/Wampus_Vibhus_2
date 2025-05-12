@@ -48,5 +48,26 @@ public class WampusController{
         return "html";
     }
     */
+
+
+    public void gameTurn(String choice){
+            
+        // Check if the player moved
+        if(choice.equals("Move")){
+            int id = this.controller.getActiveTeammate().doMove(ui, this.game.getLocationManager().getGameLocationOfPerson(activeTeammate).getAdjGameLocationId());
+            result = this.game.movePlayer(this.activeTeammate, id, result);
+        }
+
+        else if(result.getAction().equals("Shoot")){
+            // Todo: Action for shooting
+        }
+
+        else if(result.getAction().equals("Heal")){
+            
+        }
+
+        addResult(result);
+        this.ui.showMessage(result.getMessage());
+    }
 }
 
