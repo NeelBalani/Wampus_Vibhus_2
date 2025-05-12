@@ -18,14 +18,14 @@ public class WampusController{
     GameController controller;
 
     @GetMapping("")
-    public String homePage() throws FileNotFoundException {
+    public String homePage(Model model) throws FileNotFoundException {
        this.controller = new GameController("Wampus_Vibhus_2/wampus/wampus/src/main/java/edu/bothell/wampus/maps/MapGraph.csv");
         return "index";
     }
     
 
     @GetMapping("/hello")
-    public String hello() {
+    public String hello(Model model) {
         return "hello";
     }
 
@@ -34,12 +34,19 @@ public class WampusController{
         return "location";
     }
 
+    @GetMapping("/checkWinner")
+    public String checkWinner(){
+        return "checkWinner";
+    }
+
+    /*
+
+    Doesn't work as html isn't in templates
+
     @GetMapping("/html")
-    public String getMethodName() {
+    public String getMethodName(Model model) {
         return "html";
     }
-    
-
-
+    */
 }
 
