@@ -9,6 +9,12 @@ const D = {
             question:"what?",
             answers:["Huh", "Yes"],
             correctAnswer:"Yes"
+        },
+        {
+            question: "which is bad?",
+            answers:["unicorns", "disgusting lunch slop"],
+            correctAnswer: "disgusting lunch slop"
+
         }
         
     ]
