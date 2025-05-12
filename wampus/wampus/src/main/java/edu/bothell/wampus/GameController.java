@@ -4,17 +4,17 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Controller {
+public class GameController {
     private UI ui;
     private List<Person> activeTeammates = new ArrayList<>();
     private List<Person> allTeammates = new ArrayList<>();
     private Person activeTeammate;
     private List<Result> summary = new ArrayList<>();
     private boolean continueGame;
-    private Cave cave;
+    private AdjacentCave cave;
     private Game game;
 
-    public Controller(String caveFilePath) throws FileNotFoundException{
+    public GameController(String caveFilePath) throws FileNotFoundException{
 
         initializePlayerLists();
         setCaveAs(caveFilePath);
@@ -28,7 +28,7 @@ public class Controller {
     }
 
     public void setCaveAs(String filePath) throws FileNotFoundException{
-        WallCaveInitializer caveInitializer = new WallCaveInitializer(filePath);
+        AdjacentCaveInitializer caveInitializer = new AdjacentCaveInitializer(filePath);
         this.cave = caveInitializer.getBuiltCave();
     }
 
@@ -63,12 +63,16 @@ public class Controller {
             
             // Check if the player moved
             if(result.getAction().equals("Move")){
-                Directions direction = this.activeTeammate.doMove(ui);
-                result = this.game.movePlayer(this.activeTeammate, direction, result);
+                int id = this.activeTeammate.doMove(ui, this.game.getLocationManager().getGameLocationOfPerson(activeTeammate).getAdjGameLocationId());
+                result = this.game.movePlayer(this.activeTeammate, id, result);
             }
 
             else if(result.getAction().equals("Shoot")){
                 // Todo: Action for shooting
+            }
+
+            else if(result.getAction().equals("Heal")){
+                
             }
 
             addResult(result);
@@ -87,7 +91,7 @@ public class Controller {
         if(!gameOver()) updateActivePlayer();
     }
 
-    public List<Object> findWhatIsInLocation(GameLocation location){
+    public List<Object> findWhatIsInLocation(AdjacentGameLocation location){
         List<Object> o = this.game.findObjectsInLocation(location);
         System.out.println(o + " " + location.getLocationId());
         return o;
@@ -119,12 +123,12 @@ public class Controller {
         return this.summary;
     }
 
-    public Cave getCave(){
+    public AdjacentCave getCave(){
         return this.cave;
     }
 
-    public void movePlayerUsingDirections(Directions direction) {
-        Result result = this.game.movePlayer(this.activeTeammate, direction, new Result("Move", this.activeTeammate));
+    public void movePlayerUsingId(int roomId) {
+        Result result = this.game.movePlayer(this.activeTeammate, roomId, new Result("Move", this.activeTeammate));
         addResult(result);
         this.ui.showMessage(result.getMessage());
     }

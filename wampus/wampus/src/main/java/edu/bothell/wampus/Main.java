@@ -8,15 +8,13 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
         // Initialize controller
-        Controller controller = new Controller("wampus/wampus/src/main/java/edu/bothell/wampus/maps/EasyCaveMap.csv");
+        System.out.println("starting");
+        GameController controller = new GameController("Wampus_Vibhus_2/wampus/wampus/src/main/java/edu/bothell/wampus/maps/MapGraph.csv");
         controller.addPerson(new Pranav("Pranav"));
 
         UI ui = new ConsoleUI(controller);
 
-
-        
-        new GUI(controller);
-
+        controller.start();
         
 
         System.out.println("Current working directory: " + System.getProperty("user.dir"));
@@ -38,23 +36,6 @@ public class Main {
         */
         
         System.out.println("is it testing");
-
-        Room[] roomArray = {
-            new Room(0, 3),
-            new Room(1, 8),
-            new Room(2, 5),
-            new Room(3, 8),
-            new Room(4, 1)
-        };
-
-        ArrayList<Integer> visitedRooms = new ArrayList<Integer>();
-        visitedRooms.add(2);
-        visitedRooms.add(3);
-        visitedRooms.add(1);
-
-        WumpusTracker wumpusTracker = new WumpusTracker(roomArray, visitedRooms);
-        System.out.println(wumpusTracker.getAverageDanger());
-        System.out.println(wumpusTracker.getMostDangerousVisitedRoom());
 
         //controller.start();
     }

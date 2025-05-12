@@ -7,11 +7,11 @@ public class ConsoleUI implements UI {
 
     // Properties
     private Scanner scanner;
-    private Controller controller;
+    private GameController controller;
 
         
     // Constructors
-    public ConsoleUI(Controller controller) {
+    public ConsoleUI(GameController controller) {
         scanner = new Scanner(System.in);
         this.controller = controller;
         this.controller.setUI(this);

@@ -1,5 +1,6 @@
 package edu.bothell.wampus;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,16 +8,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
 public class WampusController{
 
-    //private AdjacentCaveInitializer caveInitializer = new AdjacentCaveInitializer("wampus/wampus/src/main/java/edu/bothell/wampus/maps/MapGraph.csv");
-    private AdjacentCave adjacentcave = new AdjacentCave();
+    GameController controller;
 
-    @GetMapping("/index")
-    public String homePage() {
+    @GetMapping("")
+    public String homePage() throws FileNotFoundException {
+       this.controller = new GameController("Wampus_Vibhus_2/wampus/wampus/src/main/java/edu/bothell/wampus/maps/MapGraph.csv");
         return "index";
     }
     
@@ -27,11 +30,15 @@ public class WampusController{
     }
 
     @GetMapping("/location/{id}")
-    public String getLocation(@PathVariable int id, Model model){
-        AdjacentGameLocation adjLocation = this.adjacentcave.getLocationBasedOnId(id);
-        
+    public String getLocation(@PathVariable int id, Model model){        
         return "location";
     }
+
+    @GetMapping("/html")
+    public String getMethodName() {
+        return "html";
+    }
+    
 
 
 }
