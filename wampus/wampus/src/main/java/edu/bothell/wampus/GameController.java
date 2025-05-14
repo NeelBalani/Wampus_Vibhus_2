@@ -90,9 +90,6 @@ public class GameController {
         System.out.println("Game Turn Swing");
     }
 
-    public Person getActionController(){
-        return this.activeTeammate;
-    }
 
     public void postMoveActions(){
         this.continueGame = this.ui.askToContinue(this.activeTeammate.getName());
@@ -141,6 +138,10 @@ public class GameController {
     public void movePlayerUsingId(int roomId) {
         Result result = this.game.movePlayer(this.activeTeammate, roomId, new Result("Move", this.activeTeammate));
         addResult(result);
-        this.ui.showMessage(result.getMessage());
+        //this.ui.showMessage(result.getMessage());
+    }
+
+    public Person getActiveTeammate() {
+        return this.activeTeammate;
     }
 }
