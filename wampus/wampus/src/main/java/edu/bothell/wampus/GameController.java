@@ -57,31 +57,39 @@ public class GameController {
         
         while (!gameOver()) {
 
-            this.ui.showPersonTurn((this.activeTeammate));
-
-            Result result = this.activeTeammate.doAction(this.ui);
-            
-            // Check if the player moved
-            if(result.getAction().equals("Move")){
-                int id = this.activeTeammate.doMove(ui, this.game.getLocationManager().getGameLocationOfPerson(activeTeammate).getAdjGameLocationId());
-                result = this.game.movePlayer(this.activeTeammate, id, result);
-            }
-
-            else if(result.getAction().equals("Shoot")){
-                // Todo: Action for shooting
-            }
-
-            else if(result.getAction().equals("Heal")){
-                
-            }
-
-            addResult(result);
-            this.ui.showMessage(result.getMessage());
-
+            gameTurnTerminal();
 
         }
         this.ui.displaySummary();
     }
+
+    public void gameTurnTerminal(){
+        this.ui.showPersonTurn((this.activeTeammate));
+
+        Result result = this.activeTeammate.doAction(this.ui);
+        
+        // Check if the player moved
+        if(result.getAction().equals("Move")){
+            int id = this.activeTeammate.doMove(ui, this.game.getLocationManager().getGameLocationOfPerson(activeTeammate).getAdjGameLocationId());
+            result = this.game.movePlayer(this.activeTeammate, id, result);
+        }
+
+        else if(result.getAction().equals("Shoot")){
+            // Todo: Action for shooting
+        }
+
+        else if(result.getAction().equals("Heal")){
+            
+        }
+
+        addResult(result);
+        this.ui.showMessage(result.getMessage());
+    }
+
+    public void gameTurnSwing(){
+        System.out.println("Game Turn Swing");
+    }
+
 
     public void postMoveActions(){
         this.continueGame = this.ui.askToContinue(this.activeTeammate.getName());
@@ -130,6 +138,10 @@ public class GameController {
     public void movePlayerUsingId(int roomId) {
         Result result = this.game.movePlayer(this.activeTeammate, roomId, new Result("Move", this.activeTeammate));
         addResult(result);
-        this.ui.showMessage(result.getMessage());
+        //this.ui.showMessage(result.getMessage());
+    }
+
+    public Person getActiveTeammate() {
+        return this.activeTeammate;
     }
 }
