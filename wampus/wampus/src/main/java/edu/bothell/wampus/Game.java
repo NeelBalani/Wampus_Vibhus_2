@@ -1,5 +1,6 @@
 package edu.bothell.wampus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
@@ -58,10 +59,12 @@ public class Game {
 
     public String getVisibleInfo(Person p) {
         AdjacentGameLocation currentLocation = locationManager.getGameLocationOfPerson(p);
-        List<Object> items = currentLocation.getItems();
+        ArrayList<Integer> arrayLocations = currentLocation.getAdjGameLocationId();
         StringBuilder info = new StringBuilder("You see: ");
-        for (Object item : items) {
-            info.append(item.toString()).append(", ");
+        for (Integer adjacentLocations: arrayLocations) {
+            if(locationManager.getGameLocationBasedOnId(adjacentLocations) != null && locationManager.getGameLocationBasedOnId(adjacentLocations).hasObstacle() == true) {
+                info.append(locationManager.getGameLocationBasedOnId(adjacentLocations).getObstacle()).append(", ");
+            }
         }
         return info.toString();
     }

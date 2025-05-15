@@ -52,7 +52,6 @@ public class GameController {
         setPlayers(this.allTeammates);
     }
 
-
     public void start() {
         
         while (!gameOver()) {
@@ -89,7 +88,6 @@ public class GameController {
     public void gameTurnSwing(){
         System.out.println("Game Turn Swing");
     }
-
 
     public void postMoveActions(){
         this.continueGame = this.ui.askToContinue(this.activeTeammate.getName());
