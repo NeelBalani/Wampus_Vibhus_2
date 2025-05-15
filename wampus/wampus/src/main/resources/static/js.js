@@ -20,7 +20,12 @@ const D = {
     ]
 };
 
+fetch("myUrl")
+    .then(res=>{JSON.stringify})
+    .then(getData);
 
+
+    
 const getData = function(d){
     const tmp = document.querySelector("#templates > .question");
 

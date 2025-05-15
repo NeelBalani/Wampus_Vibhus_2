@@ -26,6 +26,7 @@ public class WampusController{
 
     @GetMapping("/hello")
     public String hello(Model model) {
+        model.addAttribute("whatever", "My most sweet value");
         return "hello";
     }
 
