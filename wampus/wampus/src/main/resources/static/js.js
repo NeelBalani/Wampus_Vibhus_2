@@ -78,23 +78,6 @@ const doSomething = function(event, q) {
     });
 };
 
-const doSomething = function(e,q,a){
-    q.correct = a == q.answer;
 
-    if(q.correct){
-        alert("correct");
-    }
-    else {
-        alert("incorrect");
-    }
-
-    fetch('api/submit', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(q)
-    })
-}
 
 getData(D);
