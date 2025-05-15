@@ -11,6 +11,11 @@ public class Game {
         this.players = players;
     }
 
+    public List getQuestions(){
+
+        return null;
+    }
+
     public boolean canMove(Person p, int newGameLocationId) {
         AdjacentGameLocation currentLocation = locationManager.getGameLocationOfPerson(p);
         
@@ -74,5 +79,9 @@ public class Game {
 
     public List<Object> findObjectsInLocation(AdjacentGameLocation location) {
         return this.locationManager.getPersonsInLocation(location);
+    }
+
+    public boolean checkAnswer(int questionId, int selected) {
+        return questionId == selected;
     }
 }

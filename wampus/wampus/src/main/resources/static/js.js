@@ -18,6 +18,11 @@ const D = {
     ]
 };
 
+fetch("myUrl")
+    .then(res=>{JSON.stringify})
+    .then(getData);
+
+    
 const quizContainer = document.getElementById('quiz-container');
 const templates = document.getElementById('templates');
 
@@ -72,5 +77,24 @@ const doSomething = function(event, q) {
         console.error("Error submitting answer:", error);
     });
 };
+
+const doSomething = function(e,q,a){
+    q.correct = a == q.answer;
+
+    if(q.correct){
+        alert("correct");
+    }
+    else {
+        alert("incorrect");
+    }
+
+    fetch('api/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(q)
+    })
+}
 
 getData(D);

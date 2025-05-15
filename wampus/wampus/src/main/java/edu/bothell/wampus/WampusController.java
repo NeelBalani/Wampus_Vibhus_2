@@ -19,24 +19,34 @@ public class WampusController{
 
     @GetMapping("")
     public String homePage(Model model) throws FileNotFoundException {
-       this.controller = new GameController("Wampus_Vibhus_2/wampus/wampus/src/main/java/edu/bothell/wampus/maps/MapGraph.csv");
+        this.controller = new GameController("wampus/wampus/src/main/java/edu/bothell/wampus/maps/MapGraph.csv");
+        controller.addPerson(new Pranav("Pranav"));
         return "index";
+
     }
     
 
     @GetMapping("/hello")
     public String hello(Model model) {
+        model.addAttribute("whatever", "My most sweet value");
         return "hello";
     }
 
     @GetMapping("/location/{id}")
-    public String getLocation(@PathVariable int id, Model model){        
+    public String getLocation(@PathVariable int id, Model model){
         return "location";
     }
 
-    @GetMapping("/checkWinner")
-    public String checkWinner(){
-        return "checkWinner";
+    @GetMapping("/choosingPage/{previousAction}/{amount}")
+    public String choosingPage(@PathVariable String previousAction, @PathVariable int amount, Model model){
+        if(previousAction.equals("move")) moveCharacter(amount);
+
+        return "choose_actions";
+    }
+
+
+    public boolean checkWinner(){
+        return this.controller.gameOver();
     }
 
     /*
@@ -48,5 +58,16 @@ public class WampusController{
         return "html";
     }
     */
+
+
+    public String moveCharacter(int newLocation){
+        this.controller.movePlayerUsingId(newLocation);
+        // return this.controller.getDangersNearby()
+        /*
+        * Retrieve the dangers nearby
+        * pass them in so it can be displayed what dangers are near
+         */
+        return null;
+    }
 }
 
