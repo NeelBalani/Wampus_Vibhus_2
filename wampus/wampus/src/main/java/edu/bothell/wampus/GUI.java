@@ -1,5 +1,6 @@
 package edu.bothell.wampus;
 
+
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.CardLayout;
@@ -16,7 +17,7 @@ import javax.swing.JPanel;
 // Let GUI implement UI and replace the previous UI
 // Removes the middleman UI that implements GUI methods
 // Makes much more sense for the Controller to just talk to the GUI
-public class GUI extends JFrame implements CaveView, UI{
+public class GUI extends JFrame{
 
     private JButton[][] buttons;
     private GameController c;
@@ -26,20 +27,19 @@ public class GUI extends JFrame implements CaveView, UI{
 
         this.c = c;
         int size = this.c.getCave().getSize();
-        
+        System.out.println(size);
+
         super.setTitle("My first Jframe");
-        super.setSize(size*100,size*100);
+        super.setSize(6*100,5*100);
         super.setLayout(new FlowLayout());
-        this.buttons = new JButton[this.c.getCave().getSize()][this.c.getCave().getSize()];
-        
+        this.buttons = new JButton[6][5];
+
         JPanel pane = new JPanel();        
-        pane.setLayout(new GridLayout(size,size));
-        
-        pane.setSize(size*100, size*100);
+        pane.setLayout(new GridLayout(5,6));
 
         for(int y = 0; y < this.buttons.length; y++){
             for(int x = 0; x < this.buttons[y].length; x++){
-                this.buttons[y][x] = new ButtonLocation(this, x).giveJButton();
+                this.buttons[y][x] = new ButtonLocation(this, ((y * 5 + x % 5) + 1)).giveJButton();
                 this.buttons[y][x].setSize(100, 100);
                 System.out.println("Y: " + y + "; X: " + x);
                 pane.add(this.buttons[y][x]);
@@ -64,56 +64,30 @@ public class GUI extends JFrame implements CaveView, UI{
 
     }
 
-    @Override
+
+
+
     public JButton[][] getButtons() {
         return buttons;
     }
 
-    @Override
-    public void updateGrid() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateGrid'");
-    }
-
-    @Override
-    public void handleButtonClick(int id) {
-        AdjacentGameLocation g = this.c.getCave().getLocationBasedOnId(id);
+    public void handleButtonClick(int row, int col) {
+        AdjacentGameLocation g = getLocationID(row, col);
         System.out.println(g.getLocationId());
         System.out.println(this.c.findWhatIsInLocation(g));
     }
 
-    public void handleMoveInDirection(int moveId){
-        this.c.movePlayerUsingId(moveId);
+    public void handleMoveInDirection(String dir){
+        Directions direction = Directions.N;
+        if(dir.equals("Left")) direction = Directions.W;
+        if(dir.equals("Right")) direction = Directions.E;
+        if(dir.equals("Up")) direction = Directions.N;
+        if(dir.equals("Down")) direction = Directions.S;
+        //this.c.movePlayerUsingDirections(direction); TIBHU U GOT THIS
     }
 
-    @Override
-    public void showMessage(String message) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showMessage'");
+    public AdjacentGameLocation getLocationID(int row, int col){
+        return this.c.getCave().getLocationBasedOnId((row * 5 + col % 6) + 1);
     }
 
-    @Override
-    public void showPersonTurn(Person person) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showPersonTurn'");
-    }
-
-    @Override
-    public int getActionChoice(List<String> actions) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getActionChoice'");
-    }
-
-    @Override
-    public boolean askToContinue(String name) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'askToContinue'");
-    }
-
-    @Override
-    public void displaySummary() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'displaySummary'");
-    }
-       
 }
