@@ -15,6 +15,7 @@ public class Main {
         UI ui = new ConsoleUI(controller);
 
         controller.start();
+       // GUI gui = new GUI(controller);
         
 
         System.out.println("Current working directory: " + System.getProperty("user.dir"));

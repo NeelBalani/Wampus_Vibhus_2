@@ -66,6 +66,13 @@ public class GameController {
         this.ui.showPersonTurn((this.activeTeammate));
 
         Result result = this.activeTeammate.doAction(this.ui);
+
+        if(!this.game.getVisibleInfo(activeTeammate).equals("You see: ")){
+            this.ui.showMessage(this.game.getVisibleInfo(activeTeammate));
+        }
+        else{
+            this.ui.showMessage("You see nothing.");
+        }
         
         // Check if the player moved
         if(result.getAction().equals("Move")){
@@ -86,7 +93,9 @@ public class GameController {
     }
 
     public void gameTurnSwing(){
-        System.out.println("Game Turn Swing");
+        if(!this.game.getVisibleInfo(activeTeammate).equals("You see: ")){
+            this.ui.showMessage(this.game.getVisibleInfo(activeTeammate));
+        }
     }
 
     public void postMoveActions(){

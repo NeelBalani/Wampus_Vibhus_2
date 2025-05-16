@@ -73,13 +73,13 @@ public class Game {
         if (currentLocation.hasObstacle()) {
             Obstacle obstacle = currentLocation.getObstacle();
             
-            /* 
-                if (obstacle instanceof Wumpus) {
-                    System.out.println("You encountered a Wumpus! Game Over.");
-                } else {
-                    System.out.println("You encountered a hazard: " + obstacle);
-                }
-            */
+             
+            if (obstacle instanceof Wumpus) {
+                System.out.println("You encountered a Wumpus! Game Over.");
+            } else {
+                System.out.println("You encountered a hazard: " + obstacle);
+            }
+            
         }
     }
 
