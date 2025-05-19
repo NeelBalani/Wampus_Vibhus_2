@@ -65,14 +65,14 @@ public class GameController {
     public void gameTurnTerminal(){
         this.ui.showPersonTurn((this.activeTeammate));
 
-        Result result = this.activeTeammate.doAction(this.ui);
-
         if(!this.game.getVisibleInfo(activeTeammate).equals("You see: ")){
             this.ui.showMessage(this.game.getVisibleInfo(activeTeammate));
         }
         else{
             this.ui.showMessage("You see nothing.");
         }
+
+        Result result = this.activeTeammate.doAction(this.ui);
         
         // Check if the player moved
         if(result.getAction().equals("Move")){

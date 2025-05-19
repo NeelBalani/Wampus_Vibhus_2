@@ -1,14 +1,8 @@
 package edu.bothell.wampus;
 
 
-import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.CardLayout;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -71,8 +65,8 @@ public class GUI extends JFrame{
         return buttons;
     }
 
-    public void handleButtonClick(int row, int col) {
-        AdjacentGameLocation g = getLocationID(row, col);
+    public void handleButtonClick(int roomId) {
+        AdjacentGameLocation g = this.c.getCave().getLocationBasedOnId(roomId);
         System.out.println(g.getLocationId());
         System.out.println(this.c.findWhatIsInLocation(g));
     }
@@ -84,10 +78,6 @@ public class GUI extends JFrame{
         if(dir.equals("Up")) direction = Directions.N;
         if(dir.equals("Down")) direction = Directions.S;
         //this.c.movePlayerUsingDirections(direction); TIBHU U GOT THIS
-    }
-
-    public AdjacentGameLocation getLocationID(int row, int col){
-        return this.c.getCave().getLocationBasedOnId((row * 5 + col % 6) + 1);
     }
 
 }

@@ -26,7 +26,7 @@ public class ButtonLocation implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == this.button){
-            //this.frame.handleButtonClick(this.id);
+            this.frame.handleButtonClick(this.id);
         }
     }
 
