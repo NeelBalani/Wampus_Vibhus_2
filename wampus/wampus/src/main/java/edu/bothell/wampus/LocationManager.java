@@ -26,6 +26,9 @@ public class LocationManager {
         }
     }
 
+    public AdjacentGameLocation getLocationInDirection(Directions direction, AdjacentGameLocation oldGameLocation) {
+
+    }
 
     public AdjacentGameLocation getGameLocationOfPerson(Person p){
         return this.playerLocations.get(p);

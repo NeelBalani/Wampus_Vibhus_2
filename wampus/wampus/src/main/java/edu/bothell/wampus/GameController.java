@@ -151,4 +151,8 @@ public class GameController {
     public Person getActiveTeammate() {
         return this.activeTeammate;
     }
+
+    public void movePlayerUsingDirections(Directions directions) {
+        this.game.getLocationManager().getRoomInLocation();
+    }
 }
