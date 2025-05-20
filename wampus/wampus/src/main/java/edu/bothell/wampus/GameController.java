@@ -144,7 +144,10 @@ public class GameController {
 
     public void movePlayerUsingId(int roomId) {
         Result result = this.game.movePlayer(this.activeTeammate, roomId, new Result("Move", this.activeTeammate));
-        addResult(result);
+        if(result.getAddedAction()){ 
+            System.out.println(roomId);
+            addResult(result);
+        }
         //this.ui.showMessage(result.getMessage());
     }
 
@@ -153,6 +156,7 @@ public class GameController {
     }
 
     public void movePlayerUsingDirections(Directions directions) {
-        this.game.getLocationManager().getRoomInLocation();
+        AdjacentGameLocation newGameLocation = this.game.getLocationManager().getLocationInDirection(directions, this.game.getLocationManager().getGameLocationOfPerson(this.activeTeammate));
+        movePlayerUsingId(newGameLocation.getLocationId());
     }
 }

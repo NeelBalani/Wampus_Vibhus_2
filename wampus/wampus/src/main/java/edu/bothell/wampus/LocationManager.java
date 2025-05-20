@@ -27,7 +27,8 @@ public class LocationManager {
     }
 
     public AdjacentGameLocation getLocationInDirection(Directions direction, AdjacentGameLocation oldGameLocation) {
-
+        int newLocationId = oldGameLocation.getLocationId() + direction.getShiftNumber();
+        return this.cave.getLocationBasedOnId(newLocationId);
     }
 
     public AdjacentGameLocation getGameLocationOfPerson(Person p){
@@ -45,6 +46,10 @@ public class LocationManager {
         } catch(Exception e){
             return false;
         }
+    }
+
+    public boolean canMoveFromLocationToLocation(AdjacentGameLocation currentLocation, int newGameLocationId) {
+        return (currentLocation.getAdjLocations().contains(newGameLocationId));
     }
 
     public AdjacentGameLocation getGameLocationBasedOnId(int gameLocationId){

@@ -30,7 +30,10 @@ public enum Directions {
         if(directionStr.equals("Right")) return E;
         if(directionStr.equals("Left")) return W;
         return null;
+    }
 
+    public int getShiftNumber() {
+        return this.shiftNumber;
     }
 
     // public void shift(){

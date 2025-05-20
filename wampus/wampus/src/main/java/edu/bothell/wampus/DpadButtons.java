@@ -23,7 +23,7 @@ public class DpadButtons implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //frame.handleMoveInDirection(Integer.parseInt(direcString));
+        frame.handleMoveInDirection((direcString));
     }
     
     public JButton giveJButton(){

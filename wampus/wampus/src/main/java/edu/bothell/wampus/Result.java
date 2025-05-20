@@ -8,6 +8,7 @@ public class Result {
     private String action;
     private AdjacentGameLocation location;
     private Person player;
+    private boolean addedAction;
 
     // Constructor
     public Result(String action, Person player) {
@@ -17,6 +18,14 @@ public class Result {
     }
 
     // Methods
+
+    public boolean getAddedAction(){
+        return this.addedAction;
+    }
+
+    public void changeAddedAction(){
+        this.addedAction = !this.addedAction;
+    }
 
     public void addDirectionToMessage(Directions direction) {
         if(this.message.equals("Shoot")){

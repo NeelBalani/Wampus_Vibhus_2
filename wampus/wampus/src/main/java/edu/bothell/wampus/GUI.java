@@ -78,7 +78,8 @@ public class GUI extends JFrame{
         if(dir.equals("Up")) direction = Directions.N;
         if(dir.equals("Down")) direction = Directions.S;
         //VIBHU FIX THIS PLEASE GOOD SIR
-        //this.c.movePlayerUsingDirections(direction); TIBHU U GOT THIS
+        System.out.println(dir);
+        this.c.movePlayerUsingDirections(direction);
     }
 
 }
