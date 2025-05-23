@@ -53,21 +53,21 @@ public class TriviaManager {
         if (num >= 0 && num < questionArray.size()) {
             return questionArray.get(num);
         }
-        return null; // Or throw an exception
+        return null; 
     }
 
     public String getCorrectAnswer(int num) {
         if (num >= 0 && num < correctAnswerArray.size()) {
             return correctAnswerArray.get(num);
         }
-        return null; // Or throw an exception
+        return null;
     }
 
     public String[] getPossibleAnswers(int num) {
         if (num >= 0 && num < possibleAnswerArray.size()) {
             return possibleAnswerArray.get(num);
         }
-        return null; // Or throw an exception
+        return null; 
     }
 
     public int getTotalQuestions() {
