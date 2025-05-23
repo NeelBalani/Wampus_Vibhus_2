@@ -9,8 +9,8 @@ public enum Directions {
     // SW(-1, 1),      // South-West
     W(-1),       // West
     // NW(-1, -1)
-    S(6),
-    N(-6);        // North-West
+    S(5),
+    N(-5);        // North-West
 
     private final int shiftNumber;
     private boolean offset;
