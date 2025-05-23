@@ -26,14 +26,14 @@ public class GUI extends JFrame{
         super.setTitle("My first Jframe");
         super.setSize(6*100,5*100);
         super.setLayout(new FlowLayout());
-        this.buttons = new JButton[6][5];
+        this.buttons = new JButton[5][6];
 
         JPanel pane = new JPanel();        
-        pane.setLayout(new GridLayout(5,6));
+        pane.setLayout(new GridLayout(6,5));
 
         for(int y = 0; y < this.buttons.length; y++){
             for(int x = 0; x < this.buttons[y].length; x++){
-                this.buttons[y][x] = new ButtonLocation(this, ((y * 5 + x % 5) + 1)).giveJButton();
+                this.buttons[y][x] = new ButtonLocation(this, ((y * 6 + x % 6) + 1)).giveJButton();
                 this.buttons[y][x].setSize(100, 100);
                 System.out.println("Y: " + y + "; X: " + x);
                 pane.add(this.buttons[y][x]);

@@ -6,11 +6,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
+    //TODO:
+        //StartScreen
+        //Questions
+        //print notice on gui
+        //add functions to Hazards
+        //Make Wampus move
+        //Make Wampus & player attack
+        //make attack heal buttons
+        //finish the whole point system
+            //gold
+                //trivia
+            //number of trivia
+            //number of moves
     public static void main(String[] args) throws FileNotFoundException {
 
         // Initialize controller
         System.out.println("starting");
-        GameController controller = new GameController("Wampus_Vibhus_2/wampus/wampus/src/main/java/edu/bothell/wampus/maps/MapGraph.csv");
+        GameController controller = new GameController("wampus/wampus/src/main/java/edu/bothell/wampus/maps/MapGraph.csv");
         GUI gui = new GUI(controller);
         controller.addPerson(new Pranav("Pranav"));
 
