@@ -54,5 +54,4 @@ public class Main {
         System.out.println("is it testing");
         //controller.start();
     }
-    }
 }   
