@@ -24,7 +24,7 @@ public class Main {
             int totalQuestions = triviaManager.getTotalQuestions();
             int score = 0;
 
-            System.out.println("\n--- TRIVIA SESSION STARTED! ---");
+            System.out.println("\n--- TRIVIA IS STARTING NOW MWAHAHAHA KYS! ---");
 
             for (int i = 0; i < totalQuestions; i++) {
                 String questionText = triviaManager.getQuestion(i);
