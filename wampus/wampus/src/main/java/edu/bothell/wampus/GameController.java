@@ -156,7 +156,12 @@ public class GameController {
     }
 
     public void movePlayerUsingDirections(Directions directions) {
-        AdjacentGameLocation newGameLocation = this.game.getLocationManager().getLocationInDirection(directions, this.game.getLocationManager().getGameLocationOfPerson(this.activeTeammate));
+        AdjacentGameLocation newGameLocation;
+        try{
+            newGameLocation = this.game.getLocationManager().getLocationInDirection(directions, this.game.getLocationManager().getGameLocationOfPerson(this.activeTeammate));
+        } catch(Exception e){
+            newGameLocation = this.game.getLocationManager().getLocationOutOfBounds(directions, this.game.getLocationManager().getGameLocationOfPerson(this.activeTeammate));
+        }
         movePlayerUsingId(newGameLocation.getLocationId());
     }
 }

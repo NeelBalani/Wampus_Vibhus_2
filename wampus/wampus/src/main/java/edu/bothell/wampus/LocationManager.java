@@ -49,7 +49,16 @@ public class LocationManager {
     }
 
     public boolean canMoveFromLocationToLocation(AdjacentGameLocation currentLocation, int newGameLocationId) {
-        return (currentLocation.getAdjLocations().contains(newGameLocationId));
+        return (currentLocation.getAdjLocations().contains(newGameLocationId) && doesGameLocationIdExist(newGameLocationId));
+    }
+
+    public boolean doesGameLocationExist(AdjacentGameLocation location){
+        try{
+            this.cave.getLocationBasedOnId(location.getLocationId());
+        } catch(Exception e){
+            return false;
+        }
+        return true;
     }
 
     public AdjacentGameLocation getGameLocationBasedOnId(int gameLocationId){
@@ -60,5 +69,17 @@ public class LocationManager {
         this.playerLocations.replace(p, newGameLocation);
         oldLocation.removePlayerFromLocation(p);
         newGameLocation.addPersonToLocation(p);
+    }
+    public AdjacentGameLocation getLocationOutOfBounds(Directions directions, AdjacentGameLocation gameLocationOfPerson) {
+        int newLocationId = gameLocationOfPerson.getLocationId() + directions.getShiftNumber();
+        if(newLocationId < 0 ){
+            return this.cave.getLocationBasedOnId(this.cave.getSize() + newLocationId); // wrap around to the last location
+        } 
+        else if(newLocationId >= this.cave.getSize()){
+            return this.cave.getLocationBasedOnId(newLocationId - this.cave.getSize()); // wrap around to the first location
+        }
+        else {
+            return this.cave.getLocationBasedOnId(newLocationId);
+        }    
     }
 }
