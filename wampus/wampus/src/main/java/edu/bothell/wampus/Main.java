@@ -5,9 +5,23 @@ import java.io.FileNotFoundException;
 import java.util.Scanner; 
 
 public class Main {
+    //TODO:
+        //StartScreen
+        //Questions
+        //print notice on gui
+        //add functions to Hazards
+        //Make Wampus move
+        //Make Wampus & player attack
+        //make attack heal buttons
+        //finish the whole point system
+            //gold
+                //trivia
+            //number of trivia
+            //number of moves
     public static void main(String[] args) throws FileNotFoundException {
 
-        System.out.println("Starting Wampus Trivia Game...");
+        // Initialize controller
+        System.out.println("starting");
         GameController controller = new GameController("wampus/wampus/src/main/java/edu/bothell/wampus/maps/MapGraph.csv");
         GUI gui = new GUI(controller);
         controller.addPerson(new Pranav("Pranav"));
