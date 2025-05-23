@@ -20,9 +20,7 @@ public class Game {
     public boolean canMove(Person p, int newGameLocationId) {
         AdjacentGameLocation currentLocation = locationManager.getGameLocationOfPerson(p);
         
-        System.out.println(newGameLocationId);
-
-        return this.locationManager.doesGameLocationIdExist(newGameLocationId);
+        return (this.locationManager.doesGameLocationIdExist(newGameLocationId) && this.locationManager.canMoveFromLocationToLocation(currentLocation, newGameLocationId));
     }
 
     public LocationManager getLocationManager(){
@@ -51,9 +49,11 @@ public class Game {
             if(obstacleTrigger) resolveHazard(newLocation);
     
             result.playerMove(oldLocation, newLocation);
+            result.changeAddedAction();
             return result;
         } else {
-            throw new IllegalArgumentException("Cannot move to the specified location.");
+            System.out.println("Cannot move to the specified location.");
+            return result;
         }
     }
 

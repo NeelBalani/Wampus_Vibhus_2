@@ -31,6 +31,10 @@ public class AdjacentGameLocation {
         this.adjacentLocationsId = adjLocs;
     }
 
+    public ArrayList<Integer> getAdjLocations(){
+        return this.adjacentLocationsId;
+    }
+
     public boolean doesContainPerson(Person p){
         return this.people.contains(p);
     }

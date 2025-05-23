@@ -10,13 +10,13 @@ public class Main {
 
         // Initialize controller
         System.out.println("starting");
-        //GameController controller = new GameController("Wampus_Vibhus_2/wampus/wampus/src/main/java/edu/bothell/wampus/maps/MapGraph.csv");
-        // GUI gui = new GUI(controller);
-        //controller.addPerson(new Pranav("Pranav"));
+        GameController controller = new GameController("Wampus_Vibhus_2/wampus/wampus/src/main/java/edu/bothell/wampus/maps/MapGraph.csv");
+        GUI gui = new GUI(controller);
+        controller.addPerson(new Pranav("Pranav"));
 
         //UI ui = new ConsoleUI(controller);
 
-        //controller.start();
+        // controller.start();
        // GUI gui = new GUI(controller);
 
 
@@ -53,5 +53,6 @@ public class Main {
 
         System.out.println("is it testing");
         //controller.start();
+    }
     }
 }   
