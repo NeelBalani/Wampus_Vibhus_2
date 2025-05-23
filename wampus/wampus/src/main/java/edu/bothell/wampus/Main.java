@@ -87,7 +87,7 @@ public class Main {
             }
 
             scanner.close();
-            System.out.println("\n--- TRIVIA SESSION ENDED! ---");
+            System.out.println("\n--- TRIVIA SESSION IS OVER! ---");
             System.out.println("You answered " + score + " out of " + totalQuestions + " questions correctly.");
 
         } else {
