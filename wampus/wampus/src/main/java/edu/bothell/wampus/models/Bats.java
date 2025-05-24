@@ -1,4 +1,7 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.models;
+
+import edu.bothell.wampus.AdjacentGameLocation;
+import edu.bothell.wampus.Obstacle;
 
 public class Bats implements Obstacle {
     // Properties

@@ -1,0 +1,105 @@
+/* Main application styles */
+.root {
+    -fx-font-family: 'Arial', sans-serif;
+    -fx-background-color: #2c3e50;
+}
+
+/* Start Screen */
+.start-screen {
+    -fx-background-color: #2c3e50;
+}
+
+.title-text {
+    -fx-font-size: 48px;
+    -fx-fill: #ecf0f1;
+    -fx-font-weight: bold;
+}
+
+/* Game Screen */
+.game-screen {
+    -fx-background-color: #2c3e50;
+}
+
+/* Header */
+.header {
+    -fx-padding: 15px;
+    -fx-background-color: #34495e;
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+}
+
+.header-text {
+    -fx-text-fill: #ecf0f1;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+/* Buttons */
+.menu-button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.menu-button:hover {
+    -fx-background-color: #2980b9;
+}
+
+.dpad-button {
+    -fx-background-color: #7f8c8d;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-background-radius: 25px;
+}
+
+.dpad-button:hover {
+    -fx-background-color: #95a5a6;
+}
+
+.dpad-center-button {
+    -fx-background-color: #95a5a6;
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-background-radius: 25px;
+}
+
+/* Status Bar */
+.status-bar {
+    -fx-padding: 10px;
+    -fx-background-color: #34495e;
+    -fx-alignment: center;
+}
+
+.status-text {
+    -fx-text-fill: #ecf0f1;
+    -fx-font-size: 14px;
+}
+
+/* Game Board */
+.game-board {
+    -fx-padding: 20px;
+}
+
+.hexagon {
+    -fx-fill: #34495e;
+    -fx-stroke: #2c3e50;
+    -fx-stroke-width: 2;
+}
+
+.hexagon:hover {
+    -fx-fill: #4a6b8a;
+    -fx-cursor: hand;
+}
+
+.hexagon.current {
+    -fx-fill: #e74c3c;
+}
+
+.hexagon.visited {
+    -fx-fill: #3498db;
+}

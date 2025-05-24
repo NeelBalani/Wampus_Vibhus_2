@@ -10,6 +10,8 @@ public class AdjacentGameLocation {
     private ArrayList<Integer> adjacentLocationsId = new ArrayList<Integer>();
     private Obstacle obstacle;
     private boolean hasObstacle;
+    private int x;
+    private int y;
 
     // Constructor
     public AdjacentGameLocation(int locationId){
@@ -19,6 +21,8 @@ public class AdjacentGameLocation {
     public AdjacentGameLocation(int locationId, ArrayList<Integer>adjacentLocationsId){
         this.locationId = locationId;
         setAdjLocations(adjacentLocationsId);
+        this.x = (locationId-1) % 5;
+        this.y = (locationId-1) / 5;
     }
 
     //Method
@@ -85,4 +89,11 @@ public class AdjacentGameLocation {
         } return false;
     }
 
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
 }

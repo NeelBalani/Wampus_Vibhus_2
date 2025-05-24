@@ -1,9 +1,9 @@
 package edu.bothell.wampus;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AdjacentCaveInitializer {
     // Properties
@@ -23,16 +23,47 @@ public class AdjacentCaveInitializer {
         // Fills up the caveBuilder with the map created from the file
         // Skips description
         System.out.println(scanner.nextLine());
-        
+
         while(scanner.hasNextLine()){
             // Builds each row
             buildGameLocationRow(scanner.nextLine());
         }
 
-        this.cave = new AdjacentCave(this.caveBuilder);        
+        this.cave = new AdjacentCave(this.caveBuilder);
 
     }
 
+    public AdjacentCaveInitializer(InputStream caveStream) throws FileNotFoundException{
+        System.out.println("cave start");
+
+
+        // Gets the file and initializes the caveBuilder ready for filling up
+
+        // Put the lines from the file into a string list
+        ArrayList<String> caveLines = new BufferedReader(new InputStreamReader(caveStream))
+                .lines()
+                .map(String::trim)
+                .filter(line -> !line.isEmpty())
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        // Cave size
+        int caveSize = caveLines.size();
+
+        // Creates the caveBuilder
+        this.caveBuilder = new AdjacentGameLocation[caveSize];
+
+        // Fills up the caveBuilder with the map created from the file
+
+        // Skips description
+        caveLines.removeFirst();
+
+        // Builds each row
+        for(String row : caveLines){
+            buildGameLocationRow(row);
+        }
+
+        this.cave = new AdjacentCave(this.caveBuilder);
+    }
     // Methods
 
     public AdjacentCave getBuiltCave(){
@@ -50,6 +81,18 @@ public class AdjacentCaveInitializer {
 
         return caveSizeCounter;
 
+    }
+
+    public int getCaveSize(InputStream caveStream) throws FileNotFoundException {
+        int caveSizeCounter = 0;
+        Scanner rowScanner = new Scanner(caveStream);
+
+        while (rowScanner.hasNextLine()) {
+            caveSizeCounter++;
+            rowScanner.nextLine();
+        }
+
+        return caveSizeCounter;
     }
 
     public void buildGameLocationRow(String row){

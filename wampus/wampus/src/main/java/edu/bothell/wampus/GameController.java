@@ -1,6 +1,7 @@
 package edu.bothell.wampus;
 
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,12 +23,22 @@ public class GameController {
 
     }
 
+    public GameController(InputStream caveStream) throws FileNotFoundException{
+        initializePlayerLists();
+        setCaveAs(caveStream);
+        setNewGame();
+    }
+
     private void initializePlayerLists() {
         this.allTeammates = new ArrayList<Person>();
         this.activeTeammates = this.allTeammates;
     }
 
     public void setCaveAs(String filePath) throws FileNotFoundException{
+        AdjacentCaveInitializer caveInitializer = new AdjacentCaveInitializer(filePath);
+        this.cave = caveInitializer.getBuiltCave();
+    }
+    public void setCaveAs(InputStream filePath) throws FileNotFoundException{
         AdjacentCaveInitializer caveInitializer = new AdjacentCaveInitializer(filePath);
         this.cave = caveInitializer.getBuiltCave();
     }
@@ -161,7 +172,12 @@ public class GameController {
             newGameLocation = this.game.getLocationManager().getLocationInDirection(directions, this.game.getLocationManager().getGameLocationOfPerson(this.activeTeammate));
         } catch(Exception e){
             newGameLocation = this.game.getLocationManager().getLocationOutOfBounds(directions, this.game.getLocationManager().getGameLocationOfPerson(this.activeTeammate));
+            System.out.println(newGameLocation.getLocationId());
         }
         movePlayerUsingId(newGameLocation.getLocationId());
+    }
+
+    public Game getGame() {
+        return this.game;
     }
 }

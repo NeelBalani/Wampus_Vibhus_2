@@ -71,12 +71,19 @@ public class LocationManager {
         newGameLocation.addPersonToLocation(p);
     }
     public AdjacentGameLocation getLocationOutOfBounds(Directions directions, AdjacentGameLocation gameLocationOfPerson) {
+        System.out.println("out of bounds");
         int newLocationId = gameLocationOfPerson.getLocationId() + directions.getShiftNumber();
-        if(newLocationId < 0 ){
-            return this.cave.getLocationBasedOnId(this.cave.getSize() + newLocationId); // wrap around to the last location
+        if(directions==Directions.N){
+            return this.cave.getLocationBasedOnId(this.cave.getSize() + newLocationId - 1); // wrap around to the last location
         } 
-        else if(newLocationId >= this.cave.getSize()){
-            return this.cave.getLocationBasedOnId(newLocationId - this.cave.getSize()); // wrap around to the first location
+        else if(directions==Directions.S){
+            return this.cave.getLocationBasedOnId(newLocationId - this.cave.getSize() + 1); // wrap around to the first location
+        }
+        else if(directions==Directions.E){
+            return this.cave.getLocationBasedOnId(newLocationId - 5); // wrap around to the first location
+        }
+        else if(directions==Directions.W){
+            return this.cave.getLocationBasedOnId( newLocationId + 5); // wrap around to the last location
         }
         else {
             return this.cave.getLocationBasedOnId(newLocationId);
