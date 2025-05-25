@@ -1,15 +1,15 @@
 package edu.bothell.wampus.controllers;
 
-import edu.bothell.wampus.AdjacentGameLocation;
+import edu.bothell.wampus.models.AdjacentGameLocation;
 import edu.bothell.wampus.Directions;
-import edu.bothell.wampus.GameController;
-import edu.bothell.wampus.HexagonalRoom;
+import edu.bothell.wampus.models.HexagonalRoom;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -21,11 +21,13 @@ public class GameScreenController {
     @FXML private Button E, NE, NW, W, SE, SW;
     @FXML private Pane board;
     @FXML private Label statusLabel;
+    @FXML private TextArea historyTextArea;
 
     private GameController gameController;
     private HexagonalRoom[][] rooms = new HexagonalRoom[6][5];
     private AdjacentGameLocation currentLocation;
     private Button[] dpad;
+    private int moveCounter = 0;
 
     public GameScreenController() {
     }
@@ -35,6 +37,9 @@ public class GameScreenController {
         // TODO: Initialize Trivia button and Exit button
 
         this.dpad= new Button[]{this.E, this.NE, this.NW, this.W, this.SW, this.SE};
+        
+        // Initialize history text area
+        historyTextArea.setText("Game started. Good luck!\n");
     }
 
     public void initGameController(GameController gameController) {
@@ -113,14 +118,24 @@ public class GameScreenController {
     }
 
     private void movePlayer(Directions direction) {
-        // TODO: Implement movement logic
-        statusLabel.setText("Moving " + direction.toString());
+        if (gameController != null) {
+            AdjacentGameLocation prevLocation = currentLocation;
+            AdjacentGameLocation newLocation = gameController.movePlayerUsingDirections(direction);
+            
+            // Update history with movement information
+            if (prevLocation != newLocation) {
+                addToHistory("Player moved from Room " + prevLocation.getLocationId() +
+                             " to Room " + newLocation.getLocationId() + " (" + direction + ")");
+            } else {
+                addToHistory("Cannot move " + direction + " from Room " + prevLocation.getLocationId());
+            }
 
-        // This will be connected to the actual game controller
-        if (this.gameController != null) {
-            direction.offset(this.currentLocation.isShifted());
-            this.gameController.movePlayerUsingDirections(direction);
-             updateGameBoard();
+            // Update obstacle display
+            if (newLocation.getObstacle() != null) {
+                addToHistory("Player encountered a " + newLocation.getObstacle().toString());
+            }
+            
+            updateGameBoard();
         }
     }
 
@@ -190,6 +205,27 @@ public class GameScreenController {
         for (Directions direction : Directions.values()) {
             int order = direction.ordinal();
             this.dpad[order].setDisable(adjLocs.get(order) == 0);
+        }
+    }
+
+    /**
+     * Adds a new entry to the game history panel
+     * @param text The text to add to the history
+     */
+    public void addToHistory(String text) {
+        if (historyTextArea != null) {
+            // Use move counter instead of timestamp
+            String entry;
+            if (text.startsWith("Player moved")) {
+                moveCounter++;
+                entry = "Move " + moveCounter + ": " + text + "\n";
+            } else {
+                entry = text + "\n";
+            }
+            historyTextArea.appendText(entry);
+            
+            // Auto-scroll to the bottom
+            historyTextArea.positionCaret(historyTextArea.getText().length());
         }
     }
 }

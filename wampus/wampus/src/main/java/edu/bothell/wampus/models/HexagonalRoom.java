@@ -1,4 +1,4 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.models;
 
 import javafx.scene.Group;
 import javafx.scene.control.Label;

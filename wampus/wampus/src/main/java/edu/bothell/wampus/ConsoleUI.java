@@ -1,5 +1,10 @@
 package edu.bothell.wampus;
 
+import edu.bothell.wampus.controllers.GameController;
+import edu.bothell.wampus.interfaces.UI;
+import edu.bothell.wampus.models.Result;
+import edu.bothell.wampus.models.people.Person;
+
 import java.util.List;
 import java.util.Scanner;
 

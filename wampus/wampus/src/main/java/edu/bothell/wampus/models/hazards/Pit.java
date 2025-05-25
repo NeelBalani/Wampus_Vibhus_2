@@ -1,20 +1,20 @@
-package edu.bothell.wampus.models;
+package edu.bothell.wampus.models.hazards;
 
-import edu.bothell.wampus.AdjacentGameLocation;
-import edu.bothell.wampus.Obstacle;
+import edu.bothell.wampus.interfaces.Obstacle;
+import edu.bothell.wampus.models.AdjacentGameLocation;
 
-public class Bats implements Obstacle {
+public class Pit implements Obstacle {
     // Properties
     private AdjacentGameLocation location;
     private boolean isTriggered = false;
     private boolean isDestroyed = false;
 
-    // Constructor
-    public Bats(AdjacentGameLocation location){
-        this.location = location;
+    // Constructors
+    public Pit(AdjacentGameLocation gl){
+        this.location = gl;
     }
 
-    // Methods
+    // Method
 
     @Override
     public boolean hasObstacleBeenTriggered(){
@@ -42,5 +42,10 @@ public class Bats implements Obstacle {
     }
 
     @Override
-    public String toString() { return "Bats"; }
+    public String toString() { return "Pit"; }
+
+    @Override
+    public String getWarning() {
+        return "You feel a draft.";
+    }
 }

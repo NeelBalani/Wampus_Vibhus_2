@@ -1,4 +1,6 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.interfaces;
+
+import edu.bothell.wampus.models.AdjacentGameLocation;
 
 public interface Obstacle {
 
@@ -10,4 +12,5 @@ public interface Obstacle {
     boolean isObstacleDestroyed();
     AdjacentGameLocation getLocation();
     String toString();
+    String getWarning();
 }

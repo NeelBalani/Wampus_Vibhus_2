@@ -1,6 +1,8 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.models;
 
-import java.util.Arrays;
+import edu.bothell.wampus.Directions;
+import edu.bothell.wampus.interfaces.Obstacle;
+import edu.bothell.wampus.models.people.Person;
 
 public class Result {
     // Properties

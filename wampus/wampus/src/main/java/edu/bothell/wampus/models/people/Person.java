@@ -1,6 +1,9 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.models.people;
 
-import javax.xml.stream.Location;
+import edu.bothell.wampus.models.Result;
+import edu.bothell.wampus.interfaces.Teammate;
+import edu.bothell.wampus.interfaces.UI;
+
 import java.util.ArrayList;
 import java.util.List;
 

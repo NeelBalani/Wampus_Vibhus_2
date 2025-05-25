@@ -1,4 +1,7 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.initializers;
+
+import edu.bothell.wampus.AdjacentCave;
+import edu.bothell.wampus.models.AdjacentGameLocation;
 
 import java.io.*;
 import java.util.ArrayList;

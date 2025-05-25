@@ -1,4 +1,4 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.models;
 
 public class AnswerSubmission {
 

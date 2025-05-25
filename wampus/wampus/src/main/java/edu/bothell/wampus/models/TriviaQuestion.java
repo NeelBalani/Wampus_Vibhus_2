@@ -1,4 +1,6 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.models;
+
+import edu.bothell.wampus.controllers.TriviaManager;
 
 import java.util.Random;
 

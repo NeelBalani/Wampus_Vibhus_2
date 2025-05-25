@@ -1,8 +1,6 @@
 package edu.bothell.wampus.controllers;
 
-import edu.bothell.wampus.GameController;
-import edu.bothell.wampus.Person;
-import edu.bothell.wampus.Pranav;
+import edu.bothell.wampus.models.people.Pranav;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
