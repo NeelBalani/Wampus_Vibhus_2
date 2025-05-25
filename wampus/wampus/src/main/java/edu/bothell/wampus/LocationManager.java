@@ -73,6 +73,12 @@ public class LocationManager {
     public AdjacentGameLocation getLocationOutOfBounds(Directions directions, AdjacentGameLocation gameLocationOfPerson) {
         System.out.println("out of bounds");
         int newLocationId = gameLocationOfPerson.getLocationId() + directions.getShiftNumber();
+        if(newLocationId < 0){
+            newLocationId += 30;
+        }
+        if(newLocationId > 30){
+            newLocationId -= 31;
+        }
         if(directions==Directions.N){
             return this.cave.getLocationBasedOnId(this.cave.getSize() + newLocationId - 1); // wrap around to the last location
         } 
