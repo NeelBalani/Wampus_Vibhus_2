@@ -51,6 +51,7 @@ public class GameScreenController {
         this.gameController = gameController;
         initializeGameBoard();
         updateGameBoard();
+        checkForWarnings(currentLocation);
     }
 
     private void initializeGameBoard() {
@@ -135,8 +136,22 @@ public class GameScreenController {
             if (newLocation.getObstacle() != null) {
                 addToHistory("Player encountered a " + newLocation.getObstacle().toString());
             }
+
+            // Update warning display
+            checkForWarnings(newLocation);
             
             updateGameBoard();
+        }
+    }
+
+    private void checkForWarnings(AdjacentGameLocation newLocation) {
+        ArrayList<Integer> adjLocIds = newLocation.getAdjLocations();
+        for(int adjLocId : adjLocIds) {
+            if(adjLocId == 0) continue;
+            AdjacentGameLocation adjLoc = gameController.getGame().getLocationManager().getGameLocationBasedOnId(adjLocId);
+            if(adjLoc.hasObstacle()) {
+                addToHistory(adjLoc.getObstacle().getWarning());
+            }
         }
     }
 
