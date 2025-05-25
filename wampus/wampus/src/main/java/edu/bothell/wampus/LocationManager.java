@@ -70,23 +70,21 @@ public class LocationManager {
         oldLocation.removePlayerFromLocation(p);
         newGameLocation.addPersonToLocation(p);
     }
-    public AdjacentGameLocation getLocationOutOfBounds(Directions directions, AdjacentGameLocation gameLocationOfPerson) {
-        System.out.println("out of bounds");
-        int newLocationId = gameLocationOfPerson.getLocationId() + directions.getShiftNumber();
-        if(directions==Directions.N){
-            return this.cave.getLocationBasedOnId(this.cave.getSize() + newLocationId - 1); // wrap around to the last location
-        } 
-        else if(directions==Directions.S){
-            return this.cave.getLocationBasedOnId(newLocationId - this.cave.getSize() + 1); // wrap around to the first location
+
+    public AdjacentGameLocation movePlayer(Person activeTeammate, Directions directions) {
+        AdjacentGameLocation currentGameLocation = this.getGameLocationOfPerson(activeTeammate);
+        ArrayList<Integer> adjLocs = currentGameLocation.getAdjLocations();
+        int directionIndex = directions.ordinal(); // Assumes Directions enum matches MapGraph.csv order
+
+        // If direction index is out of bounds or wall (0), stay in place
+        if (directionIndex >= adjLocs.size()) {
+            return currentGameLocation;
         }
-        else if(directions==Directions.E){
-            return this.cave.getLocationBasedOnId(newLocationId - 5); // wrap around to the first location
+        int targetId = adjLocs.get(directionIndex);
+        if (targetId == 0) {
+            return currentGameLocation;
         }
-        else if(directions==Directions.W){
-            return this.cave.getLocationBasedOnId( newLocationId + 5); // wrap around to the last location
-        }
-        else {
-            return this.cave.getLocationBasedOnId(newLocationId);
-        }    
+
+        return this.cave.getLocationBasedOnId(targetId);
     }
 }

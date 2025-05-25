@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -17,20 +18,23 @@ import java.util.ArrayList;
 
 public class GameScreenController {
 
+    @FXML private Button E, NE, NW, W, SE, SW;
     @FXML private Pane board;
     @FXML private Label statusLabel;
 
     private GameController gameController;
     private HexagonalRoom[][] rooms = new HexagonalRoom[6][5];
     private AdjacentGameLocation currentLocation;
+    private Button[] dpad;
 
     public GameScreenController() {
     }
 
     @FXML
     public void initialize() {
-        // TODO: Initialize D-Pad buttons
         // TODO: Initialize Trivia button and Exit button
+
+        this.dpad= new Button[]{this.E, this.NE, this.NW, this.W, this.SW, this.SE};
     }
 
     public void initGameController(GameController gameController) {
@@ -77,10 +81,6 @@ public class GameScreenController {
     }
 
     // D-Pad button handlers
-    @FXML
-    private void handleMoveUp() {
-        movePlayer(Directions.N);
-    }
 
     @FXML
     private void handleMoveUpRight() {
@@ -95,11 +95,6 @@ public class GameScreenController {
     @FXML
     private void handleMoveDownRight() {
         movePlayer(Directions.SE);
-    }
-
-    @FXML
-    private void handleMoveDown() {
-        movePlayer(Directions.S);
     }
 
     @FXML
@@ -182,12 +177,19 @@ public class GameScreenController {
         ArrayList<Integer> adjLocs = currentLocation.getAdjLocations();
 
         for (int adjLocId : adjLocs) {
+            if(adjLocId == 0) continue;
             int adjRow = (adjLocId - 1) / 5;  // Assuming 5 columns
             int adjCol = (adjLocId - 1) % 5;
             if (this.rooms[adjRow][adjCol] != null && !this.rooms[row][col].getLocation().didPersonTriggerObstacle()) { // Check if the room exists
                 this.rooms[adjRow][adjCol].updateVisualState("AdjacentToPlayer");
                 System.out.println("Room " + adjLocId + " is adjacent to " + locId);
             }
+        }
+
+        // Update D-Pad buttons
+        for (Directions direction : Directions.values()) {
+            int order = direction.ordinal();
+            this.dpad[order].setDisable(adjLocs.get(order) == 0);
         }
     }
 }
