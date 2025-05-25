@@ -3,14 +3,12 @@ package edu.bothell.wampus;
 import java.util.Arrays;
 
 public enum Directions {
-     NE(-5),      // North-East
-    E(1),     // East
-     SE(5),    // South-East
-     SW(4),      // South-West
+    E(1), // East
+    NE(-5),      // North-East
+    NW(-6),   // North-West
     W(-1),       // West
-     NW(-6),
-    S(5),
-    N(-5);        // North-West
+    SW(4),      // South-West
+    SE(5);    // South-East
 
     private final int shiftNumber;
     private boolean offset;
@@ -24,13 +22,6 @@ public enum Directions {
         return this;
     }
 
-    public static Directions getDirectionFromString(String directionStr){
-        if(directionStr.equals("Up")) return N;
-        if(directionStr.equals("Down")) return S;
-        if(directionStr.equals("Right")) return E;
-        if(directionStr.equals("Left")) return W;
-        return null;
-    }
 
     public int getShiftNumber() {
         if(this.offset && !(name().equals("E")||name().equals("W")||name().equals("N")||name().equals("S"))) return this.shiftNumber + 1;
@@ -58,12 +49,11 @@ public enum Directions {
         switch (this) {
             //case NE: return SW;
             case E:  return W;
-            //case SE: return NW;
-            //case SW: return NE;
             case W:  return E;
-            //case NW: return SE;
-            case N: return S;
-            case S: return N;
+            case NW: return SE;
+            case NE: return SW;
+            case SW: return NE;
+            case SE: return NW;
             default: throw new IllegalStateException("Unexpected value: " + this);
         }
     }

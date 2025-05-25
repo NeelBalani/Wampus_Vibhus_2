@@ -23,7 +23,6 @@ public class Main {
         // Initialize controller
         System.out.println("starting");
         GameController controller = new GameController("wampus/wampus/src/main/resources/edu/bothell/wampus/maps/MapGraph.csv");
-        GUI gui = new GUI(controller);
         controller.addPerson(new Pranav("Pranav"));
 
         System.out.println("Current working directory: " + System.getProperty("user.dir"));

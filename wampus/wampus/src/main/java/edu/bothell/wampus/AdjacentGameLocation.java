@@ -24,7 +24,7 @@ public class AdjacentGameLocation {
         setAdjLocations(adjacentLocationsId);
         this.x = (locationId-1) % 5;
         this.y = (locationId-1) / 5;
-        if((this.locationId/6) % 2 == 0) shifted = true;
+        if(((this.locationId-1)/5) % 2 == 0) shifted = true;
     }
 
     //Method
