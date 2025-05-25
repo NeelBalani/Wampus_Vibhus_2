@@ -46,6 +46,9 @@ public class AdjacentCaveInitializer {
                 .filter(line -> !line.isEmpty())
                 .collect(Collectors.toCollection(ArrayList::new));
 
+        // Skips description
+        caveLines.removeFirst();
+
         // Cave size
         int caveSize = caveLines.size();
 
@@ -53,9 +56,6 @@ public class AdjacentCaveInitializer {
         this.caveBuilder = new AdjacentGameLocation[caveSize];
 
         // Fills up the caveBuilder with the map created from the file
-
-        // Skips description
-        caveLines.removeFirst();
 
         // Builds each row
         for(String row : caveLines){

@@ -20,18 +20,19 @@ public class StartScreenController {
     @FXML
     private void handleStartButton(ActionEvent event) {
         try {
-            // Load the game screen
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/bothell/wampus/views/GameScreen.fxml"));
-            Parent gameScreen = loader.load();
+            // Load the level picker screen
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/bothell/wampus/views/LevelPicker.fxml"));
+            Parent levelPickerScreen = loader.load();
             
             // Get the current stage
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             
             // Set the new scene
-            Scene scene = new Scene(gameScreen);
+            Scene scene = new Scene(levelPickerScreen);
             scene.getStylesheets().add(getClass().getResource("/edu/bothell/wampus/css/styles.css").toExternalForm());
             stage.setScene(scene);
             stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

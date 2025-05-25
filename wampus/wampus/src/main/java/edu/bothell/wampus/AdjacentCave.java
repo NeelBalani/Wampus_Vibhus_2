@@ -10,10 +10,17 @@ public class AdjacentCave {
     
     public AdjacentCave(AdjacentGameLocation[] c){
         this.cave = c;
-        AdjacentGameLocation testTrap = getLocationBasedOnId(1);
-        testTrap.addObstacle(new Pit(testTrap));
-        AdjacentGameLocation wumpusLocation = getLocationBasedOnId(8);
-        wumpusLocation.addObstacle(new Wumpus(wumpusLocation));
+//        AdjacentGameLocation testTrap = getLocationBasedOnId(1);
+//        testTrap.addObstacle(new Pit(testTrap));
+//        AdjacentGameLocation wumpusLocation = getLocationBasedOnId(8);
+//        wumpusLocation.addObstacle(new Wumpus(wumpusLocation));
+        for(AdjacentGameLocation l : this.cave){
+            if (l != null) {
+                System.out.print(l.getLocationId() + " ");
+            } else {
+                System.out.print("[null] ");
+            }
+        }
     }
 
     public AdjacentCave(){

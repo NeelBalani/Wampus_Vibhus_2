@@ -1,33 +1,31 @@
 package edu.bothell.wampus.controllers;
 
-import edu.bothell.wampus.AdjacentCave;
 import edu.bothell.wampus.AdjacentGameLocation;
 import edu.bothell.wampus.Directions;
 import edu.bothell.wampus.GameController;
 import edu.bothell.wampus.HexagonalRoom;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GameScreenController {
 
-    @FXML private Pane gameBoard;
+    @FXML private Pane board;
     @FXML private Label statusLabel;
 
     private GameController gameController;
-    private HexagonalRoom[][] rooms = new HexagonalRoom[5][6];
+    private HexagonalRoom[][] rooms = new HexagonalRoom[6][5];
+    private AdjacentGameLocation currentLocation;
+
+    public GameScreenController() {
+    }
 
     @FXML
     public void initialize() {
@@ -36,33 +34,46 @@ public class GameScreenController {
     }
 
     public void initGameController(GameController gameController) {
-        if(gameController != null) return;
+        if(gameController == null) {
+            System.out.println("game controller not initialized");
+            return;
+        }
         this.gameController = gameController;
         initializeGameBoard();
         updateGameBoard();
     }
 
     private void initializeGameBoard() {
-        gameBoard.getChildren().clear();
-        if (gameController == null) return;
-        AdjacentGameLocation[] locations = gameController.getCave().getCave();
-        double hexHeight = Math.sqrt(3) * 40;
-        double hexWidth = 2 * 40;
-        double vertSpacing = hexHeight * 0.75;
+        board.getChildren().clear();
+        if (this.gameController == null) {
+            System.out.println("this game controller not initialized");
+            return;
+        }
+        AdjacentGameLocation[] locations = this.gameController.getCave().getCave();
+        double hexRadius = 40; // Distance from center to any corner
+        double hexWidth = 2 * hexRadius; // Flat side to flat side (horizontal span)
+        double hexHeight = Math.sqrt(3) * hexRadius; // Point to point (vertical span)
+        double vertSpacing = hexHeight; // Vertical spacing between rows
+
 
         int locIdx = 1;
-        for (int row = 0; row < 5; row++) {
-            for (int col = 0; col < 6; col++) {
-                if (locIdx >= locations.length) break;
-                double x = col * hexWidth * 0.75 + (row % 2) * (hexWidth * 0.375) + 40;
+        for (int row = 0; row < 6; row++) {
+            for (int col = 0; col < 5; col++) {
+
+                if (locIdx > locations.length) break;
+
+                // Shift odd columns downwards by half the height (for pointy-topped staggered columns)
+                double x = col * hexWidth + ((row % 2 == 0) ? hexWidth / 2 : 0) + 40;
                 double y = row * vertSpacing + 40;
-                AdjacentGameLocation location = locations[locIdx];
+
+                AdjacentGameLocation location = locations[locIdx-1];
                 HexagonalRoom room = new HexagonalRoom(location, x, y, 40);
-                gameBoard.getChildren().add(room);
-                rooms[row][col] = room;
+                board.getChildren().add(room);
+                this.rooms[row][col] = room;
                 locIdx++;
             }
         }
+        System.out.println("Game board initialized");
     }
 
     // D-Pad button handlers
@@ -71,49 +82,50 @@ public class GameScreenController {
         movePlayer(Directions.N);
     }
 
-//    @FXML
-//    private void handleMoveUpRight() {
-//        movePlayer(Directions.NE);
-//    }
+    @FXML
+    private void handleMoveUpRight() {
+        movePlayer(Directions.NE);
+    }
 
     @FXML
     private void handleMoveRight() {
         movePlayer(Directions.E);
     }
 
-//    @FXML
-//    private void handleMoveDownRight() {
-//        movePlayer(Directions.SE);
-//    }
+    @FXML
+    private void handleMoveDownRight() {
+        movePlayer(Directions.SE);
+    }
 
     @FXML
     private void handleMoveDown() {
         movePlayer(Directions.S);
     }
 
-//    @FXML
-//    private void handleMoveDownLeft() {
-//        movePlayer(Directions.SW);
-//    }
+    @FXML
+    private void handleMoveDownLeft() {
+        movePlayer(Directions.SW);
+    }
 
     @FXML
     private void handleMoveLeft() {
         movePlayer(Directions.W);
     }
 
-//    @FXML
-//    private void handleMoveUpLeft() {
-//        movePlayer(Directions.NW);
-//    }
+    @FXML
+    private void handleMoveUpLeft() {
+        movePlayer(Directions.NW);
+    }
 
     private void movePlayer(Directions direction) {
         // TODO: Implement movement logic
         statusLabel.setText("Moving " + direction.toString());
 
         // This will be connected to the actual game controller
-        if (gameController != null) {
-            gameController.movePlayerUsingDirections(direction);
-            // updateGameBoard();
+        if (this.gameController != null) {
+            direction.offset(this.currentLocation.isShifted());
+            this.gameController.movePlayerUsingDirections(direction);
+             updateGameBoard();
         }
     }
 
@@ -125,7 +137,7 @@ public class GameScreenController {
             Parent startScreen = loader.load();
 
             // Get the current stage
-            Stage stage = (Stage) gameBoard.getScene().getWindow();
+            Stage stage = (Stage) board.getScene().getWindow();
 
             // Set the new scene
             Scene scene = new Scene(startScreen);
@@ -145,24 +157,24 @@ public class GameScreenController {
     // Update the game board display
     public void updateGameBoard() {
         // Get the current game location
-        AdjacentGameLocation currentLocation = gameController.getGame().getLocationManager()
-                .getGameLocationOfPerson(gameController.getActiveTeammate());
+        this.currentLocation = this.gameController.getGame().getLocationManager()
+                .getGameLocationOfPerson(this.gameController.getActiveTeammate());
 
         // Reset all rooms first
-        for (int row = 0; row < 5; row++) {
-            for (int col = 0; col < 6; col++) {
-                if (rooms[row][col] != null && !rooms[row][col].getLocation().didPersonTriggerObstacle()) {
-                    rooms[row][col].updateVisualState("Normal");
+        for (int row = 0; row < 6; row++) {
+            for (int col = 0; col < 5; col++) {
+                if (this.rooms[row][col] != null && !this.rooms[row][col].getLocation().didPersonTriggerObstacle()) {
+                    this.rooms[row][col].updateVisualState("Normal");
                 }
             }
         }
 
         // Highlight current location
-        int locId = currentLocation.getLocationId();
-        int row = (locId - 1) / 6;  // Assuming 6 columns
-        int col = (locId - 1) % 6;
-        if (rooms[row][col] != null) {
-            rooms[row][col].updateVisualState("Player");
+        int locId = this.currentLocation.getLocationId();
+        int row = (locId - 1) / 5;  // Assuming 5 columns
+        int col = (locId - 1) % 5;
+        if (this.rooms[row][col] != null) {
+            this.rooms[row][col].updateVisualState("Player");
         }
 
         // Update adjacent rooms
@@ -172,8 +184,8 @@ public class GameScreenController {
         for (int adjLocId : adjLocs) {
             int adjRow = (adjLocId - 1) / 5;  // Assuming 5 columns
             int adjCol = (adjLocId - 1) % 5;
-            if (rooms[adjRow][adjCol] != null && !rooms[row][col].getLocation().didPersonTriggerObstacle()) { // Check if the room exists
-                rooms[adjRow][adjCol].updateVisualState("Adjacent");
+            if (this.rooms[adjRow][adjCol] != null && !this.rooms[row][col].getLocation().didPersonTriggerObstacle()) { // Check if the room exists
+                this.rooms[adjRow][adjCol].updateVisualState("Adjacent");
             }
         }
     }

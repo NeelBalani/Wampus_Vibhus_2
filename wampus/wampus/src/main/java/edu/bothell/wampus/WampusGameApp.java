@@ -14,20 +14,10 @@ import java.net.URL;
 import java.util.Enumeration;
 
 public class WampusGameApp extends Application {
-    private GameController gameController;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         System.out.println("starting");
-        // Initialize game controller with the cave file path
-        InputStream caveStream = getClass().getClassLoader().getResourceAsStream("edu/bothell/wampus/maps/MapGraph.csv");
-        if (caveStream == null) {
-            throw new FileNotFoundException("Could not find MapGraph.csv in resources");
-        }
-        this.gameController = new GameController(caveStream);
-//        this.gameController = new GameController("src/main/resources/edu/bothell/wampus/maps/MapGraph.csv"); // DEVELOPMENT IF ABOVE BREAKS
-
-        System.out.println("game controller initialized");
 
         // Load the start screen
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/bothell/wampus/views/StartScreen.fxml"));

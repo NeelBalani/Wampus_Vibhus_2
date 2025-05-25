@@ -9,9 +9,10 @@ public class AdjacentGameLocation {
     private ArrayList<Person> people = new ArrayList<Person>();
     private ArrayList<Integer> adjacentLocationsId = new ArrayList<Integer>();
     private Obstacle obstacle;
-    private boolean hasObstacle;
+    private boolean hasObstacle = false;
     private int x;
     private int y;
+    private boolean shifted = false;
 
     // Constructor
     public AdjacentGameLocation(int locationId){
@@ -23,12 +24,17 @@ public class AdjacentGameLocation {
         setAdjLocations(adjacentLocationsId);
         this.x = (locationId-1) % 5;
         this.y = (locationId-1) / 5;
+        if((this.locationId/6) % 2 == 0) shifted = true;
     }
 
     //Method
 
     public ArrayList<Integer> getAdjGameLocationId(){
         return this.adjacentLocationsId;
+    }
+
+    public boolean isShifted(){
+        return this.shifted;
     }
 
     public void setAdjLocations(ArrayList<Integer> adjLocs){

@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:controller="edu.bothell.wampus.controllers.StartScreenController" 
+<BorderPane fx:controller="edu.bothell.wampus.controllers.StartScreenController"
            xmlns:fx="http://javafx.com/fxml" 
            styleClass="start-screen">
     <center>

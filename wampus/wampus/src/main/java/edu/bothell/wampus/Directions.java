@@ -3,12 +3,12 @@ package edu.bothell.wampus;
 import java.util.Arrays;
 
 public enum Directions {
-    // NE(0, -1),      // North-East
+     NE(-5),      // North-East
     E(1),     // East
-    // SE(0, 1),    // South-East
-    // SW(-1, 1),      // South-West
+     SE(5),    // South-East
+     SW(4),      // South-West
     W(-1),       // West
-    // NW(-1, -1)
+     NW(-6),
     S(5),
     N(-5);        // North-West
 
@@ -33,6 +33,7 @@ public enum Directions {
     }
 
     public int getShiftNumber() {
+        if(this.offset && !(name().equals("E")||name().equals("W")||name().equals("N")||name().equals("S"))) return this.shiftNumber + 1;
         return this.shiftNumber;
     }
 
