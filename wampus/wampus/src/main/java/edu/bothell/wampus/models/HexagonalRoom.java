@@ -64,6 +64,10 @@ public class HexagonalRoom extends Group {
                 hexShape.setFill(Color.BLUE);
                 idLabel.setTextFill(Color.WHITE);
             }
+            case "Visited" -> {
+                hexShape.setFill(Color.GREEN);
+                idLabel.setTextFill(Color.BLACK);
+            }
             case "AdjacentToPlayer" -> {
                 hexShape.setFill(Color.AZURE);
                 idLabel.setTextFill(Color.BLACK);

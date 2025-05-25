@@ -28,6 +28,7 @@ public class GameScreenController {
     private AdjacentGameLocation currentLocation;
     private Button[] dpad;
     private int moveCounter = 0;
+    private ArrayList<Integer> visited = new ArrayList<Integer>();
 
     public GameScreenController() {
     }
@@ -181,6 +182,7 @@ public class GameScreenController {
 
         // Highlight current location
         int locId = this.currentLocation.getLocationId();
+        visited.add(locId);
         int row = (locId - 1) / 5;  // Assuming 5 columns
         int col = (locId - 1) % 5;
         if (this.rooms[row][col] != null) {
@@ -197,6 +199,13 @@ public class GameScreenController {
             int adjCol = (adjLocId - 1) % 5;
             if (this.rooms[adjRow][adjCol] != null && !this.rooms[row][col].getLocation().didPersonTriggerObstacle()) { // Check if the room exists
                 this.rooms[adjRow][adjCol].updateVisualState("AdjacentToPlayer");
+                for(int nums : visited){
+                    int r = (nums - 1) / 5;  // Assuming 5 columns
+                    int c = (nums - 1) % 5;
+                    if(r == adjRow && c == adjCol){
+                        this.rooms[r][c].updateVisualState("Visited");
+                    }
+                }
                 System.out.println("Room " + adjLocId + " is adjacent to " + locId);
             }
         }
