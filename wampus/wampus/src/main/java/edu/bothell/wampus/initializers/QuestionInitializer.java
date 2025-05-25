@@ -1,8 +1,7 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.initializers;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import edu.bothell.wampus.controllers.TriviaManager;
+
 import java.io.File;
 
 public class QuestionInitializer {

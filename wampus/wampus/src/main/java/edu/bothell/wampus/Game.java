@@ -1,5 +1,12 @@
 package edu.bothell.wampus;
 
+import edu.bothell.wampus.controllers.LocationManager;
+import edu.bothell.wampus.interfaces.Obstacle;
+import edu.bothell.wampus.models.AdjacentGameLocation;
+import edu.bothell.wampus.models.Result;
+import edu.bothell.wampus.models.hazards.Wumpus;
+import edu.bothell.wampus.models.people.Person;
+
 import java.util.ArrayList;
 import java.util.List;
 

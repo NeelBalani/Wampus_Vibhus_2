@@ -1,4 +1,11 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.controllers;
+
+import edu.bothell.wampus.*;
+import edu.bothell.wampus.initializers.AdjacentCaveInitializer;
+import edu.bothell.wampus.interfaces.UI;
+import edu.bothell.wampus.models.AdjacentGameLocation;
+import edu.bothell.wampus.models.Result;
+import edu.bothell.wampus.models.people.Person;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -166,11 +173,12 @@ public class GameController {
         return this.activeTeammate;
     }
 
-    public void movePlayerUsingDirections(Directions directions) {
+    public AdjacentGameLocation movePlayerUsingDirections(Directions directions) {
 
         AdjacentGameLocation newGameLocation = this.game.getLocationManager().movePlayer(this.activeTeammate, directions);
 
         movePlayerUsingId(newGameLocation.getLocationId());
+        return newGameLocation;
     }
 
     public Game getGame() {

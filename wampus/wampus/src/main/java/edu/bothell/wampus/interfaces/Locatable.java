@@ -1,5 +1,7 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.interfaces;
 
+
+import edu.bothell.wampus.models.AdjacentGameLocation;
 
 public interface Locatable {
     int getX();  // Return the X-coordinate

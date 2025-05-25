@@ -1,4 +1,9 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.controllers;
+
+import edu.bothell.wampus.AdjacentCave;
+import edu.bothell.wampus.Directions;
+import edu.bothell.wampus.models.AdjacentGameLocation;
+import edu.bothell.wampus.models.people.Person;
 
 import java.util.*;
 

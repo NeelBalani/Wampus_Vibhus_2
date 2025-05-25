@@ -1,4 +1,7 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.models;
+
+import edu.bothell.wampus.interfaces.Obstacle;
+import edu.bothell.wampus.models.people.Person;
 
 import java.util.ArrayList;
 import java.util.List;

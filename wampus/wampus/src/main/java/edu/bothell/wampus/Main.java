@@ -1,5 +1,10 @@
 package edu.bothell.wampus;
 
+import edu.bothell.wampus.controllers.GameController;
+import edu.bothell.wampus.controllers.TriviaManager;
+import edu.bothell.wampus.initializers.QuestionInitializer;
+import edu.bothell.wampus.models.people.Pranav;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner; 

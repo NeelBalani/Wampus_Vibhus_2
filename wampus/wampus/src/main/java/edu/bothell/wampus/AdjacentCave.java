@@ -1,7 +1,8 @@
 package edu.bothell.wampus;
 
+import edu.bothell.wampus.models.AdjacentGameLocation;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class AdjacentCave {
 

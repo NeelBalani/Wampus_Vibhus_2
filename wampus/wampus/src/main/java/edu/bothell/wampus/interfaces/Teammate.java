@@ -1,4 +1,6 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.interfaces;
+
+import edu.bothell.wampus.models.Result;
 
 import java.util.List;
 

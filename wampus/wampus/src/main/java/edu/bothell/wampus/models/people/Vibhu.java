@@ -1,13 +1,13 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.models.people;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pranav extends Person {
+public class Vibhu extends Person {
     private String name;
     private List<String> actions;
 
-    public Pranav(String name) {
+    public Vibhu(String name) {
         super(name);
         this.name = name;
         this.actions = new ArrayList<>();

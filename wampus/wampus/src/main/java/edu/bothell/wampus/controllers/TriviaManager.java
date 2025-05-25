@@ -1,4 +1,4 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.controllers;
 
 import java.io.BufferedReader;
 import java.io.File;

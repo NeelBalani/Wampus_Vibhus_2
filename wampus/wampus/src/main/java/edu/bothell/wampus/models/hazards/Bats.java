@@ -1,17 +1,20 @@
-package edu.bothell.wampus;
+package edu.bothell.wampus.models.hazards;
 
-public class Wumpus implements Obstacle {
+import edu.bothell.wampus.interfaces.Obstacle;
+import edu.bothell.wampus.models.AdjacentGameLocation;
+
+public class Bats implements Obstacle {
     // Properties
     private AdjacentGameLocation location;
     private boolean isTriggered = false;
     private boolean isDestroyed = false;
 
-    // Constructors
-    public Wumpus(AdjacentGameLocation gl){
-        this.location = gl;
+    // Constructor
+    public Bats(AdjacentGameLocation location){
+        this.location = location;
     }
 
-    // Method
+    // Methods
 
     @Override
     public boolean hasObstacleBeenTriggered(){
@@ -39,6 +42,10 @@ public class Wumpus implements Obstacle {
     }
 
     @Override
-    public String toString() { return "Wumpus"; }
-}
+    public String toString() { return "Bats"; }
 
+    @Override
+    public String getWarning() {
+        return "You hear flapping.";
+    }
+}
