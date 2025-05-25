@@ -99,6 +99,8 @@ public class AdjacentCaveInitializer {
         Scanner gameLocationRowReader = new Scanner(row);
         int mainRoomId = Integer.parseInt(gameLocationRowReader.next());
         gameLocationRowReader.next();
+
+        System.out.println(mainRoomId);
         
         ArrayList<Integer> connectingRoomsId = new ArrayList<Integer>();
         while (gameLocationRowReader.hasNext()) {

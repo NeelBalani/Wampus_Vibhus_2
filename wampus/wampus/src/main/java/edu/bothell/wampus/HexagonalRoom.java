@@ -67,6 +67,7 @@ public class HexagonalRoom extends Group {
             case "AdjacentToPlayer" -> {
                 hexShape.setFill(Color.AZURE);
                 idLabel.setTextFill(Color.BLACK);
+                System.out.println("Adjacent to player: " + location.getLocationId());
             }
             case "Obstacle" -> {
                 hexShape.setFill(Color.RED);

@@ -185,7 +185,8 @@ public class GameScreenController {
             int adjRow = (adjLocId - 1) / 5;  // Assuming 5 columns
             int adjCol = (adjLocId - 1) % 5;
             if (this.rooms[adjRow][adjCol] != null && !this.rooms[row][col].getLocation().didPersonTriggerObstacle()) { // Check if the room exists
-                this.rooms[adjRow][adjCol].updateVisualState("Adjacent");
+                this.rooms[adjRow][adjCol].updateVisualState("AdjacentToPlayer");
+                System.out.println("Room " + adjLocId + " is adjacent to " + locId);
             }
         }
     }
