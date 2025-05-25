@@ -207,6 +207,13 @@ public class GameScreenController {
         // Update adjacent rooms
 
         ArrayList<Integer> adjLocs = currentLocation.getAdjLocations();
+        ArrayList<Integer> adjHazardLocs = new ArrayList<Integer>();
+        for(int adj : adjLocs){
+            AdjacentGameLocation loc = new AdjacentGameLocation(adj);
+            if(loc.hasObstacle()){
+                adjHazardLocs.add(loc.getLocationId());
+            }
+        }
 
         for (int adjLocId : adjLocs) {
             if(adjLocId == 0) continue;
@@ -219,6 +226,13 @@ public class GameScreenController {
                     int c = (nums - 1) % 5;
                     if(r == adjRow && c == adjCol){
                         this.rooms[r][c].updateVisualState("Visited");
+                    }
+                }
+                for(int number : adjHazardLocs){
+                    int hazR = (number - 1) / 5;  // Assuming 5 columns
+                    int hazC = (number - 1) % 5;
+                    if(hazR == adjRow && hazC == adjCol){
+                        this.rooms[hazR][hazC].updateVisualState("Obstacle");
                     }
                 }
                 System.out.println("Room " + adjLocId + " is adjacent to " + locId);
