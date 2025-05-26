@@ -174,17 +174,22 @@ public class GameController {
     }
 
     public boolean shootArrow(AdjacentGameLocation targetLocation) {
-        // Shoot the arrow
+        if(this.activeTeammate == null) return false;
+        if(!this.activeTeammate.hasAmmo()) {
+            return false;
+        }
         this.activeTeammate.shoot();
 
-        // Check if there's a Wumpus in the target location
-        if (targetLocation.hasObstacle() && targetLocation.getObstacle().toString().equals("Wumpus")) {
-            // Hit the Wumpus!
+        if(targetLocation.hasObstacle() && targetLocation.getObstacle().toString().equals("Wumpus")) {
             targetLocation.getObstacle().destroyObstacle();
             return true;
-        } else {
-            // Missed the Wumpus
-            return false;
+        }
+        return false;
+    }
+
+    public void awardGold(int amount) {
+        if(this.activeTeammate != null) {
+            this.activeTeammate.addGold(amount);
         }
     }
 

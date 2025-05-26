@@ -12,10 +12,10 @@ public class TriviaQuestion {
     private TriviaManager tmanager;
 
     // Constructor
-    public TriviaQuestion(TriviaManager tmanager) {
-        this.tmanager = tmanager;
-        Random r = new Random();
-        getQuestionFromTM(r.nextInt(tmanager.getTotalQuestions()));
+    public TriviaQuestion(String question, String correctAnswer, String[] possibleAnswers) {
+        this.question = question;
+        this.answer = correctAnswer;
+        this.possibleAnswers = possibleAnswers;
     }
 
     // Methods
@@ -35,9 +35,4 @@ public class TriviaQuestion {
         return this.possibleAnswers;
     }
 
-    public void getQuestionFromTM(int rand) {
-        question = tmanager.getQuestion(rand);
-        answer = tmanager.getCorrectAnswer(rand);
-        possibleAnswers = tmanager.getPossibleAnswers(rand);
-    }
 }

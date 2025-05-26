@@ -186,3 +186,22 @@
     -fx-pref-height: 100%;
     -fx-padding: 5px;
 }
+
+/* Arrow & Gold */
+.arrow-icon, .gold-icon {
+    -fx-text-fill: #ecf0f1;
+    -fx-font-size: 18px;
+}
+.arrow-count, .gold-count {
+    -fx-text-fill: #ecf0f1;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+.trivia-button {
+    -fx-background-color: #e67e22;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+}
+.trivia-button:hover {
+    -fx-background-color: #d35400;
+}

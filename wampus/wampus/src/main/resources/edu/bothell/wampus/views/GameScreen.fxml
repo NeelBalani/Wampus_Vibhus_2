@@ -7,81 +7,95 @@
 <?import javafx.geometry.Insets?>
 
 <?import java.lang.String?>
-<BorderPane fx:controller="edu.bothell.wampus.controllers.GameScreenController"
-            xmlns:fx="http://javafx.com/fxml"
-            styleClass="game-screen"
-            prefWidth="900" prefHeight="700">
-    
-    <top>
-        <HBox styleClass="header">
-            <Label text="Wumpus Game" styleClass="header-text">
-                <font>
-                    <Font name="System Bold" size="24"/>
-                </font>
-            </Label>
-        </HBox>
-    </top>
-    
-    <center>
-        <HBox alignment="CENTER" spacing="20" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-            <!-- Results History Panel -->
-            <VBox alignment="TOP_CENTER" spacing="5" styleClass="history-panel" prefWidth="300" minWidth="250" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-                <padding>
-                    <Insets top="10" right="10" bottom="10" left="10"/>
-                </padding>
-                <Label text="Game History" styleClass="history-header">
+<StackPane fx:controller="edu.bothell.wampus.controllers.GameScreenController"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:id="rootStack"
+           styleClass="game-screen"
+           prefWidth="900" prefHeight="700">
+    <!-- Main Game UI -->
+    <BorderPane fx:id="mainPane">
+        <top>
+            <HBox styleClass="header">
+                <Label text="Wumpus Game" styleClass="header-text">
                     <font>
-                        <Font name="System Bold" size="16"/>
+                        <Font name="System Bold" size="24"/>
                     </font>
                 </Label>
-                <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" styleClass="history-scroll">
-                    <content>
-                        <TextArea fx:id="historyTextArea" editable="false" wrapText="true"
-                                styleClass="history-text" VBox.vgrow="ALWAYS">
-                            <font>
-                                <Font name="System" size="14"/>
-                            </font>
-                        </TextArea>
-                    </content>
-                </ScrollPane>
-            </VBox>
+            </HBox>
+        </top>
 
-            <VBox alignment="CENTER" spacing="20" HBox.hgrow="ALWAYS">
-                <!-- Game board will be injected here -->
-                <HBox alignment="CENTER" spacing="10">
-                    <Pane fx:id="board" styleClass="game-board" prefWidth="400" prefHeight="400">
-                        <!-- Hexagonal grid will be generated programmatically -->
-                    </Pane>
-                </HBox>
-                
-                <!-- D-Pad Controls -->
-                <HBox alignment="CENTER" spacing="10">
-                    <Button text="↖" onAction="#handleMoveUpLeft" styleClass="dpad-button" fx:id="NW"/>
-    <!--                <Button text="↑" onAction="#handleMoveUp" styleClass="dpad-button" fx:id="upButton"/>-->
-                    <Button text="↗" onAction="#handleMoveUpRight" styleClass="dpad-button" fx:id="NE"/>
-                </HBox>
-                <HBox alignment="CENTER" spacing="10">
-                    <Button text="←" onAction="#handleMoveLeft" styleClass="dpad-button" fx:id="W"/>
-                    <Button text="🎯" onAction="#handleShootButton" styleClass="dpad-center-button" fx:id="centerButton"/>
-                    <Button text="→" onAction="#handleMoveRight" styleClass="dpad-button" fx:id="E"/>
-                </HBox>
-                <HBox alignment="CENTER" spacing="10">
-                    <Button text="↙" onAction="#handleMoveDownLeft" styleClass="dpad-button" fx:id="SW"/>
-    <!--                <Button text="↓" onAction="#handleMoveDown" styleClass="dpad-button" fx:id="downButton"/>-->
-                    <Button text="↘" onAction="#handleMoveDownRight" styleClass="dpad-button" fx:id="SE"/>
-                </HBox>
+        <center>
+            <HBox alignment="CENTER" spacing="20" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                <!-- Results History Panel -->
+                <VBox alignment="TOP_CENTER" spacing="5" styleClass="history-panel" prefWidth="300" minWidth="250" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                    <Label text="Game History" styleClass="history-header">
+                        <font>
+                            <Font name="System Bold" size="16"/>
+                        </font>
+                    </Label>
+                    <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS" styleClass="history-scroll">
+                        <content>
+                            <TextArea fx:id="historyTextArea" editable="false" wrapText="true"
+                                      styleClass="history-text" VBox.vgrow="ALWAYS">
+                                <font>
+                                    <Font name="System" size="14"/>
+                                </font>
+                            </TextArea>
+                        </content>
+                    </ScrollPane>
+                </VBox>
+
+                <!-- Game board + DPad + Trackers -->
+                <VBox alignment="CENTER" spacing="15" HBox.hgrow="ALWAYS">
+                    <!-- Game board will be injected here -->
+                    <HBox alignment="CENTER" spacing="10">
+                        <Pane fx:id="board" styleClass="game-board" prefWidth="400" prefHeight="400" />
+                    </HBox>
+
+                    <!-- Arrow & Gold Trackers -->
+                    <VBox alignment="CENTER_LEFT" spacing="8">
+                        <HBox alignment="CENTER_LEFT" spacing="6">
+                            <Label text="➶" styleClass="arrow-icon" />
+                            <Label fx:id="arrowCountLabel" text="3" styleClass="arrow-count" />
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="6">
+                            <Label text="💰" styleClass="gold-icon" />
+                            <Label fx:id="goldCountLabel" text="0" styleClass="gold-count" />
+                        </HBox>
+                        <Button fx:id="triviaButton" text="Play Trivia" onAction="#handleTriviaButton" styleClass="trivia-button" />
+                    </VBox>
+
+                    <!-- D-Pad Controls -->
+                    <VBox alignment="CENTER" spacing="6">
+                        <HBox alignment="CENTER" spacing="10">
+                            <Button text="↖" onAction="#handleMoveUpLeft" styleClass="dpad-button" fx:id="NW"/>
+                            <Button text="↗" onAction="#handleMoveUpRight" styleClass="dpad-button" fx:id="NE"/>
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="10">
+                            <Button text="←" onAction="#handleMoveLeft" styleClass="dpad-button" fx:id="W"/>
+                            <Button text="🎯" onAction="#handleShootButton" styleClass="dpad-center-button" fx:id="centerButton"/>
+                            <Button text="→" onAction="#handleMoveRight" styleClass="dpad-button" fx:id="E"/>
+                        </HBox>
+                        <HBox alignment="CENTER" spacing="10">
+                            <Button text="↙" onAction="#handleMoveDownLeft" styleClass="dpad-button" fx:id="SW"/>
+                            <Button text="↘" onAction="#handleMoveDownRight" styleClass="dpad-button" fx:id="SE"/>
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </HBox>
+        </center>
+
+        <bottom>
+            <VBox styleClass="status-bar">
+                <padding>
+                    <Insets top="5" right="10" bottom="5" left="10"/>
+                </padding>
+                <Label text="Status: " styleClass="status-text" />
+                <Label fx:id="statusLabel" text="Ready to play!" styleClass="status-text" />
             </VBox>
-        </HBox>
-    </center>
-    
-    <bottom>
-        <VBox styleClass="status-bar">
-            <padding>
-                <Insets top="5" right="10" bottom="5" left="10"/>
-            </padding>
-            <Label text="Status: " styleClass="status-text"/>
-            <Label fx:id="statusLabel" text="Ready to play!" styleClass="status-text"/>
-        </VBox>
-    </bottom>
-    
-</BorderPane>
+        </bottom>
+    </BorderPane>
+</StackPane>

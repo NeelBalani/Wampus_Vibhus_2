@@ -16,6 +16,12 @@ public class Person {
         this.name = name;
     }
 
+    public Person(String name, int ammo, int gold) {
+        this.name = name;
+        this.ammo = ammo;
+        this.gold = gold;
+    }
+
     public String getName() {
         return name;
     }
@@ -24,13 +30,19 @@ public class Person {
         return ammo;
     }
 
+    public void setAmmo(int ammo) { this.ammo = ammo; }
+
     public int getGold() {
         return gold;
     }
 
+    public void setGold(int gold) { this.gold = gold; }
+
     public void shoot() {
         this.ammo -= 1;
     }
+
+    public boolean hasAmmo() { return this.ammo > 0; }
 
     public void addGold(int amount) {
         this.gold += amount;

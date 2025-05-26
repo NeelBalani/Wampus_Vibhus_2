@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,6 +24,10 @@ public class GameScreenController {
     @FXML private Label statusLabel;
     @FXML private TextArea historyTextArea;
     @FXML private Button centerButton;
+    @FXML private Label arrowCountLabel;
+    @FXML private Label goldCountLabel;
+    @FXML private Button triviaButton;
+    @FXML private StackPane rootStack; // StackPane reference
 
     private GameController gameController;
     private HexagonalRoom[][] rooms = new HexagonalRoom[6][5];
@@ -57,6 +62,7 @@ public class GameScreenController {
         initializeGameBoard();
         updateGameBoard();
         checkForWarnings(currentLocation);
+        updateTrackerLabels();
     }
 
     private void initializeGameBoard() {
@@ -231,6 +237,7 @@ public class GameScreenController {
                 button.getStyleClass().remove("shoot-mode-button");
                 button.getStyleClass().add("dpad-button");
             }
+            updateTrackerLabels();
         }
     }
 
@@ -327,6 +334,32 @@ public class GameScreenController {
             int order = direction.ordinal();
             this.dpad[order].setDisable(adjLocs.get(order) == 0);
         }
+    }
+
+    private void updateTrackerLabels() {
+        if(gameController == null) return;
+        if(gameController.getActiveTeammate() == null) return;
+        arrowCountLabel.setText(String.valueOf(gameController.getActiveTeammate().getAmmo()));
+        goldCountLabel.setText(String.valueOf(gameController.getActiveTeammate().getGold()));
+    }
+
+    @FXML
+    private void handleTriviaButton() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/bothell/wampus/views/TriviaOverlay.fxml"));
+            Parent overlay = loader.load();
+            TriviaOverlayController controller = loader.getController();
+            controller.init(gameController, this, overlay);
+            // Add overlay to root stack
+            rootStack.getChildren().add(overlay);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void closeTriviaOverlay(Parent overlay) {
+        rootStack.getChildren().remove(overlay);
+        updateTrackerLabels(); // refresh gold
     }
 
     /**
