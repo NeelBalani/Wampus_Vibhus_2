@@ -11,9 +11,7 @@ import java.util.Scanner;
 
 public class Main {
     //TODO:
-        //StartScreen
         //Questions
-        //print notice on gui
         //add functions to Hazards
         //Make Wampus move
         //Make Wampus & player attack

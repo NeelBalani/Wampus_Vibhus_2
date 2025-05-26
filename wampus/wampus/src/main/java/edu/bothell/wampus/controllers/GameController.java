@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
-    private UI ui;
     private List<Person> activeTeammates = new ArrayList<>();
     private List<Person> allTeammates = new ArrayList<>();
     private Person activeTeammate;
@@ -61,63 +60,45 @@ public class GameController {
         this.activeTeammate = this.activeTeammates.getFirst();
     }
 
-    public void setUI(UI ui){
-        this.ui = ui;
-    }
 
     public void addPerson(Person teammate) {
         this.allTeammates.add(teammate);
         setPlayers(this.allTeammates);
     }
 
-    public void start() {
-        
-        while (!gameOver()) {
 
-            gameTurnTerminal();
+//    public void gameTurnTerminal(){
+//
+//        if(!this.game.getVisibleInfo(activeTeammate).equals("You see: ")){
+////            this.ui.showMessage(this.game.getVisibleInfo(activeTeammate));
+//        }
+//        else{
+////            this.ui.showMessage("You see nothing.");
+//        }
+//
+////        Result result = this.activeTeammate.doAction(this.ui);
+//
+//        // Check if the player moved
+//        if(result.getAction().equals("Move")){
+//            int id = this.activeTeammate.doMove(ui, this.game.getLocationManager().getGameLocationOfPerson(activeTeammate).getAdjGameLocationId());
+//            result = this.game.movePlayer(this.activeTeammate, id, result);
+//        }
+//
+//        else if(result.getAction().equals("Shoot")){
+//            // Todo: Action for shooting
+//        }
+//
+//        else if(result.getAction().equals("Heal")){
+//
+//        }
+//
+//        addResult(result);
+//        this.ui.showMessage(result.getMessage());
+//    }
 
-        }
-        this.ui.displaySummary();
-    }
-
-    public void gameTurnTerminal(){
-        this.ui.showPersonTurn((this.activeTeammate));
-
-        if(!this.game.getVisibleInfo(activeTeammate).equals("You see: ")){
-            this.ui.showMessage(this.game.getVisibleInfo(activeTeammate));
-        }
-        else{
-            this.ui.showMessage("You see nothing.");
-        }
-
-        Result result = this.activeTeammate.doAction(this.ui);
-        
-        // Check if the player moved
-        if(result.getAction().equals("Move")){
-            int id = this.activeTeammate.doMove(ui, this.game.getLocationManager().getGameLocationOfPerson(activeTeammate).getAdjGameLocationId());
-            result = this.game.movePlayer(this.activeTeammate, id, result);
-        }
-
-        else if(result.getAction().equals("Shoot")){
-            // Todo: Action for shooting
-        }
-
-        else if(result.getAction().equals("Heal")){
-            
-        }
-
-        addResult(result);
-        this.ui.showMessage(result.getMessage());
-    }
-
-    public void gameTurnSwing(){
-        if(!this.game.getVisibleInfo(activeTeammate).equals("You see: ")){
-            this.ui.showMessage(this.game.getVisibleInfo(activeTeammate));
-        }
-    }
 
     public void postMoveActions(){
-        this.continueGame = this.ui.askToContinue(this.activeTeammate.getName());
+//        this.continueGame = this.ui.askToContinue(this.activeTeammate.getName());
         if(!this.continueGame){
             removePlayer(this.activeTeammate);
         }
@@ -178,6 +159,12 @@ public class GameController {
         AdjacentGameLocation newGameLocation = this.game.getLocationManager().movePlayer(this.activeTeammate, directions);
 
         movePlayerUsingId(newGameLocation.getLocationId());
+
+        if(newGameLocation.getObstacle() != null) {
+//            this.ui.showMessage("Player encountered a " + newGameLocation.getObstacle().toString());
+
+        }
+
         return newGameLocation;
     }
 

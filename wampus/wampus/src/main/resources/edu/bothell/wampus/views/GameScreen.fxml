@@ -23,9 +23,9 @@
     </top>
     
     <center>
-        <HBox alignment="CENTER" spacing="20">
+        <HBox alignment="CENTER" spacing="20" VBox.vgrow="ALWAYS">
             <!-- Results History Panel -->
-            <VBox alignment="CENTER" spacing="10" styleClass="history-panel" prefWidth="300" minWidth="250">
+            <VBox alignment="CENTER" spacing="10" styleClass="history-panel" prefWidth="300" minWidth="250" HBox.hgrow="ALWAYS">
                 <padding>
                     <Insets top="10" right="10" bottom="10" left="10"/>
                 </padding>
@@ -34,17 +34,17 @@
                         <Font name="System Bold" size="16"/>
                     </font>
                 </Label>
-                <ScrollPane fitToWidth="true" prefHeight="450" styleClass="history-scroll" VBox.vgrow="ALWAYS">
-                    <TextArea fx:id="historyTextArea" editable="false" wrapText="true" 
-                              prefHeight="450" styleClass="history-text">
+                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="history-scroll">
+                    <TextArea fx:id="historyTextArea" editable="false" wrapText="true"
+                              styleClass="history-text" VBox.vgrow="ALWAYS">
                         <font>
                             <Font name="System" size="14"/>
                         </font>
                     </TextArea>
                 </ScrollPane>
             </VBox>
-            
-            <VBox alignment="CENTER" spacing="20">
+
+            <VBox alignment="CENTER" spacing="20" HBox.hgrow="ALWAYS">
                 <!-- Game board will be injected here -->
                 <HBox alignment="CENTER" spacing="10">
                     <Pane fx:id="board" styleClass="game-board" prefWidth="400" prefHeight="400">

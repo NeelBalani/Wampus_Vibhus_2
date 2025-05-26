@@ -228,13 +228,14 @@ public class GameScreenController {
                         this.rooms[r][c].updateVisualState("Visited");
                     }
                 }
-                for(int number : adjHazardLocs){
-                    int hazR = (number - 1) / 5;  // Assuming 5 columns
-                    int hazC = (number - 1) % 5;
-                    if(hazR == adjRow && hazC == adjCol){
-                        this.rooms[hazR][hazC].updateVisualState("Obstacle");
-                    }
-                }
+                // Don't think we need this
+//                for(int number : adjHazardLocs){
+//                    int hazR = (number - 1) / 5;  // Assuming 5 columns
+//                    int hazC = (number - 1) % 5;
+//                    if(hazR == adjRow && hazC == adjCol){
+//                        this.rooms[hazR][hazC].updateVisualState("Obstacle");
+//                    }
+//                }
                 System.out.println("Room " + adjLocId + " is adjacent to " + locId);
             }
         }
