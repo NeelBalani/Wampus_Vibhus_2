@@ -60,7 +60,7 @@
                 </HBox>
                 <HBox alignment="CENTER" spacing="10">
                     <Button text="←" onAction="#handleMoveLeft" styleClass="dpad-button" fx:id="W"/>
-                    <Button text="•" styleClass="dpad-center-button" fx:id="centerButton"/>
+                    <Button text="🎯" onAction="#handleShootButton" styleClass="dpad-center-button" fx:id="centerButton"/>
                     <Button text="→" onAction="#handleMoveRight" styleClass="dpad-button" fx:id="E"/>
                 </HBox>
                 <HBox alignment="CENTER" spacing="10">

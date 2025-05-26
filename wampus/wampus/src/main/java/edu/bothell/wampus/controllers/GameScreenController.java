@@ -22,6 +22,7 @@ public class GameScreenController {
     @FXML private Pane board;
     @FXML private Label statusLabel;
     @FXML private TextArea historyTextArea;
+    @FXML private Button centerButton;
 
     private GameController gameController;
     private HexagonalRoom[][] rooms = new HexagonalRoom[6][5];
@@ -29,6 +30,9 @@ public class GameScreenController {
     private Button[] dpad;
     private int moveCounter = 0;
     private ArrayList<Integer> visited = new ArrayList<Integer>();
+    
+    // Flag to track if we're in shooting mode
+    private boolean shootingMode = false;
 
     public GameScreenController() {
     }
@@ -91,32 +95,134 @@ public class GameScreenController {
 
     @FXML
     private void handleMoveUpRight() {
-        movePlayer(Directions.NE);
+        if (shootingMode) {
+            shootArrow(Directions.NE);
+        } else {
+            movePlayer(Directions.NE);
+        }
     }
 
     @FXML
     private void handleMoveRight() {
-        movePlayer(Directions.E);
+        if (shootingMode) {
+            shootArrow(Directions.E);
+        } else {
+            movePlayer(Directions.E);
+        }
     }
 
     @FXML
     private void handleMoveDownRight() {
-        movePlayer(Directions.SE);
+        if (shootingMode) {
+            shootArrow(Directions.SE);
+        } else {
+            movePlayer(Directions.SE);
+        }
     }
 
     @FXML
     private void handleMoveDownLeft() {
-        movePlayer(Directions.SW);
+        if (shootingMode) {
+            shootArrow(Directions.SW);
+        } else {
+            movePlayer(Directions.SW);
+        }
     }
 
     @FXML
     private void handleMoveLeft() {
-        movePlayer(Directions.W);
+        if (shootingMode) {
+            shootArrow(Directions.W);
+        } else {
+            movePlayer(Directions.W);
+        }
     }
 
     @FXML
     private void handleMoveUpLeft() {
-        movePlayer(Directions.NW);
+        if (shootingMode) {
+            shootArrow(Directions.NW);
+        } else {
+            movePlayer(Directions.NW);
+        }
+    }
+
+    @FXML
+    private void handleShootButton() {
+        // Toggle shooting mode
+        shootingMode = !shootingMode;
+        
+        if (shootingMode) {
+            // Enter shooting mode
+            centerButton.getStyleClass().remove("dpad-center-button");
+            centerButton.getStyleClass().add("shoot-active");
+            statusLabel.setText("Shooting Mode: Select a direction to shoot");
+            
+            // Make all available D-pad buttons red
+            for (Button button : dpad) {
+                if (!button.isDisabled()) {
+                    button.getStyleClass().remove("dpad-button");
+                    button.getStyleClass().add("shoot-mode-button");
+                }
+            }
+        } else {
+            // Exit shooting mode
+            centerButton.getStyleClass().remove("shoot-active");
+            centerButton.getStyleClass().add("dpad-center-button");
+            statusLabel.setText("Ready to play!");
+            
+            // Restore original button styles
+            for (Button button : dpad) {
+                button.getStyleClass().remove("shoot-mode-button");
+                button.getStyleClass().add("dpad-button");
+            }
+        }
+    }
+    
+    private void shootArrow(Directions direction) {
+        if (gameController != null) {
+            // Get the adjacent location in the specified direction
+            ArrayList<Integer> adjLocIds = currentLocation.getAdjLocations();
+            int targetLocId = adjLocIds.get(direction.ordinal());
+            
+            if (targetLocId == 0) {
+                // Can't shoot in this direction
+                addToHistory("Cannot shoot in direction " + direction);
+                return;
+            }
+            
+            // Get the target location
+            AdjacentGameLocation targetLocation = gameController.getGame().getLocationManager()
+                    .getGameLocationBasedOnId(targetLocId);
+            
+            // Check if there's a Wumpus in the target location
+            if (targetLocation.hasObstacle() && targetLocation.getObstacle().toString().equals("Wumpus")) {
+                // Hit the Wumpus!
+                targetLocation.getObstacle().destroyObstacle();
+                addToHistory("You shot the Wumpus! You win!");
+                statusLabel.setText("You win! The Wumpus is dead.");
+                
+                // Disable all buttons except menu
+                for (Button button : dpad) {
+                    button.setDisable(true);
+                }
+                centerButton.setDisable(true);
+            } else {
+                // Missed the Wumpus
+                addToHistory("You shot an arrow into Room " + targetLocId + " but hit nothing.");
+            }
+            
+            // Exit shooting mode
+            shootingMode = false;
+            centerButton.getStyleClass().remove("shoot-active");
+            centerButton.getStyleClass().add("dpad-center-button");
+            
+            // Restore original button styles
+            for (Button button : dpad) {
+                button.getStyleClass().remove("shoot-mode-button");
+                button.getStyleClass().add("dpad-button");
+            }
+        }
     }
 
     private void movePlayer(Directions direction) {

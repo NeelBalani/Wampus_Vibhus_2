@@ -73,6 +73,26 @@
     -fx-background-radius: 25px;
 }
 
+/* Shooting mode styles */
+.shoot-mode-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+    -fx-background-radius: 25px;
+}
+
+.shoot-mode-button:hover {
+    -fx-background-color: #c0392b;
+}
+
+.shoot-active {
+    -fx-background-color: #c0392b;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+
 /* Status Bar */
 .status-bar {
     -fx-padding: 10px;
