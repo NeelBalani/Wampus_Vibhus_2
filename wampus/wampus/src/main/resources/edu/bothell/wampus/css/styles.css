@@ -143,6 +143,8 @@
     -fx-border-radius: 5px;
     -fx-padding: 10px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 8, 0, 0, 3);
+    -fx-max-height: Infinity;
+    -fx-vgrow: ALWAYS;
 }
 
 .history-header {
@@ -157,10 +159,20 @@
     -fx-border-color: #2c3e50;
     -fx-border-width: 1px;
     -fx-border-radius: 3px;
+    -fx-vgrow: ALWAYS;
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: true;
+    -fx-pref-height: 100%;
+    -fx-max-height: Infinity;
 }
 
 .history-scroll .viewport {
     -fx-background-color: #2c3e50;
+}
+
+.history-scroll .scroll-pane {
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: as-needed;
 }
 
 .history-text {
@@ -170,4 +182,7 @@
     -fx-text-fill: #ecf0f1;
     -fx-font-size: 14px;
     -fx-highlight-fill: #34495e;
+    -fx-pref-width: 100%;
+    -fx-pref-height: 100%;
+    -fx-padding: 5px;
 }

@@ -1,51 +1,42 @@
 package edu.bothell.wampus.models.people;
 
 import edu.bothell.wampus.models.Result;
-import edu.bothell.wampus.interfaces.Teammate;
 import edu.bothell.wampus.interfaces.UI;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person implements Teammate {
+public class Person {
 
     private String name;
-    private List<String> actions;
+    private int ammo = 3;
+    private int gold = 0;
 
     public Person(String name) {
         this.name = name;
-        this.actions = new ArrayList<>();
-        actions.add("Shoot");
-        actions.add("Move");
-        actions.add("Heal");
     }
 
     public String getName() {
         return name;
     }
 
-    @Override
-    public List<String> getActions() {
-        return actions;
+    public int getAmmo() {
+        return ammo;
     }
 
-    @Override
-    public Result doAction(UI ui) {
-        int actionIndex = ui.getActionChoice(actions);
-        String action = actions.get(actionIndex);
-        return new Result(action, this);
+    public int getGold() {
+        return gold;
     }
 
-    public int doMove(UI ui, ArrayList<Integer> adjacentIntegers) {
-        List<String> idChoices = new ArrayList<String>();
+    public void shoot() {
+        this.ammo -= 1;
+    }
 
-        for(int adjacentIds : adjacentIntegers){
-            idChoices.add(""+adjacentIds);
-        }
+    public void addGold(int amount) {
+        this.gold += amount;
+    }
 
-        int actionIndex = ui.getActionChoice(idChoices);
-        int chosenRoom = adjacentIntegers.get(actionIndex);
-        ui.showMessage(""+chosenRoom);
-        return chosenRoom;
+    public void removeGold(int amount) {
+        this.gold -= amount;
     }
 }

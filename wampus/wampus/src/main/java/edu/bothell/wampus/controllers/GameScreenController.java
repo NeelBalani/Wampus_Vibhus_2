@@ -201,21 +201,23 @@ public class GameScreenController {
             // Get the target location
             AdjacentGameLocation targetLocation = gameController.getGame().getLocationManager()
                     .getGameLocationBasedOnId(targetLocId);
-            
-            // Check if there's a Wumpus in the target location
-            if (targetLocation.hasObstacle() && targetLocation.getObstacle().toString().equals("Wumpus")) {
-                // Hit the Wumpus!
-                targetLocation.getObstacle().destroyObstacle();
-                addToHistory("You shot the Wumpus! You win!");
-                statusLabel.setText("You win! The Wumpus is dead.");
-                
+
+            // Shoot the arrow and check if it hit the Wumpus
+            if(gameController.shootArrow(targetLocation)) {
+
+                addToHistory("You shot an arrow into Room " + targetLocId + " and hit the Wumpus!");
+                statusLabel.setText("You shot an arrow into Room " + targetLocId + " and hit the Wumpus!");
+
+                // Make the target location red
+                this.rooms[(targetLocation.getLocationId() - 1) / 5][(targetLocation.getLocationId() - 1) % 5].updateVisualState("Obstacle");
+
                 // Disable all buttons except menu
                 for (Button button : dpad) {
                     button.setDisable(true);
                 }
                 centerButton.setDisable(true);
+
             } else {
-                // Missed the Wumpus
                 addToHistory("You shot an arrow into Room " + targetLocId + " but hit nothing.");
             }
             
@@ -233,9 +235,9 @@ public class GameScreenController {
     }
 
     private void movePlayer(Directions direction) {
-        if (gameController != null) {
-            AdjacentGameLocation prevLocation = currentLocation;
-            AdjacentGameLocation newLocation = gameController.movePlayerUsingDirections(direction);
+        if (this.gameController != null) {
+            AdjacentGameLocation prevLocation = this.currentLocation;
+            AdjacentGameLocation newLocation = this.gameController.movePlayerUsingDirections(direction);
             
             // Update history with movement information
             if (prevLocation != newLocation) {
@@ -258,40 +260,14 @@ public class GameScreenController {
     }
 
     private void checkForWarnings(AdjacentGameLocation newLocation) {
-        ArrayList<Integer> adjLocIds = newLocation.getAdjLocations();
-        for(int adjLocId : adjLocIds) {
-            if(adjLocId == 0) continue;
-            AdjacentGameLocation adjLoc = gameController.getGame().getLocationManager().getGameLocationBasedOnId(adjLocId);
-            if(adjLoc.hasObstacle()) {
-                addToHistory(adjLoc.getObstacle().getWarning());
-            }
+
+        ArrayList<String> warnings = this.gameController.getWarnings(newLocation);
+
+        for (String warning : warnings) {
+            addToHistory(warning);
         }
     }
 
-    @FXML
-    private void handleMenuButton() {
-        try {
-            // Load the start screen
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/bothell/wampus/views/StartScreen.fxml"));
-            Parent startScreen = loader.load();
-
-            // Get the current stage
-            Stage stage = (Stage) board.getScene().getWindow();
-
-            // Set the new scene
-            Scene scene = new Scene(startScreen);
-            scene.getStylesheets().add(getClass().getResource("/edu/bothell/wampus/css/styles.css").toExternalForm());
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Setter for game controller
-    public void setGameController(GameController gameController) {
-        this.gameController = gameController;
-    }
 
     // Update the game board display
     public void updateGameBoard() {
@@ -310,7 +286,7 @@ public class GameScreenController {
 
         // Highlight current location
         int locId = this.currentLocation.getLocationId();
-        visited.add(locId);
+        this.visited.add(locId);
         int row = (locId - 1) / 5;  // Assuming 5 columns
         int col = (locId - 1) % 5;
         if (this.rooms[row][col] != null) {
@@ -318,37 +294,30 @@ public class GameScreenController {
         }
 
         // Update adjacent rooms
-
         ArrayList<Integer> adjLocs = currentLocation.getAdjLocations();
-        ArrayList<Integer> adjHazardLocs = new ArrayList<Integer>();
-        for(int adj : adjLocs){
-            AdjacentGameLocation loc = new AdjacentGameLocation(adj);
-            if(loc.hasObstacle()){
-                adjHazardLocs.add(loc.getLocationId());
-            }
-        }
 
+        // Loop through all adjacent locations
         for (int adjLocId : adjLocs) {
-            if(adjLocId == 0) continue;
+            if (adjLocId == 0) continue; // Skip invalid location IDs
+
+            // Calculate the row and column indices of the adjacent location
             int adjRow = (adjLocId - 1) / 5;  // Assuming 5 columns
             int adjCol = (adjLocId - 1) % 5;
-            if (this.rooms[adjRow][adjCol] != null && !this.rooms[row][col].getLocation().didPersonTriggerObstacle()) { // Check if the room exists
+
+            // If the room exists and the player has not triggered the obstacle, highlight it
+            if (this.rooms[adjRow][adjCol] != null && !this.rooms[row][col].getLocation().didPersonTriggerObstacle()) {
                 this.rooms[adjRow][adjCol].updateVisualState("AdjacentToPlayer");
-                for(int nums : visited){
+
+                // If the room has been visited, set its visual state to "Visited"
+                for (int nums : visited) {
                     int r = (nums - 1) / 5;  // Assuming 5 columns
                     int c = (nums - 1) % 5;
-                    if(r == adjRow && c == adjCol){
+                    if (r == adjRow && c == adjCol) {
                         this.rooms[r][c].updateVisualState("Visited");
                     }
                 }
-                // Don't think we need this
-//                for(int number : adjHazardLocs){
-//                    int hazR = (number - 1) / 5;  // Assuming 5 columns
-//                    int hazC = (number - 1) % 5;
-//                    if(hazR == adjRow && hazC == adjCol){
-//                        this.rooms[hazR][hazC].updateVisualState("Obstacle");
-//                    }
-//                }
+
+                // Print a debug message
                 System.out.println("Room " + adjLocId + " is adjacent to " + locId);
             }
         }
@@ -379,14 +348,6 @@ public class GameScreenController {
             // Auto-scroll to the bottom
             historyTextArea.positionCaret(historyTextArea.getText().length());
         }
-    }
-
-    public int getMoveCounter(){
-        return moveCounter;
-    }
-
-    public int getArrowsShot(){
-        return arrowsShot;
     }
 
 }

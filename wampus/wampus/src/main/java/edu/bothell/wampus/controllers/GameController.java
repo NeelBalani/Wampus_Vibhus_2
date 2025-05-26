@@ -6,6 +6,7 @@ import edu.bothell.wampus.interfaces.UI;
 import edu.bothell.wampus.models.AdjacentGameLocation;
 import edu.bothell.wampus.models.Result;
 import edu.bothell.wampus.models.people.Person;
+import javafx.scene.control.Button;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -170,5 +171,47 @@ public class GameController {
 
     public Game getGame() {
         return this.game;
+    }
+
+    public boolean shootArrow(AdjacentGameLocation targetLocation) {
+        // Shoot the arrow
+        this.activeTeammate.shoot();
+
+        // Check if there's a Wumpus in the target location
+        if (targetLocation.hasObstacle() && targetLocation.getObstacle().toString().equals("Wumpus")) {
+            // Hit the Wumpus!
+            targetLocation.getObstacle().destroyObstacle();
+            return true;
+        } else {
+            // Missed the Wumpus
+            return false;
+        }
+    }
+
+    public ArrayList<String> getWarnings(AdjacentGameLocation newLocation) {
+        ArrayList<Integer> adjLocIds = newLocation.getAdjLocations();
+        ArrayList<String> warnings = new ArrayList<String>();
+
+        for(int adjLocId : adjLocIds) {
+            if(adjLocId == 0) continue;
+            AdjacentGameLocation adjLoc = this.game.getLocationManager().getGameLocationBasedOnId(adjLocId);
+            if(adjLoc.hasObstacle()) {
+                warnings.add(adjLoc.getObstacle().getWarning());
+            }
+        }
+        return warnings;
+    }
+
+    public int getAmmo(){
+        return this.activeTeammate.getAmmo();
+    }
+
+    public boolean isAmmoEmpty(){
+        if(this.activeTeammate.getAmmo() == 0) {
+            this.activeTeammates.remove(this.activeTeammate); // remove player
+            return true;
+        } else {
+            return false;
+        }
     }
 }
