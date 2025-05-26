@@ -30,6 +30,7 @@ public class GameScreenController {
     private Button[] dpad;
     private int moveCounter = 0;
     private ArrayList<Integer> visited = new ArrayList<Integer>();
+    private int arrowsShot = 0;
     
     // Flag to track if we're in shooting mode
     private boolean shootingMode = false;
@@ -96,6 +97,7 @@ public class GameScreenController {
     @FXML
     private void handleMoveUpRight() {
         if (shootingMode) {
+            arrowsShot++;
             shootArrow(Directions.NE);
         } else {
             movePlayer(Directions.NE);
@@ -105,6 +107,7 @@ public class GameScreenController {
     @FXML
     private void handleMoveRight() {
         if (shootingMode) {
+            arrowsShot++;
             shootArrow(Directions.E);
         } else {
             movePlayer(Directions.E);
@@ -114,6 +117,7 @@ public class GameScreenController {
     @FXML
     private void handleMoveDownRight() {
         if (shootingMode) {
+            arrowsShot++;
             shootArrow(Directions.SE);
         } else {
             movePlayer(Directions.SE);
@@ -123,6 +127,7 @@ public class GameScreenController {
     @FXML
     private void handleMoveDownLeft() {
         if (shootingMode) {
+            arrowsShot++;
             shootArrow(Directions.SW);
         } else {
             movePlayer(Directions.SW);
@@ -132,6 +137,7 @@ public class GameScreenController {
     @FXML
     private void handleMoveLeft() {
         if (shootingMode) {
+            arrowsShot++;
             shootArrow(Directions.W);
         } else {
             movePlayer(Directions.W);
@@ -141,6 +147,7 @@ public class GameScreenController {
     @FXML
     private void handleMoveUpLeft() {
         if (shootingMode) {
+            arrowsShot++;
             shootArrow(Directions.NW);
         } else {
             movePlayer(Directions.NW);
@@ -373,4 +380,13 @@ public class GameScreenController {
             historyTextArea.positionCaret(historyTextArea.getText().length());
         }
     }
+
+    public int getMoveCounter(){
+        return moveCounter;
+    }
+
+    public int getArrowsShot(){
+        return arrowsShot;
+    }
+
 }

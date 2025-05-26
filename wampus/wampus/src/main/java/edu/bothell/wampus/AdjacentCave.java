@@ -29,10 +29,10 @@ public class AdjacentCave {
     public AdjacentCave(){
         this.cave = new AdjacentGameLocation[30];
         
-        //AdjacentGameLocation testTrap = getLocationBasedOnCoords(1,0);
-        //testTrap.addObstacle(new Pit(testTrap));
-        //AdjacentGameLocation wumpusLocation = getLocationBasedOnCoords(2, 3);
-        //wumpusLocation.addObstacle(new Wumpus(wumpusLocation));
+        AdjacentGameLocation testTrap = getLocationBasedOnId(8);
+        testTrap.addObstacle(new Pit(testTrap));
+        AdjacentGameLocation wumpusLocation = getLocationBasedOnId(14);
+        wumpusLocation.addObstacle(new Wumpus(wumpusLocation));
     }
 
     public AdjacentGameLocation spawnPoint(){
