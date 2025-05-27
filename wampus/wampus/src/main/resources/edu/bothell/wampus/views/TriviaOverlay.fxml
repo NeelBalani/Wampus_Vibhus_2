@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.scene.shape.Rectangle?>
+<StackPane fx:controller="edu.bothell.wampus.controllers.TriviaOverlayController"
+           xmlns:fx="http://javafx.com/fxml"
+           styleClass="trivia-overlay" prefWidth="900" prefHeight="700"
+           stylesheets="/edu/bothell/wampus/css/trivia.css">
+
+    <!-- Semi-transparent dark background -->
+    <Rectangle fx:id="background" fill="#00000088" width="900" height="700" StackPane.alignment="CENTER"/>
+
+    <!-- Main overlay content -->
+    <BorderPane maxWidth="600" maxHeight="400" styleClass="trivia-pane">
+        <top>
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="trivia-header">
+                <Label fx:id="scoreLabel" text="Score: 0/5" styleClass="trivia-score" />
+            </HBox>
+        </top>
+
+        <center>
+            <VBox alignment="TOP_CENTER" spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10" />
+                </padding>
+                <Label fx:id="questionLabel" wrapText="true" styleClass="trivia-question" maxWidth="560" />
+
+                <VBox fx:id="answersBox" alignment="CENTER" spacing="10" />
+            </VBox>
+        </center>
+
+        <bottom>
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="20" />
+                </padding>
+                <Button fx:id="nextButton" text="Next Question" prefWidth="150" prefHeight="40" onAction="#handleNext" visible="false" />
+                <Button fx:id="exitButton" text="Exit Trivia" prefWidth="150" prefHeight="40" onAction="#handleExit" visible="false" />
+            </HBox>
+        </bottom>
+    </BorderPane>
+
+</StackPane>
