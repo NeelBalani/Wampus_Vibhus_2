@@ -93,6 +93,19 @@
     -fx-font-size: 20px;
 }
 
+/* Shop Button */
+.shop-button {
+    -fx-background-color: #8e44ad;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+}
+
+.shop-button:hover {
+    -fx-background-color: #7d3c98;
+}
+
 /* Status Bar */
 .status-bar {
     -fx-padding: 10px;

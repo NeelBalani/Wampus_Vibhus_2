@@ -370,6 +370,31 @@ public class GameScreenController {
         updateTrackerLabels(); // refresh gold
     }
 
+    @FXML
+    private void handleShopButton() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/bothell/wampus/views/ShopOverlay.fxml"));
+            Parent overlay = loader.load();
+            ShopOverlayController controller = loader.getController();
+            controller.init(gameController, this, overlay);
+            // Add overlay to root stack
+            rootStack.getChildren().add(overlay);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void closeShop(Parent overlay) {
+        rootStack.getChildren().remove(overlay);
+        updateTrackerLabels();
+    }
+    
+    // Method for radar item
+    public void revealHazards() {
+        // For demonstration purposes, this just updates the status message
+        statusLabel.setText("Radar activated! Nearby hazards are temporarily revealed.");
+    }
+
     /**
      * Adds a new entry to the game history panel
      * @param text The text to add to the history

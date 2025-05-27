@@ -91,7 +91,10 @@
                             </HBox>
                         </VBox>
                         <!-- Trivia Button -->
-                        <Button GridPane.columnIndex="2" fx:id="triviaButton" text="Play Trivia" onAction="#handleTriviaButton" styleClass="trivia-button" prefWidth="140" prefHeight="40" />
+                        <VBox GridPane.columnIndex="2" spacing="10" alignment="CENTER">
+                            <Button fx:id="shopButton" text="Shop" onAction="#handleShopButton" styleClass="shop-button" prefWidth="140" prefHeight="40" />
+                            <Button fx:id="triviaButton" text="Play Trivia" onAction="#handleTriviaButton" styleClass="trivia-button" prefWidth="140" prefHeight="40" />
+                        </VBox>
                     </GridPane>
                 </VBox>
             </HBox>

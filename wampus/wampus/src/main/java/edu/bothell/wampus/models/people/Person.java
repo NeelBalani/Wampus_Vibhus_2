@@ -51,4 +51,16 @@ public class Person {
     public void removeGold(int amount) {
         this.gold -= amount;
     }
+    
+    public void subtractGold(int amount) {
+        this.gold -= amount;
+    }
+    
+    public void addArrow() {
+        this.ammo += 1;
+    }
+    
+    public void heal(int amount) {
+        // Health system not implemented yet, but method stub for future use
+    }
 }
