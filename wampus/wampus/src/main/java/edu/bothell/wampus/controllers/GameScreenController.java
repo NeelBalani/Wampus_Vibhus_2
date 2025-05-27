@@ -36,6 +36,7 @@ public class GameScreenController {
     private int moveCounter = 0;
     private ArrayList<Integer> visited = new ArrayList<Integer>();
     private int arrowsShot = 0;
+    private int lastTriviaMove = -10; // track last move used for trivia
     
     // Flag to track if we're in shooting mode
     private boolean shootingMode = false;
@@ -63,6 +64,7 @@ public class GameScreenController {
         updateGameBoard();
         checkForWarnings(currentLocation);
         updateTrackerLabels();
+        updateTriviaButton();
     }
 
     private void initializeGameBoard() {
@@ -263,6 +265,9 @@ public class GameScreenController {
             checkForWarnings(newLocation);
             
             updateGameBoard();
+            moveCounter++;
+            updateTrackerLabels();
+            updateTriviaButton();
         }
     }
 
@@ -345,6 +350,9 @@ public class GameScreenController {
 
     @FXML
     private void handleTriviaButton() {
+        // limit access
+        lastTriviaMove = moveCounter;
+        updateTriviaButton();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/bothell/wampus/views/TriviaOverlay.fxml"));
             Parent overlay = loader.load();
@@ -371,7 +379,6 @@ public class GameScreenController {
             // Use move counter instead of timestamp
             String entry;
             if (text.startsWith("Player moved")) {
-                moveCounter++;
                 entry = "Move " + moveCounter + ": " + text + "\n";
             } else {
                 entry = text + "\n";
@@ -383,4 +390,10 @@ public class GameScreenController {
         }
     }
 
+    /** Enable trivia button only if 10 moves passed since last trivia */
+    private void updateTriviaButton() {
+        if (triviaButton == null) return;
+        boolean allowed = (moveCounter - lastTriviaMove) >= 10;
+        triviaButton.setDisable(!allowed);
+    }
 }
