@@ -162,7 +162,8 @@ public class GameController {
         movePlayerUsingId(newGameLocation.getLocationId());
 
         if(newGameLocation.getObstacle() != null) {
-            newGameLocation.getObstacle().doAction(this);
+//            this.ui.showMessage("Player encountered a " + newGameLocation.getObstacle().toString());
+
         }
 
         return newGameLocation;

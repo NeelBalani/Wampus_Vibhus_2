@@ -1,9 +1,7 @@
 package edu.bothell.wampus.models.hazards;
 
-import edu.bothell.wampus.controllers.GameController;
 import edu.bothell.wampus.interfaces.Obstacle;
 import edu.bothell.wampus.models.AdjacentGameLocation;
-import java.util.Random;
 
 public class Bats implements Obstacle {
     // Properties
@@ -36,13 +34,6 @@ public class Bats implements Obstacle {
     @Override
     public boolean isObstacleDestroyed(){
         return this.isDestroyed;
-    }
-
-    @Override
-    public void doAction(GameController controller) {
-        Random r = new Random();
-        int room = r.nextInt(1,31);
-        controller.movePlayerUsingId(room);
     }
 
     @Override
