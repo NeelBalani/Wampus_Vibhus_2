@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "WampusGameApp",
+      "request": "launch",
+      "mainClass": "edu.bothell.wampus.WampusGameApp",
+      "projectName": "wampus"
+    },
+    {
+      "type": "java",
       "name": "Run JavaFX with Maven",
       "request": "launch",
       "mainClass": "",
