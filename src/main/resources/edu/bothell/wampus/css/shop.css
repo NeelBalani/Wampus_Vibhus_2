@@ -1,0 +1,82 @@
+.overlay-background {
+    -fx-fill: rgba(0, 0, 0, 0.7);
+}
+
+.shop-panel {
+    -fx-background-color: #34495e;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.shop-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f1c40f;
+    -fx-padding: 20px 0 10px 0;
+    -fx-alignment: center;
+    -fx-background-color: #2c3e50;
+    -fx-background-radius: 8px 8px 0 0;
+    -fx-min-width: 500px;
+    -fx-alignment: center;
+}
+
+.gold-display {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f1c40f;
+    -fx-padding: 5px;
+}
+
+.items-container {
+    -fx-background-color: #2c3e50;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+}
+
+.shop-item {
+    -fx-background-color: #3d566e;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+}
+
+.item-name {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-min-width: 120px;
+}
+
+.item-price {
+    -fx-font-size: 14px;
+    -fx-text-fill: #f1c40f;
+    -fx-min-width: 80px;
+}
+
+.item-description {
+    -fx-font-size: 14px;
+    -fx-text-fill: #ecf0f1;
+}
+
+.buy-button {
+    -fx-background-color: #2ecc71;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-min-width: 70px;
+}
+
+.buy-button:hover {
+    -fx-background-color: #27ae60;
+}
+
+.exit-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-min-width: 100px;
+}
+
+.exit-button:hover {
+    -fx-background-color: #c0392b;
+}
