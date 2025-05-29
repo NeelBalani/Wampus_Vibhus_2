@@ -41,6 +41,11 @@ public class GameScreenController {
     // Flag to track if we're in shooting mode
     private boolean shootingMode = false;
 
+    // Radar tracking
+    private boolean radarActive = false;
+    private int radarMovesRemaining = 0;
+    private static final int RADAR_DURATION_MOVES = 3;
+
     public GameScreenController() {
     }
 
@@ -192,6 +197,7 @@ public class GameScreenController {
                 button.getStyleClass().add("dpad-button");
             }
         }
+        updateRadarStatus();
     }
     
     private void shootArrow(Directions direction) {
@@ -268,6 +274,7 @@ public class GameScreenController {
             moveCounter++;
             updateTrackerLabels();
             updateTriviaButton();
+            updateRadarStatus();
         }
     }
 
@@ -281,8 +288,14 @@ public class GameScreenController {
     }
 
 
-    // Update the game board display
+    // Overload updateGameBoard
     public void updateGameBoard() {
+        updateGameBoard("Normal");
+    }
+
+    // Update the game board display
+    public void updateGameBoard(String type) {
+
         // Get the current game location
         this.currentLocation = this.gameController.getGame().getLocationManager()
                 .getGameLocationOfPerson(this.gameController.getActiveTeammate());
@@ -305,8 +318,23 @@ public class GameScreenController {
             this.rooms[row][col].updateVisualState("Player");
         }
 
+
         // Update adjacent rooms
-        ArrayList<Integer> adjLocs = currentLocation.getAdjLocations();
+        ArrayList<Integer> adjLocs = new ArrayList<>(currentLocation.getAdjLocations());
+
+        if(type.equals("Normal")) {
+             adjLocs= currentLocation.getAdjLocations();
+        }
+        else if(type.equals("Radar")) {
+            int wall = 0;
+            for(int i = 0; i < adjLocs.size(); i++) {
+                System.out.println(adjLocs.get(i));
+                if(adjLocs.get(i) != 0 && this.gameController.getCave().getLocationBasedOnId(adjLocs.get(i)).hasObstacle()) {
+                    adjLocs.set(i, wall);
+                }
+            }
+        }
+
 
         // Loop through all adjacent locations
         for (int adjLocId : adjLocs) {
@@ -391,8 +419,57 @@ public class GameScreenController {
     
     // Method for radar item
     public void revealHazards() {
-        // For demonstration purposes, this just updates the status message
-        statusLabel.setText("Radar activated! Nearby hazards are temporarily revealed.");
+        // Activate radar for 3 moves
+        if(!radarActive) {
+            radarActive = true;
+            radarMovesRemaining = RADAR_DURATION_MOVES;
+        }
+        
+        updateGameBoard("Radar");
+    }
+    
+    /**
+     * Checks if radar is active and decrements the remaining moves if it is.
+     * Should be called after each player move.
+     */
+    private void updateRadarStatus() {
+        if (radarActive) {
+            radarMovesRemaining--;
+            
+            if (radarMovesRemaining <= 0) {
+                // Radar has expired
+                radarActive = false;
+                statusLabel.setText("Radar has deactivated. Hazards are hidden again.");
+                addToHistory("Radar has deactivated after " + RADAR_DURATION_MOVES + " moves.");
+                System.out.println("Radar deactivated");
+            } else {
+                // Update status with remaining moves
+                statusLabel.setText("Radar activated! Nearby hazards will be revealed for " + RADAR_DURATION_MOVES + " moves.");
+                // Add to game history
+                addToHistory("Radar activated! Scanning for nearby hazards for " + RADAR_DURATION_MOVES + " moves.");
+
+                revealHazards();
+
+            }
+        }
+    }
+
+    /**
+     * Checks if the radar is currently active.
+     * 
+     * @return true if radar is active, false otherwise
+     */
+    public boolean isRadarActive() {
+        return radarActive;
+    }
+    
+    /**
+     * Gets the number of moves remaining for the radar.
+     * 
+     * @return number of moves remaining before radar deactivates
+     */
+    public int getRadarMovesRemaining() {
+        return radarMovesRemaining;
     }
 
     /**
