@@ -219,4 +219,28 @@ public class GameController {
             return false;
         }
     }
+
+    public boolean hasAmmo(){
+        return this.activeTeammate.hasAmmo();
+    }
+
+    /**
+     * Checks if the active player is in the same room as the Wumpus.
+     * @return true if player is in the same room as the Wumpus, false otherwise
+     */
+    public boolean isWumpusInRoom() {
+        if (this.activeTeammate == null) return false;
+        
+        // Get the current location of the player
+        AdjacentGameLocation currentLocation = this.game.getLocationManager().getGameLocationOfPerson(this.activeTeammate);
+        
+        // Check if the location has the Wumpus obstacle
+        return currentLocation.hasObstacle() && 
+               currentLocation.getObstacle().toString().equals("Wumpus");
+    }
+    
+    /**
+     * Gets the current room the player is in.
+     * @return The current HexagonalRoom
+     */
 }

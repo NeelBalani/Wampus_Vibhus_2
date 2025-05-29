@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="edu.bothell.wampus.controllers.EndScreenController"
+      prefHeight="600.0" prefWidth="800.0"
+      stylesheets="/edu/bothell/wampus/css/styles.css"
+      styleClass="end-screen">
+
+    <StackPane VBox.vgrow="ALWAYS">
+        <VBox alignment="CENTER" spacing="20" styleClass="end-screen-container">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            
+            <Label fx:id="titleLabel" text="Game Over" styleClass="end-screen-title">
+                <font>
+                    <Font size="48.0" />
+                </font>
+            </Label>
+            
+            <Label fx:id="resultLabel" text="Result" styleClass="end-screen-result">
+                <font>
+                    <Font size="24.0" />
+                </font>
+            </Label>
+            
+            <Label fx:id="scoreLabel" text="Score: 0" styleClass="end-screen-score">
+                <font>
+                    <Font size="36.0" />
+                </font>
+            </Label>
+            
+            <Label fx:id="statsLabel" text="Game Statistics" styleClass="end-screen-stats">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            
+            <Separator prefWidth="400" />
+            
+            <HBox alignment="CENTER" spacing="20">
+                <Button fx:id="restartButton" text="Play Again" onAction="#handleRestartButton" styleClass="restart-button">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Button>
+                
+                <Button fx:id="exitButton" text="Exit Game" onAction="#handleExitButton" styleClass="exit-button">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Button>
+            </HBox>
+        </VBox>
+    </StackPane>
+</VBox>

@@ -28,6 +28,7 @@ public class GameScreenController {
     @FXML private Label goldCountLabel;
     @FXML private Button triviaButton;
     @FXML private StackPane rootStack; // StackPane reference
+    @FXML private Button giveUpButton;
 
     private GameController gameController;
     private HexagonalRoom[][] rooms = new HexagonalRoom[6][5];
@@ -211,6 +212,13 @@ public class GameScreenController {
                 addToHistory("Cannot shoot in direction " + direction);
                 return;
             }
+
+            if (this.gameController.hasAmmo()) {
+                // No arrows left
+                addToHistory("No arrows left!");
+                endGame(false, "You ran out of arrows!");
+                return;
+            }
             
             // Get the target location
             AdjacentGameLocation targetLocation = gameController.getGame().getLocationManager()
@@ -218,19 +226,9 @@ public class GameScreenController {
 
             // Shoot the arrow and check if it hit the Wumpus
             if(gameController.shootArrow(targetLocation)) {
-
-                addToHistory("You shot an arrow into Room " + targetLocId + " and hit the Wumpus!");
-                statusLabel.setText("You shot an arrow into Room " + targetLocId + " and hit the Wumpus!");
-
-                // Make the target location red
-                this.rooms[(targetLocation.getLocationId() - 1) / 5][(targetLocation.getLocationId() - 1) % 5].updateVisualState("Obstacle");
-
-                // Disable all buttons except menu
-                for (Button button : dpad) {
-                    button.setDisable(true);
-                }
-                centerButton.setDisable(true);
-
+                // Player hit the Wumpus - victory!
+                endGame(true, "You shot the Wumpus! Victory!");
+                return;
             } else {
                 addToHistory("You shot an arrow into Room " + targetLocId + " but hit nothing.");
             }
@@ -275,6 +273,8 @@ public class GameScreenController {
             updateTrackerLabels();
             updateTriviaButton();
             updateRadarStatus();
+            checkWumpusEncounter();
+            checkArrows();
         }
     }
 
@@ -497,5 +497,68 @@ public class GameScreenController {
         if (triviaButton == null) return;
         boolean allowed = (moveCounter - lastTriviaMove) >= 10;
         triviaButton.setDisable(!allowed);
+    }
+
+    /**
+     * Handle the Give Up button click, end the game as a loss.
+     */
+    @FXML
+    private void handleGiveUpButton() {
+        endGame(false, "You gave up!");
+    }
+    
+    /**
+     * End the game and navigate to the end screen.
+     * 
+     * @param playerWon Whether the player won the game
+     * @param message The message to display in the status label
+     */
+    private void endGame(boolean playerWon, String message) {
+        // Update status message
+        statusLabel.setText(message);
+        
+        // Add to game history
+        addToHistory(message);
+        
+        // Reset radar if active
+        radarActive = false;
+        radarMovesRemaining = 0;
+        
+        try {
+            // Get game statistics
+            int turns = moveCounter;
+            int gold = gameController.getActiveTeammate().getGold();
+            int arrows = gameController.getActiveTeammate().getAmmo();
+            
+            // Load the end screen
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/bothell/wampus/views/EndScreen.fxml"));
+            Parent root = loader.load();
+            
+            // Get the controller and initialize it
+            EndScreenController controller = loader.getController();
+            Stage stage = (Stage) rootStack.getScene().getWindow();
+            controller.initialize(stage, playerWon, turns, gold, arrows);
+            
+            // Set the scene
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Check if player has run into the Wumpus
+    private void checkWumpusEncounter() {
+        if (gameController.isWumpusInRoom()) {
+            endGame(false, "Oh no! You walked into the Wumpus's room and were eaten!");
+        }
+    }
+    
+    // Check if player has run out of arrows
+    private void checkArrows() {
+        if (!gameController.getActiveTeammate().hasAmmo()) {
+            endGame(false, "You've run out of arrows! Game over!");
+        }
     }
 }

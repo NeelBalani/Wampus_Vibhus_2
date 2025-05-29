@@ -219,3 +219,72 @@
 .trivia-button:hover {
     -fx-background-color: #d35400;
 }
+
+/* End Screen Styles */
+.end-screen {
+    -fx-background-color: #2c3e50;
+}
+
+.end-screen-container {
+    -fx-background-color: #34495e;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 0);
+    -fx-max-width: 600px;
+    -fx-padding: 30px;
+}
+
+.end-screen-title {
+    -fx-text-fill: #e74c3c;
+    -fx-font-weight: bold;
+}
+
+.end-screen-result {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.end-screen-score {
+    -fx-text-fill: #f1c40f;
+    -fx-font-weight: bold;
+}
+
+.end-screen-stats {
+    -fx-text-fill: #ecf0f1;
+    -fx-alignment: center;
+}
+
+.restart-button {
+    -fx-background-color: #2ecc71;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-min-width: 150px;
+    -fx-background-radius: 5px;
+}
+
+.restart-button:hover {
+    -fx-background-color: #27ae60;
+}
+
+.exit-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-min-width: 150px;
+    -fx-background-radius: 5px;
+}
+
+.exit-button:hover {
+    -fx-background-color: #c0392b;
+}
+
+.give-up-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+}
+
+.give-up-button:hover {
+    -fx-background-color: #c0392b;
+}
