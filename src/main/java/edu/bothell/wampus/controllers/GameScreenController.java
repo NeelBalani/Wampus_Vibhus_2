@@ -213,12 +213,7 @@ public class GameScreenController {
                 return;
             }
 
-            if (this.gameController.hasAmmo()) {
-                // No arrows left
-                addToHistory("No arrows left!");
-                endGame(false, "You ran out of arrows!");
-                return;
-            }
+            checkArrows();
             
             // Get the target location
             AdjacentGameLocation targetLocation = gameController.getGame().getLocationManager()
